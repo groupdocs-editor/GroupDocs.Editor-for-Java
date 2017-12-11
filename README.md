@@ -19,8 +19,8 @@ Directory | Description
 ## Resources
 
 + **Website:** [www.groupdocs.com](http://www.groupdocs.com)
-+ **Product Home:** [GroupDocs.Signature for Java](#)
-+ **Download:** [Download GroupDocs.Signature for Java](#)
-+ **Documentation:** [GroupDocs.Signature for Java Documentation](#)
-+ **Forum:** [GroupDocs.Signature for Java Forum](https://forum.groupdocs.com/c/editor)
-+ **Blog:** [GroupDocs.Signature for Java Blog](https://blog.groupdocs.com/category/groupdocs-editor-product-family/)
++ **Product Home:** [GroupDocs.Editor for Java](#)
++ **Download:** [Download GroupDocs.Editor for Java](#)
++ **Documentation:** [GroupDocs.Editor for Java Documentation](#)
++ **Forum:** [GroupDocs.Editor for Java Forum](https://forum.groupdocs.com/c/editor)
++ **Blog:** [GroupDocs.Editor for Java Blog](https://blog.groupdocs.com/category/groupdocs-editor-product-family/)
