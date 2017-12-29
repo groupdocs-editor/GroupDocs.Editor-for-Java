@@ -2,8 +2,8 @@ package com.groupdocs.editor.examples;
 
 public class MainClass {
 	public static void main(String[] args) throws Throwable {
-		CommonUtilities.applyLicense();
-	    //HTMLDOMEditor.getHTMLContents("source.html");
+		//CommonUtilities.applyLicense();
+	    	//HTMLDOMEditor.getHTMLContents("source.html");
 		//HTMLDOMEditor.getHTMLContentsWithExternalResources("source.html");
 		//HTMLDOMEditor.getHTMLContentsWithEmbeddedResources("source.html");
 		//HTMLDOMEditor.getHTMLBodyTagContents("source.html");
