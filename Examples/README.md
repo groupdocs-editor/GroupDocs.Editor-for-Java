@@ -1,6 +1,6 @@
 # GroupDocs.Editor for Java Examples
 
-This package contains Java Example Projects for [GroupDocs.Editor for Java](#) and sample input templates used in the examples.
+This package contains Java Example Projects for [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java) and sample input templates used in the examples.
 
 <p align="center">
 
