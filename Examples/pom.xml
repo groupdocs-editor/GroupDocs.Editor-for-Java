@@ -10,11 +10,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- <dependency>
+		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
     		<version>17.9</version>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -22,6 +22,13 @@
 			<version>2.5</version>
 		</dependency>
 	</dependencies>
+	   <repositories>
+		<repository>
+			<id>GroupDocsJavaAPI</id>
+			<name>GroupDocs Java API</name>
+			<url>http://artifact.groupdocs.com/repo/</url>
+		</repository>
+	</repositories>
 	<build>
 		<resources>
 			<resource>
