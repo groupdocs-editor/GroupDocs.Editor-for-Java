@@ -16,11 +16,13 @@ Directory | Description
 [Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples)  | Contains the package of all Java examples and sample files that will help you learn how to use product features.
 [Showcases](#)  | Contains the Frontend Examples to help you learn how to Implement product features in a Web-UI based application.
 
-## Resources
+#  Resources
 
-+ **Website:** [www.groupdocs.com](http://www.groupdocs.com)
++ **Website:** [www.groupdocs.com](https://www.groupdocs.com)
 + **Product Home:** [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java)
-+ **Download:** [Download GroupDocs.Editor for Java](https://downloads.groupdocs.com/editor/java)
-+ **Documentation:** [GroupDocs.Editor for Java Documentation](https://docs.groupdocs.com/display/editorjava/)
-+ **Forum:** [GroupDocs.Editor for Java Forum](https://forum.groupdocs.com/c/editor)
++ **API Reference:** [GroupDocs.Editor for Java API Reference](https://apireference.groupdocs.com/java/editor)
++ **Download:** [Download GroupDocs.Editor for Java](https://artifact.groupdocs.com/repo/com/groupdocs/groupdocs-editor/)
++ **Documentation:** [GroupDocs.Editor for Java Documentation](https://docs.groupdocs.com/display/editorjava/Home)
++ **Free Support:** [GroupDocs.Editor for Java Free Support Forum](https://forum.groupdocs.com/c/editor)
++ **Paid Support:** [GroupDocs.Editor for Java Paid Support Helpdesk](https://helpdesk.groupdocs.com/)
 + **Blog:** [GroupDocs.Editor for Java Blog](https://blog.groupdocs.com/category/groupdocs-editor-product-family/)
