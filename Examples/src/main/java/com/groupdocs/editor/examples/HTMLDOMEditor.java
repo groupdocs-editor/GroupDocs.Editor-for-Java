@@ -11,6 +11,7 @@ import com.groupdocs.editor.EditorHandler;
 import com.groupdocs.editor.InputHtmlDocument;
 import com.groupdocs.editor.OutputHtmlDocument;
 import com.groupdocs.editor.htmlcss.resources.fonts.FontResourceBase;
+import com.groupdocs.editor.htmlcss.resources.images.IImageResource;
 import com.groupdocs.editor.htmlcss.resources.images.raster.RasterImageResourceBase;
 import com.groupdocs.editor.htmlcss.resources.textual.CssText;
 import com.groupdocs.editor.words.htmltowords.WordFormats;
@@ -94,8 +95,10 @@ public class HTMLDOMEditor {
 		try {
 		    InputHtmlDocument htmlDoc = EditorHandler.toHtml(inputStream);
 		    // Obtain CSS  content
-		    String cssContent = htmlDoc.getCssContent();
-		    System.out.println(cssContent);
+		    for (String cssContent : htmlDoc.getCssContent())
+		    {
+		    	System.out.println(cssContent);
+		    }
 		} catch (Exception ex){
 		     ex.getMessage();
 		}
@@ -108,9 +111,11 @@ public class HTMLDOMEditor {
 		try {
 		    InputHtmlDocument htmlDoc = EditorHandler.toHtml(inputStream);
 		    String externalResourcePrefix = "GetResource?htmlDocumentFolderName=" + CommonUtilities.resourceFolder + "&resourceFilename=Picture 3.png";
-		    // Obtain CSS document content
-		    String bodyContent = htmlDoc.getCssContent(externalResourcePrefix);
-		    System.out.println(bodyContent);
+		    // Obtain CSS document content		    
+		    for (String bodyContent : htmlDoc.getCssContent(externalResourcePrefix))
+		    {
+		    	System.out.println(bodyContent);
+		    }
 		} catch (Exception ex){
 		     ex.getMessage();
 		}
@@ -153,18 +158,18 @@ public class HTMLDOMEditor {
 		    for (FontResourceBase fontResource : htmlDoc.getFontResources()){
 		        System.out.println(fontResource.getFilenameWithExtension());
 		        System.out.println(fontResource.getName());
-		        //System.out.println(fontResource.getByteContent()); -- returns a java.io.InputStream instance with actual content of the image as a byte stream
-		        //System.out.println(fontResource.getTextContent()); -- returns a java.lang.String instance with actual content of the font as a text in base-64 encoding
+		        System.out.println(fontResource.getByteContent()); //returns a java.io.InputStream instance with actual content of the image as a byte stream
+		        System.out.println(fontResource.getTextContent()); //returns a java.lang.String instance with actual content of the font as a text in base-64 encoding
 		 
 		        String pathToResource =  CommonUtilities.getOutputPathWithResource(fontResource.getFilenameWithExtension());
 		        fontResource.save(pathToResource);
 		    }
-		    for (RasterImageResourceBase imageResource : htmlDoc.getImageResources())
+		    for (IImageResource imageResource : htmlDoc.getImageResources())
 		    {
 		        System.out.println(imageResource.getFilenameWithExtension());
-		        //System.out.println(imageResource.getByteContent()); -- returns a java.io.InputStream instance with actual content of the image as a byte stream
+		        System.out.println(imageResource.getByteContent()); //returns a java.io.InputStream instance with actual content of the image as a byte stream
 		        System.out.println(imageResource.getName());
-		        //System.out.println(imageResource.getTextContent()); -- returns a java.lang.String instance with actual content of the image as a text in base-64 encoding
+		        System.out.println(imageResource.getTextContent()); //returns a java.lang.String instance with actual content of the image as a text in base-64 encoding
 		        System.out.println(imageResource.getLinearDimensions().getHeight());
 		        System.out.println(imageResource.getLinearDimensions().getWidth());
 		        System.out.println(imageResource.getLinearDimensions().isSquare());
@@ -173,16 +178,16 @@ public class HTMLDOMEditor {
 		        imageResource.save(pathToResource);
 		    }
 		 
-		    CssText css = htmlDoc.getCss();
-		    System.out.println(css.getFilenameWithExtension());
-		    //System.out.println(css.getByteContent()); -- returns a java.io.InputStream instance with actual content of the stylesheet as a byte stream (UTF-8 is a default encoding)
-		    System.out.println(css.getName());
-		    //System.out.println(css.getTextContent()); -- returns a java.lang.String instance with actual content of the stylesheet as a simple text
-		    System.out.println(css.getEncoding());
-		 
-		    String pathToCss = CommonUtilities.getOutputPathWithResource(css.getFilenameWithExtension());
-		    css.save(pathToCss);
-		 
+		    for(CssText css : htmlDoc.getCss()){
+		    	System.out.println(css.getFilenameWithExtension());
+			    System.out.println(css.getByteContent()); //returns a java.io.InputStream instance with actual content of the stylesheet as a byte stream (UTF-8 is a default encoding)
+			    System.out.println(css.getName());
+			    System.out.println(css.getTextContent()); //returns a java.lang.String instance with actual content of the stylesheet as a simple text
+			    System.out.println(css.getEncoding());
+			 
+			    String pathToCss = CommonUtilities.getOutputPathWithResource(css.getFilenameWithExtension());
+			    css.save(pathToCss);
+		    }		 
 		    // saving output html file.
 		    htmlDoc.save(CommonUtilities.getOutputPath("output.html"),CommonUtilities.getOutputPathWithResource(""));
 		 
