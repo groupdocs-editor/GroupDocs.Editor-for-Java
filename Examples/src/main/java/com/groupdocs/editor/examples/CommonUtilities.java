@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.groupdocs.editor.license.License;
+import com.groupdocs.editor.license.metered.Metered;
 
 
 public class CommonUtilities {
@@ -56,4 +57,12 @@ public class CommonUtilities {
 		license.setLicense(licenseStream);
 		// ExEnd:applyLicenseFromStream
 	}
+	public static void SetMeteredLicense() throws Exception  {
+		// ExStart:SetMeteredLicense
+        String PublicKey = ""; // Your public license key
+        String PrivateKey = ""; // Your private license key
+        Metered metered = new Metered();
+        metered.setMeteredKey(PublicKey, PrivateKey);
+        // ExEnd:SetMeteredLicense
+    }
 }
