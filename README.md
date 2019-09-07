@@ -1,4 +1,4 @@
-# GroupDocs.Editor for Java
+## GroupDocs.Editor for Java
 
 This package contains [Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples) for [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java) that will help you understand API's working and write your own applications.
 
@@ -16,7 +16,18 @@ Directory | Description
 [Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples)  | Contains the package of all Java examples and sample files that will help you learn how to use product features.
 [Showcases](#)  | Contains the Frontend Examples to help you learn how to Implement product features in a Web-UI based application.
 
-#  Resources
+## How to Run the Examples
+
++ You can either clone the repository using your favorite GitHub client or download the ZIP file from the above button.
++ Extract the contents of the ZIP file to any folder on your computer.
++ Open Java IDE and import the project to get started with it.
++ On the first run, the dependencies will automatically be downloaded.
++ Open MainClass.java file, all the examples are called from here.
++ Uncomment the examples you want to run from within the project.
+
+Please find more details for how to run the examples [here](https://docs.groupdocs.com/display/editorjava/How+to+Run+Examples).
+
+##  Resources
 
 + **Website:** [www.groupdocs.com](https://www.groupdocs.com)
 + **Product Home:** [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java)
