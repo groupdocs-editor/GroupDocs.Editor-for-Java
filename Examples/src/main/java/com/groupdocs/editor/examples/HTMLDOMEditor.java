@@ -11,11 +11,9 @@ import com.groupdocs.editor.EditorHandler;
 import com.groupdocs.editor.InputHtmlDocument;
 import com.groupdocs.editor.OutputHtmlDocument;
 import com.groupdocs.editor.htmlcss.resources.fonts.FontResourceBase;
-import com.groupdocs.editor.htmlcss.resources.images.IImageResource;
-import com.groupdocs.editor.htmlcss.resources.images.raster.RasterImageResourceBase;
 import com.groupdocs.editor.htmlcss.resources.textual.CssText;
-import com.groupdocs.editor.words.htmltowords.WordFormats;
-import com.groupdocs.editor.words.htmltowords.WordsSaveOptions;
+import com.groupdocs.editor.options.WordProcessingFormats;
+import com.groupdocs.editor.options.WordProcessingSaveOptions;
 
 public class HTMLDOMEditor {
 	public static void getHTMLContents(String fileName) throws Throwable{
@@ -148,7 +146,6 @@ public class HTMLDOMEditor {
 		}
 		//ExEnd:saveHTMLDocumentWithResourcesFolder
 	}
-	
 	public static void workingWithHTMLResourcesAndCSS(String fileName) throws Throwable{
 		//ExStart:workingWithHTMLResourcesAndCSS
 		InputStream inputStream = new FileInputStream(CommonUtilities.getStoragePath(fileName));
@@ -163,19 +160,6 @@ public class HTMLDOMEditor {
 		 
 		        String pathToResource =  CommonUtilities.getOutputPathWithResource(fontResource.getFilenameWithExtension());
 		        fontResource.save(pathToResource);
-		    }
-		    for (IImageResource imageResource : htmlDoc.getImageResources())
-		    {
-		        System.out.println(imageResource.getFilenameWithExtension());
-		        System.out.println(imageResource.getByteContent()); //returns a java.io.InputStream instance with actual content of the image as a byte stream
-		        System.out.println(imageResource.getName());
-		        System.out.println(imageResource.getTextContent()); //returns a java.lang.String instance with actual content of the image as a text in base-64 encoding
-		        System.out.println(imageResource.getLinearDimensions().getHeight());
-		        System.out.println(imageResource.getLinearDimensions().getWidth());
-		        System.out.println(imageResource.getLinearDimensions().isSquare());
-		 
-		        String pathToResource =  CommonUtilities.getOutputPathWithResource(imageResource.getFilenameWithExtension());
-		        imageResource.save(pathToResource);
 		    }
 		 
 		    for(CssText css : htmlDoc.getCss()){
@@ -196,7 +180,6 @@ public class HTMLDOMEditor {
 		}
 		//ExEnd:workingWithHTMLResourcesAndCSS
 	}
-	
 	public static void saveToWordsDocument(String fileName) throws Throwable{
 		//ExStart:saveToWordsDocument
 		InputStream inputStream = new FileInputStream(CommonUtilities.storagePath + File.separator + fileName);
@@ -204,7 +187,7 @@ public class HTMLDOMEditor {
 		    InputHtmlDocument htmlDoc = EditorHandler.toHtml(inputStream);
 		    String htmlContent = htmlDoc.getContent();
 		    OutputHtmlDocument editedHtmlDoc = OutputHtmlDocument.fromMarkup(htmlContent, CommonUtilities.getStoragePathWithResource(""));
-		    WordsSaveOptions saveOptions = new WordsSaveOptions();
+		    WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions();
 		    OutputStream out = new FileOutputStream(CommonUtilities.getOutputPath("output.docx"));
 		    EditorHandler.toDocument(editedHtmlDoc, out, saveOptions);
 		} catch (Exception ex){
@@ -212,12 +195,11 @@ public class HTMLDOMEditor {
 		}
 		//ExEnd:saveToWordsDocument
 	}
-	
 	public static void saveHTMLDOMFromFileToWordsDocument(String fileName) throws Throwable{
 		//ExStart:saveHTMLDOMFromFileToWordsDocument
 		try {
 		    OutputHtmlDocument editedHtmlDoc = OutputHtmlDocument.fromFile(CommonUtilities.getStoragePath(fileName), CommonUtilities.getStoragePathWithResource(""));
-		    WordsSaveOptions saveOptions = new WordsSaveOptions();
+		    WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions();
 		    OutputStream out = new FileOutputStream(CommonUtilities.getOutputPath("output.docx"));
 		    EditorHandler.toDocument(editedHtmlDoc, out, saveOptions);
 		} catch (Exception ex){
@@ -225,7 +207,6 @@ public class HTMLDOMEditor {
 		}
 		//ExEnd:saveHTMLDOMFromFileToWordsDocument
 	}
-	
 	public static void saveHTMLDOMToRTFDocument(String fileName) throws Throwable{
 		//ExStart:saveHTMLDOMToRTFDocument
 		InputStream inputStream = new FileInputStream(CommonUtilities.getStoragePath(fileName));
@@ -235,8 +216,8 @@ public class HTMLDOMEditor {
 		    // Initialize with HTML markup of the edited document
 		    String htmlContent = htmlDoc.getContent();
 		    OutputHtmlDocument editedHtmlDoc = OutputHtmlDocument.fromMarkup(htmlContent, CommonUtilities.getStoragePathWithResource(""));
-		    WordsSaveOptions saveOptions = new WordsSaveOptions();
-		    saveOptions.setOutputFormat(WordFormats.Rtf);
+		    WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions();
+		    saveOptions.setOutputFormat(WordProcessingFormats.Rtf);
 		    OutputStream out = new FileOutputStream(CommonUtilities.getOutputPath("output.rtf"));
 		    EditorHandler.toDocument(editedHtmlDoc, out, saveOptions);    
 		} catch (Exception ex){
@@ -244,7 +225,6 @@ public class HTMLDOMEditor {
 		}
 		//ExEnd:saveHTMLDOMToRTFDocument
 	}
-	
 	public static void saveToWordsDocumentWithOptions(String fileName) throws Throwable{
 		//ExStart:saveToWordsDocumentWithOptions
 		InputStream inputStream = new FileInputStream(CommonUtilities.getStoragePath(fileName));
@@ -254,7 +234,7 @@ public class HTMLDOMEditor {
 		    // Initialize with HTML markup of the edited document
 		    String htmlContent = htmlDoc.getContent();
 		    OutputHtmlDocument editedHtmlDoc = OutputHtmlDocument.fromMarkup(htmlContent, CommonUtilities.getStoragePathWithResource(""));
-		    WordsSaveOptions saveOptions = new WordsSaveOptions(WordFormats.Docx, "12345678");
+		    WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx, "12345678");
 		    OutputStream out = new FileOutputStream(CommonUtilities.getOutputPath("output.docx"));
 		    saveOptions.setLocale(Locale.getDefault());
 		    saveOptions.setLocaleBi(Locale.getDefault());
