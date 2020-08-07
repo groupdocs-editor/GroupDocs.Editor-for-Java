@@ -1,6 +1,6 @@
 # Edit Documents as HTML via Java API
 
-GroupDocs.Editor is a one-stop solution for [Document Editing as HTML](https://products.groupdocs.com/editor/java). The edited documents can be saved in original format as well as other formats including Microsoft Word documents (DOC, DOCX), Excel spreadsheets (XLS, XSLSX), PDF & TXT.
+GroupDocs.Editor is a one-stop solution for [Document Editing as HTML](https://products.groupdocs.com/editor/java). The edited documents can be saved in original format as well as other formats including Microsoft Word documents (DOC, DOCX), Excel spreadsheets (XLS, XLSX), PDF & TXT.
 
 <p align="center">
   <a title="Download complete GroupDocs.Editor for Java source code" href="https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/archive/master.zip"> 
