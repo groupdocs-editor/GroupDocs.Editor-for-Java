@@ -216,7 +216,7 @@ public String getInputControlsClassName()
 public void setInputControlsClassName(String)
 ```
 
-You can find more info about this feature in the article "[Adding class name to input controls]({{< ref "editor/net/developer-guide/advanced-usage/working-with-wordprocessing-documents/adding-class-name-to-input-controls.md" >}})".
+You can find more info about this feature in the article "[Adding class name to input controls]({{< ref "editor/java/developer-guide/advanced-usage/working-with-wordprocessing-documents/adding-class-name-to-input-controls.md" >}})".
 
 ## New enum and property in TextEditOptions
 
