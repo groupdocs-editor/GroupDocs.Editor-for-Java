@@ -2,28 +2,29 @@
 id: features-overview
 url: editor/java/features-overview
 title: Features Overview
-weight: 2
+weight: 1
 description: ""
 keywords: 
 productName: GroupDocs.Editor for Java
 hideChildren: False
 ---
-## Working with Documents Editor
+## Document editing
 
-GroupDocs.Editor for Java is a lightweight component that allows to edit multiple document formats in form of HTML. The editor can both translate source document into html and save edited html into source document format.
+The main feature of GroupDocs.Editor is an ability to edit most popular document formats using front-end WYSIWYG editors without any additional applications. No Open Office or MS Office is required to edit a Word Processing documents, Spreadsheets or Presentations. You can just load document via GroupDocs.Editor into any WYSIWYG editor, edit document in a way you want and save it back to original document format.
 
-### Features
+#### Editing options and output customizations
 
-*   Ability to edit document from all major file formats - Words, Cells\*, Slides\*, PDF\* etc (the list of supported formats will be constantly extended). Native Java API, so third party developers can easily integrate GroupDocs.Editor into their products
-*   Simple to use API - couple of methods for direct and inverse document transformation with set of options for different formats
-*   Storage agnostic
-*   UI agnostic
-*   Metered Licensing
-*   Apply protection to the resultant document
-*   PDF compliance
-*   Reply comments and statuses
-*   Optimize memory usage
-*   Paginal mode for the Words document
-*   Ability to open, view and edit XML document
+GroupDocs.Editor provides a set of options to customize editing process dependent on document type:
+*   Word Processing documents - ability to edit document in a flow or paged mode; consider language information for multi-language document editing; manage font extraction to provide same document editing and appearance behaviour in different environments.    
+*   Spreadsheets - supports multi-tabbed spreadsheets editing by ability to specify index of currently edited worksheet.    
+*   Comma-Separated Values and Tab-Separated Values - options to specify separator; flexible numeric and dates conversion; memory usage optimization for large files;    
+*   XML files - fix incorrect document structure; URIs and e-mail addresses recognition; highlight and formatting options etc.
+    
 
-*\* - marked document formats will be implemented in next versions of GroupDocs.Editor.*
+## Document information extraction
+
+GroupDocs.Editor provides an ability to extract basic information about edited document:
+*   Document type;
+*   Document size;
+*   Pages count;
+*   etc.

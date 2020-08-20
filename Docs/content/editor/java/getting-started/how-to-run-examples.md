@@ -2,7 +2,7 @@
 id: how-to-run-examples
 url: editor/java/how-to-run-examples
 title: How to Run Examples
-weight: 7
+weight: 6
 description: ""
 keywords: 
 productName: GroupDocs.Editor for Java

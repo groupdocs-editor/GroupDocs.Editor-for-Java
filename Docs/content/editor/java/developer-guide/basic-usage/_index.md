@@ -4,7 +4,7 @@ url: editor/java/basic-usage
 title: Basic usage
 weight: 1
 description: "Quick Start section about main features of GroupDocs.Editor API, describes how to edit documents with just couple lines of code."
-keywords: GroupDocs.Editor Quick Start, GroupDocs.Editor Java Basic Usage, GroupDocs.Editor Get Started
+keywords: GroupDocs.Editor Quick Start, GroupDocs.Editor Java Basic Usage, GroupDocs.Editor Quick Start Java, GroupDocs.Editor Get Started
 productName: GroupDocs.Editor for Java
 hideChildren: False
 ---

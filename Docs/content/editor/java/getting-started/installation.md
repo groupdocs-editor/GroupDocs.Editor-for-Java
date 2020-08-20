@@ -2,7 +2,7 @@
 id: installation
 url: editor/java/installation
 title: Development Environment Installation and Configuration
-weight: 6
+weight: 4
 description: ""
 keywords: 
 productName: GroupDocs.Editor for Java
@@ -53,7 +53,7 @@ Then define GroupDocs.Editor for Java API dependency in your `pom.xml` as fol
     <dependency>
         <groupId>com.groupdocs</groupId>
         <artifactId>groupdocs-editor</artifactId>
-        <version>19.10</version> 
+        <version>20.8</version> 
     </dependency>
 </dependencies>
 ```
