@@ -167,49 +167,32 @@ public final class TextSaveOptions implements ISaveOptions {
 
 ## Presentation module - ability to load, open for editing, edit and save Presentation documents. This feature is represented in public API by the next new public types.
     
-    | Type name | Responsibility |
-    | --- | --- |
-    | PresentationLoadOptions | Allows to specify custom options for loading documents of all supportable Presentation formats like PPT(X), PPTM, PPS(X) etc. |
-    | PresentationEditOptions | Allows to specify custom options for editing documents of all supportable Presentation (PowerPoint-compatible) formats |
-    | PresentationSaveOptions | Allows to specify custom options for generating and saving Presentation (PowerPoint-compatible) documents |
-    | PresentationDocumentInfo | Represents metadata of one Presentation document |
-    | PresentationFormats | Encapsulates all Presentation formats |
+| Type name | Responsibility |
+| --- | --- |
+| PresentationLoadOptions | Allows to specify custom options for loading documents of all supportable Presentation formats like PPT(X), PPTM, PPS(X) etc. |
+| PresentationEditOptions | Allows to specify custom options for editing documents of all supportable Presentation (PowerPoint-compatible) formats |
+| PresentationSaveOptions | Allows to specify custom options for generating and saving Presentation (PowerPoint-compatible) documents |
+| PresentationDocumentInfo | Represents metadata of one Presentation document |
+| PresentationFormats | Encapsulates all Presentation formats |
 
 ## Represented in public API by the next new public types and methods.
     
-    | Type name | Member name | Responsibility |
-    | --- | --- | --- |
-    | WordProcessingFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within WordProcessingFormats  |
-    | SpreadsheetFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within SpreadsheetFormats |
-    | PresentationFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within PresentationFormats |
-    | TextualFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within TextualFormats |
-    | WordProcessingFormats  | All | Static readonly field, that returns an WordProcessingFormats.AllEnumerable instance |
-    | SpreadsheetFormats  | All | Static readonly field, that returns an SpreadsheetFormats .AllEnumerable instance |
-    | PresentationFormats  | All | Static readonly field, that returns an PresentationFormats .AllEnumerable instance |
-    | TextualFormats  | All | Static readonly field, that returns an TextualFormats .AllEnumerable instance |
-    | WordProcessingFormats | FromExtension | Static method, that parses a string and returns appropriate WordProcessing format |
-    | SpreadsheetFormats | FromExtension | Static method, that parses a string and returns appropriate Spreadsheet format |
-    | PresentationFormats | FromExtension | Static method, that parses a string and returns appropriate Presentation format |
-    | TextualFormats | FromExtension | Static method, that parses a string and returns appropriate Textual format |
+| Type name | Member name | Responsibility |
+| --- | --- | --- |
+| WordProcessingFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within WordProcessingFormats |
+| SpreadsheetFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within SpreadsheetFormats |
+| PresentationFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within PresentationFormats |
+| TextualFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within TextualFormats |
+| WordProcessingFormats | All | Static readonly field, that returns an WordProcessingFormats.AllEnumerable instance |
+| SpreadsheetFormats | All | Static readonly field, that returns an SpreadsheetFormats .AllEnumerable instance |
+| PresentationFormats | All | Static readonly field, that returns an PresentationFormats .AllEnumerable instance |
+| TextualFormats | All | Static readonly field, that returns an TextualFormats .AllEnumerable instance |
+| WordProcessingFormats | FromExtension | Static method, that parses a string and returns appropriate WordProcessing format |
+| SpreadsheetFormats | FromExtension | Static method, that parses a string and returns appropriate Spreadsheet format |
+| PresentationFormats | FromExtension | Static method, that parses a string and returns appropriate Presentation format |
+| TextualFormats | FromExtension | Static method, that parses a string and returns appropriate Textual format |
     
-First feature is represented in public API by the next new public types and methods.
-    
-    | Type name | Member name | Responsibility |
-    | --- | --- | --- |
-    | WordProcessingFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within WordProcessingFormats  |
-    | SpreadsheetFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within SpreadsheetFormats |
-    | PresentationFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within PresentationFormats |
-    | TextualFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within TextualFormats |
-    | WordProcessingFormats  | All | Static readonly field, that returns an WordProcessingFormats.AllEnumerable instance |
-    | SpreadsheetFormats  | All | Static readonly field, that returns an SpreadsheetFormats .AllEnumerable instance |
-    | PresentationFormats  | All | Static readonly field, that returns an PresentationFormats .AllEnumerable instance |
-    | TextualFormats  | All | Static readonly field, that returns an TextualFormats .AllEnumerable instance |
-    | WordProcessingFormats | FromExtension | Static method, that parses a string and returns appropriate WordProcessing format |
-    | SpreadsheetFormats | FromExtension | Static method, that parses a string and returns appropriate Spreadsheet format |
-    | PresentationFormats | FromExtension | Static method, that parses a string and returns appropriate Presentation format |
-    | TextualFormats | FromExtension | Static method, that parses a string and returns appropriate Textual format |
-	
-	
+      
 ## Representing by only one new method in the EditableDocument class:
     
     ```java
