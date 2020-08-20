@@ -192,7 +192,24 @@ public final class TextSaveOptions implements ISaveOptions {
     | PresentationFormats | FromExtension | Static method, that parses a string and returns appropriate Presentation format |
     | TextualFormats | FromExtension | Static method, that parses a string and returns appropriate Textual format |
     
-      
+First feature is represented in public API by the next new public types and methods.
+    
+    | Type name | Member name | Responsibility |
+    | --- | --- | --- |
+    | WordProcessingFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within WordProcessingFormats  |
+    | SpreadsheetFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within SpreadsheetFormats |
+    | PresentationFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within PresentationFormats |
+    | TextualFormats.AllEnumerable | N/A | Internal class, that enables enumeration over all formats within TextualFormats |
+    | WordProcessingFormats  | All | Static readonly field, that returns an WordProcessingFormats.AllEnumerable instance |
+    | SpreadsheetFormats  | All | Static readonly field, that returns an SpreadsheetFormats .AllEnumerable instance |
+    | PresentationFormats  | All | Static readonly field, that returns an PresentationFormats .AllEnumerable instance |
+    | TextualFormats  | All | Static readonly field, that returns an TextualFormats .AllEnumerable instance |
+    | WordProcessingFormats | FromExtension | Static method, that parses a string and returns appropriate WordProcessing format |
+    | SpreadsheetFormats | FromExtension | Static method, that parses a string and returns appropriate Spreadsheet format |
+    | PresentationFormats | FromExtension | Static method, that parses a string and returns appropriate Presentation format |
+    | TextualFormats | FromExtension | Static method, that parses a string and returns appropriate Textual format |
+	
+	
 ## Representing by only one new method in the EditableDocument class:
     
     ```java
