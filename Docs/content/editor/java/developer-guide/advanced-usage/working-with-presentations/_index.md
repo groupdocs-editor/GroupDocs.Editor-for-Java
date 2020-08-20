@@ -75,6 +75,3 @@ FileStream outputStream = /* obtain it from somewhere */;
 //saving edited slide to specified stream in PPTM format and with password encoding
 editor.save(afterEdit, outputStream, saveOptions);
 ```
-<!---
-Starting from version 20.4, [PresentationSaveOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/presentationsaveoptions) class contains two new properties — [SlideNumber](https://apireference.groupdocs.com/editor/java/groupdocs.editor.options/presentationsaveoptions/properties/slidenumber) and [InsertAsNewSlide](https://apireference.groupdocs.com/editor/java/groupdocs.editor.options/presentationsaveoptions/properties/insertasnewslide), — which are highly coupled together. These properties allow to insert edited slide into existing presentation instead of creating new presentation with single edited slide, which remains the default behavior. They are explained in detail in [separate article]({{< ref "editor/java/developer-guide/advanced-usage/working-with-presentations/inserting-edited-slide-into-existing-presentation.md" >}}).
---->
