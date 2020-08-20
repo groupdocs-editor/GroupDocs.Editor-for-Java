@@ -195,17 +195,17 @@ public final class TextSaveOptions implements ISaveOptions {
       
 ## Representing by only one new method in the EditableDocument class:
     
-    ```java
-    /// <summary>
-    /// Static factory, that creates an instance of EditableDocument from a specified HTML markup,
-    /// that doesn't contain an HTML header, but only inner markup of HTML BODY element, and from resources, located in the folder, specified by the full path
-    /// </summary>
-    /// <param name="htmlBodyContent">String, that contains raw HTML markup, which is located inside HTML->BODY element (without BODY itself),
-    /// that should be parsed. Cannot be NULL, empty or invalid.</param>
-    /// <param name="resourceFolderPath">Mandatory path to the folder with resources. All stylesheets, which are located in this folder, will be used.</param>
-    /// <returns>New non-null instance of EditableDocument</returns>
-    public static EditableDocument fromBodyMarkupAndResourceFolder(String htmlBodyContent, String resourceFolderPath)
-    ```
+```java
+/// <summary>
+/// Static factory, that creates an instance of EditableDocument from a specified HTML markup,
+/// that doesn't contain an HTML header, but only inner markup of HTML BODY element, and from resources, located in the folder, specified by the full path
+/// </summary>
+/// <param name="htmlBodyContent">String, that contains raw HTML markup, which is located inside HTML->BODY element (without BODY itself),
+/// that should be parsed. Cannot be NULL, empty or invalid.</param>
+/// <param name="resourceFolderPath">Mandatory path to the folder with resources. All stylesheets, which are located in this folder, will be used.</param>
+/// <returns>New non-null instance of EditableDocument</returns>
+public static EditableDocument fromBodyMarkupAndResourceFolder(String htmlBodyContent, String resourceFolderPath)
+```
     
 ## New property in WordProcessingEditOptions
 
