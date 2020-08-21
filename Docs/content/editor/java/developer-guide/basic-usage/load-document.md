@@ -8,7 +8,7 @@ keywords: Load document with GroupDocs.Editor, Load and edit document, edit docu
 productName: GroupDocs.Editor for Java
 hideChildren: False
 ---
-> This article describes how to load input document to the [**GroupDocs.Editor**](https://products.groupdocs.com/editor/net) and how to apply load options.
+> This article describes how to load input document to the [**GroupDocs.Editor**](https://products.groupdocs.com/editor/java) and how to apply load options.
 
 First of all the input document, which should be accessible as a byte stream or through valid file path, should be loaded into the GroupDocs.Editor by creating an instance of the [Editor](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor) class through one of the constructor overloads.   
 If the input document is presented as a stream, it should be loaded through delegate. Source code below shows two ways of loading documents: from path and from stream.
