@@ -23,16 +23,16 @@ In counterpart to this, when paged mode is enabled, document content is divided 
 
 ### Loading WordProcessing documents
 
-First of all user must open a document by loading it into the [Editor](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editor) class instance. This example demonstrates how to load the password-protected document from the stream. So, let's suppose we have an encoded DOCX, and user knows its password. First of all, you need to create a load options.
+First of all user must open a document by loading it into the [Editor](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor) class instance. This example demonstrates how to load the password-protected document from the stream. So, let's suppose we have an encoded DOCX, and user knows its password. First of all, you need to create a load options.
 
 ```java
 WordProcessingLoadOptions loadOptions = new WordProcessingLoadOptions();
 loadOptions.setPassword("some_password_to_open_a_document");
 ```
 
-Please note that if document has no protection, the password will be ignored. However, if document is protected, but user has not specified a password, a [PasswordRequiredException](https://apireference.groupdocs.com/java/editor/groupdocs.editor/passwordrequiredexception) will be thrown during document editing.
+Please note that if document has no protection, the password will be ignored. However, if document is protected, but user has not specified a password, a [PasswordRequiredException](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/passwordrequiredexception) will be thrown during document editing.
 
-Next step is to load the document from stream into the [Editor](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editor) class. For loading documents from streams [Editor](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editor) uses delegates. In other words, you need to pass the delegate instance, that points to the method, that returns a stream.   
+Next step is to load the document from stream into the [Editor](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor) class. For loading documents from streams [Editor](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor) uses delegates. In other words, you need to pass the delegate instance, that points to the method, that returns a stream.   
 Same with load options — they are passed via delegate.
 
 ```java
@@ -42,7 +42,7 @@ Editor editor = new Editor(inputStream, loadOptions);
 
 ### Editing WordProcessing documents
 
-When document is loaded, it can be edited (transformed to [EditableDocument](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editabledocument) class), and this process can be adjusted with edit options. Let's create them:
+When document is loaded, it can be edited (transformed to [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) class), and this process can be adjusted with edit options. Let's create them:
 
 ```java
 WordProcessingEditOptions editOptions = new WordProcessingEditOptions(); //#1
@@ -53,8 +53,8 @@ editOptions.setEnablePagination(true); //#4
 ```
 
 Let's describe the code above line by line.   
-*Line #1* - every supported document family format has its own options class. So for all WordProcessing formats you need to apply the [WordProcessingEditOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/wordprocessingeditoptions). The same for other formats — [SpreadsheetEditOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/spreadsheeteditoptions) for all spreadsheet-based formats (like XLS, ODS etc.) and so on.   
-*Line #2* - specifies font extraction options. By default no fonts are extracted from the document, but with this option user can specify, which fonts categories should be extracted and saved in the [EditableDocument](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editabledocument) instance.   
+*Line #1* - every supported document family format has its own options class. So for all WordProcessing formats you need to apply the [WordProcessingEditOptions](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.options/wordprocessingeditoptions). The same for other formats — [SpreadsheetEditOptions](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.options/spreadsheeteditoptions) for all spreadsheet-based formats (like XLS, ODS etc.) and so on.   
+*Line #2* - specifies font extraction options. By default no fonts are extracted from the document, but with this option user can specify, which fonts categories should be extracted and saved in the [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) instance.   
 *Line #3* - enables extracting language information for better subsequent spell-checking on client side. Finally, *line #4* switches document processing mode from float (default) to the paged.
 
 After preparing options the previously loaded document can be edited:
@@ -74,15 +74,15 @@ First string contains all HTML markup without resources, while second `List` c
 
 ### Modifying document content
 
-Let's imagine that user passed HTML markup and resources, obtained from [EditableDocument](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editabledocument) instance, to the WYSIWYG-editor, edited the document on client-side and obtained back a modified HTML markup.   
-Now user needs to create new [EditableDocument](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editabledocument) instance from this modified markup.
+Let's imagine that user passed HTML markup and resources, obtained from [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) instance, to the WYSIWYG-editor, edited the document on client-side and obtained back a modified HTML markup.   
+Now user needs to create new [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) instance from this modified markup.
 
 ```java
 String editedContent = originalContent.replace("document", "edited document");
 EditableDocument afterEdit = EditableDocument.fromMarkup(editedContent, allResources);
 ```
 
-We passed the same `List` with resources to the edited [EditableDocument](https://apireference.groupdocs.com/java/editor/groupdocs.editor/editabledocument), however it can be a completely new `List` with other resources.
+We passed the same `List` with resources to the edited [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument), however it can be a completely new `List` with other resources.
 
 ### Saving WordProcessing documents
 
@@ -101,9 +101,9 @@ saveOptions.setProtection(new WordProcessingProtection(WordProcessingProtectionT
 Let's describe a piece of code above line by line:
 
 1.  Creating a format of output document, in our case it is DOCM.
-2.  Creating instance of [WordProcessingSaveOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/wordprocessingsaveoptions) with previously prepared format.
+2.  Creating instance of [WordProcessingSaveOptions](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.options/wordprocessingsaveoptions) with previously prepared format.
 3.  When user specifies a password, GroupDocs.Editor encrypts the document with this password. So, when document will be saved, it can be opened only with the password.
-4.  Because pagination was previously enabled in [WordProcessingEditOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/wordprocessingeditoptions) (`editOptions` variable), for better output result it is highly recommended to enable it in [WordProcessingSaveOptions](https://apireference.groupdocs.com/java/editor/groupdocs.editor.options/wordprocessingsaveoptions).
+4.  Because pagination was previously enabled in [WordProcessingEditOptions](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.options/wordprocessingeditoptions) (`editOptions` variable), for better output result it is highly recommended to enable it in [WordProcessingSaveOptions](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.options/wordprocessingsaveoptions).
 5.  You can set locale for output WordProcessing document manually.
 6.  If document is really huge and causes OutOfMemoryException, you can set memory optimization option
 7.  You can protect document from writing (make it read-only) with password. Please note that this is write protection, and it is separate from opening protection, that was installed above.
