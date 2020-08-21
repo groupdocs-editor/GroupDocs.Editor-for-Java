@@ -81,7 +81,6 @@ Lot of minor and major bug fixes and improvements over all code base.
 | EDITORNET-1353 | Undisposed resources in EditableDocument class | Bug |
 | EDITORNET-1354 | Missing bindings for Aspose components | Bug |
 | EDITORNET-1356 | Error While Getting DOCX document HTML | Bug |
-| EDITORNET-1357 | Exception in FieldProcessor while opening MOBI file | Bug |
 | EDITORNET-1374 | Fix bug with missing binding for Aspose components | Bug |
 | EDITORNET-1419 | Bug with duplicated images in EditableDocument | Bug |
 | EDITORNET-1418 | Internal error in Bookmark processor | Bug |
