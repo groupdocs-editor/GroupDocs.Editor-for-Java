@@ -13,7 +13,7 @@
 		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
-    		<version>19.10</version>
+    		<version>20.8</version>
 		</dependency>
 		
 		<dependency>
