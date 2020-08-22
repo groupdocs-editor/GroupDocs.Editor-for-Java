@@ -15,7 +15,7 @@ public boolean getOptimizeMemoryUsage()
 public void getOptimizeMemoryUsage(boolean)
 ```
 
-By default it has a "*false*" value, which means that the memory optimization is disabled for the sake of the best possible performance. By setting a "*true*" user can enable another document generating mechanism, which can significantly decrease memory consumption while generating large documents at the cost of slower generation time while performing the [`editor.Save()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/save) method.
+By default it has a "*false*" value, which means that the memory optimization is disabled for the sake of the best possible performance. By setting a "*true*" user can enable another document generating mechanism, which can significantly decrease memory consumption while generating large documents at the cost of slower generation time while performing the [`editor.Save()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#save()) method.
 
 ## More resources
 ### GitHub Examples

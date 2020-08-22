@@ -28,21 +28,21 @@ Piece of code above has prepared a ready-to-use instance of [EditableDocument](
 
 #### Getting whole HTML content
 
-The most default and standard method for generating HTML markup is parameterless [GetContent](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument/methods/getcontent) method:
+The most default and standard method for generating HTML markup is parameterless [GetContent](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument#getcontent()) method:
 
 ```java
 String htmlContent = document.getContent();
 
 ```
 
-If document has external resources (stylesheets, fonts, images), they are referenced via different HTML elements: stylesheets are specified through LINK elements, while images — through IMG. When using the [GetContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument/methods/getcontent) method, such external resources will be referenced by external links. For example:
+If document has external resources (stylesheets, fonts, images), they are referenced via different HTML elements: stylesheets are specified through LINK elements, while images — through IMG. When using the [GetContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument#getcontent()) method, such external resources will be referenced by external links. For example:
 
 ```java
 <link href="stylesheet.css" rel="stylesheet"/>
 <IMG src="image.png"/"> 
 ```
 
-Quite often on the web-server, where such HTML will be edited, resources are processed by specific HTTP handler. In such cases it is required to adjust paths to such endpoints. More advanced overload of the [GetContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument/methods/getcontent) method can help:
+Quite often on the web-server, where such HTML will be edited, resources are processed by specific HTTP handler. In such cases it is required to adjust paths to such endpoints. More advanced overload of the [GetContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument#getcontent()) method can help:
 
 ```java
 String externalImagesPrefix = "http://www.mywebsite.com/images/id=";
@@ -59,7 +59,7 @@ In the example above specified prefixes will be added to every external link in 
 
 #### Getting HTML BODY content
 
-Lot of HTML WYSIWYG editors are not able to process the whole HTML document, with HEAD section and so on. They are able only to process inner content of HTML->BODY element. In order to obtain such part of HTML markup, [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) class contains the [GetBodyContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument/methods/getcontent) method, which, as previous one, has two overloads, that are provided below:
+Lot of HTML WYSIWYG editors are not able to process the whole HTML document, with HEAD section and so on. They are able only to process inner content of HTML->BODY element. In order to obtain such part of HTML markup, [EditableDocument](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument) class contains the [GetBodyContent()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editabledocument#getcontent()) method, which, as previous one, has two overloads, that are provided below:
 
 ```java
 String bodyContent = document.getBodyContent();
