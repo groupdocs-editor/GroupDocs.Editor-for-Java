@@ -8,15 +8,15 @@ keywords: Extract document metadata, Get document info
 productName: GroupDocs.Editor for Java
 hideChildren: False
 ---
-> This demonstration shows and explains usage of the [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo) method, that extracts meta info from the document.
+> This demonstration shows and explains usage of the [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo()) method, that extracts meta info from the document.
 
 #### Introduction
 
-In some situations it is required to grab meta info from the document before actually editing it. For example, user wants to edit last tab of the multi-tabbed spreadsheet, but he doesn't know, how many tabs the document contains. Ir it is unclear for the user, is the document password-protected or not. For such situations [**GroupDocs.Editor**](https://products.groupdocs.com/editor/java) provides a [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo) method, that returns detailed meta info (metadata) about the specified document.
+In some situations it is required to grab meta info from the document before actually editing it. For example, user wants to edit last tab of the multi-tabbed spreadsheet, but he doesn't know, how many tabs the document contains. Ir it is unclear for the user, is the document password-protected or not. For such situations [**GroupDocs.Editor**](https://products.groupdocs.com/editor/java) provides a [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo()) method, that returns detailed meta info (metadata) about the specified document.
 
 #### Using the method
 
-In order to grab the meta info from the document, it should firstly be loaded into the `Editor` class. Then [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo)() should be called. This method obtains one parameter — password as a string. If document is encoded and user knows the password, he can specify it here. For other cases the null or empty string can be passed. Code example below demonstrates the usage:
+In order to grab the meta info from the document, it should firstly be loaded into the `Editor` class. Then [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo())() should be called. This method obtains one parameter — password as a string. If document is encoded and user knows the password, he can specify it here. For other cases the null or empty string can be passed. Code example below demonstrates the usage:
 
 ```java
 Editor editor = new Editor("C://input//document.docx");
@@ -27,12 +27,12 @@ IDocumentInfo infoDocxWithPassword = editor.getDocumentInfo("password");
 There can be several scenarios here regarding whether document is encoded or not, and did user specified a password:
 
 1.  If password is specified, but document is not password-protected, or the document format doesn't support encoding at all, the password will be ignored.
-2.  If document is password-protected, but password is not specified, the [PasswordRequiredException](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/passwordrequiredexception) will be thrown while calling [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo)().
-3.  If document is password-protected,and password is specified, but is incorrect, the [IncorrectPasswordException](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/incorrectpasswordexception) will be thrown while calling [GetDocumentInfo()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo).
+2.  If document is password-protected, but password is not specified, the [PasswordRequiredException](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/passwordrequiredexception) will be thrown while calling [GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo())().
+3.  If document is password-protected,and password is specified, but is incorrect, the [IncorrectPasswordException](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/incorrectpasswordexception) will be thrown while calling [GetDocumentInfo()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo()).
 
 #### Explaining resulting type
 
-[GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo)() method returns a [IDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo). This is interface, that stores meta info about one particular document and contains the next properties:
+[GetDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo())() method returns a [IDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo). This is interface, that stores meta info about one particular document and contains the next properties:
 
 1.  [PageCount](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo/properties/pagecount). This is a positive number, that returns page count for WordProcessing documents, tabs (worksheets) count for Spreadsheets, and 1 for pageless documents like XML or TXT.
 2.  [Size](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo/properties/size). Document size in bytes.
@@ -46,7 +46,7 @@ There are three inheritors of the [IDocumentInfo](https://apireference.groupdoc
 3.  [PresentationDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/presentationdocumentinfo) — common for all Presentation family formats.
 4.  [TextualDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/textualdocumentinfo) — common for all textual types, including all DSV (like CSV and TSV), XML, HTML, and plain text.
 
-One important thing to note: if [GetDocumentInfo()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor/methods/getdocumentinfo) returns NULL value instead of some of [IDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo) inheritors, this means that specified document is not supported by the GroupDocs.Editor and thus cannot be opened for editing or saved.
+One important thing to note: if [GetDocumentInfo()](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor/editor#getdocumentinfo()) returns NULL value instead of some of [IDocumentInfo](https://apireference.groupdocs.com/editor/java/com.groupdocs.editor.metadata/idocumentinfo) inheritors, this means that specified document is not supported by the GroupDocs.Editor and thus cannot be opened for editing or saved.
 
 #### Explaining document format
 
