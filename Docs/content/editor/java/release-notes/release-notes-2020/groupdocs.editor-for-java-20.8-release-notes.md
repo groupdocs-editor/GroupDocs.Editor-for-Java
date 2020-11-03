@@ -2,7 +2,7 @@
 id: groupdocs-editor-for-java-20-8-release-notes
 url: editor/java/groupdocs-editor-for-java-20-8-release-notes
 title: GroupDocs.Editor for Java 20.8 Release Notes
-weight: 6
+weight: 7
 description: ""
 keywords: 
 productName: GroupDocs.Editor for Java
