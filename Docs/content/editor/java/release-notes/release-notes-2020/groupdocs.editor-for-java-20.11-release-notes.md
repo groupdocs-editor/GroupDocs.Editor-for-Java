@@ -22,4 +22,4 @@ This release of GroupDocs.Editor for Java 20.11 resolves problems with paginatio
 | EDITORJAVA-290 | Exception when editing ODT files | Bug |
 | EDITORJAVA-289 | Enable pagination feature is not working | Bug |
 | EDITORJAVA-264 | Formatting issue when making a HTML file editable | Bug |
-| EDITORJAVA-267 | Add missing namespaces descriptions into api references | Task |
+| EDITORJAVA-267 | Add missing namespaces descriptions into api references | Improvement |
