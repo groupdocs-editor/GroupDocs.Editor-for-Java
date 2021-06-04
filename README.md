@@ -10,8 +10,10 @@ GroupDocs.Editor is a one-stop solution for [Document Editing as HTML](https://p
 
 Directory | Description
 --------- | -----------
-[Docs](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Docs)  | Product documentation containing the Developer's Guide, Release Notes and more.
+[Docs](https://github.com/groupdocs-editor/GroupDocs.Editor-Docs)  | Product documentation containing the Developer's Guide, Release Notes and more.
 [Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples)  | Java examples and sample documents for you to get started quickly. 
+[Demos](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Demos)  | Frontend examples to help you learn how to Implement product features in a Web-UI based application.
+
 
 ## Document Editing as HTML
 
