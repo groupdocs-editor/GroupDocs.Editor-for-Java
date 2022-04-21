@@ -30,6 +30,7 @@ public class LoadDocument {
         Editor editor2 = new Editor(inputPath, wordLoadOptions);
 
         InputStream inputStream = new FileInputStream(Constants.SAMPLE_XLSX);
+        InputStream inputStream2 = new FileInputStream(Constants.SAMPLE_XLSX);
 
         //Load document as content from byte stream and without load options
         Editor editor3 = new Editor(inputStream);
@@ -37,7 +38,7 @@ public class LoadDocument {
         //Load document as content from byte stream and with load options
         SpreadsheetLoadOptions sheetLoadOptions = new SpreadsheetLoadOptions();
         sheetLoadOptions.setOptimizeMemoryUsage(true);
-        Editor editor4 = new Editor(inputStream, sheetLoadOptions);
+        Editor editor4 = new Editor(inputStream2, sheetLoadOptions);
 
         //Dispose all resources
         editor1.dispose();

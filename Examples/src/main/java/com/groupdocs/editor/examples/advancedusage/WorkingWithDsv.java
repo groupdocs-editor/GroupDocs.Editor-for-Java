@@ -11,6 +11,7 @@ import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.SpreadsheetFormats;
 import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.DelimitedTextEditOptions;
 import com.groupdocs.editor.options.DelimitedTextSaveOptions;
 import com.groupdocs.editor.options.SpreadsheetSaveOptions;
@@ -25,7 +26,7 @@ public class WorkingWithDsv {
     public static void run() throws Exception {
         //1. Get a path to the input DSV file. In our case it is CSV
         String inputFilePath = Constants.SAMPLE_CSV;
-
+        String fileName = Constants.removeExtension(Path.getFileName(inputFilePath));
         //2. Create Editor instance (not load options required)
         Editor editor = new Editor(inputFilePath);
 
@@ -60,11 +61,11 @@ public class WorkingWithDsv {
         SpreadsheetSaveOptions cellsSaveOptions = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsm);
 
         //10. Prepare 3 different save paths
-        String outputCsvPath = Constants.getOutputFilePath(inputFilePath, "csv");
+        String outputCsvPath = Constants.getOutputFilePath(fileName, "csv");
 
-        String outputTsvPath = Constants.getOutputFilePath(inputFilePath, "tsv");
+        String outputTsvPath = Constants.getOutputFilePath(fileName, "tsv");
 
-        String outputCellsPath = Constants.getOutputFilePath(inputFilePath, "xlsm");
+        String outputCellsPath = Constants.getOutputFilePath(fileName, "xlsm");
 
         //11. Save edited document to 3 files of different formats
         editor.save(afterEdit, outputCsvPath, csvSaveOptions);

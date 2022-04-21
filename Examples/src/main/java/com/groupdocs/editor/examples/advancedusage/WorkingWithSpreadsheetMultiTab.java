@@ -9,6 +9,7 @@ import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.SpreadsheetFormats;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.SpreadsheetEditOptions;
 import com.groupdocs.editor.options.SpreadsheetLoadOptions;
 import com.groupdocs.editor.options.SpreadsheetSaveOptions;
@@ -45,7 +46,7 @@ public class WorkingWithSpreadsheetMultiTab {
 
         //5. Save first tab from EditableDocument #1 to separate document
         SpreadsheetSaveOptions saveOptions1 = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsm);
-        String outputPath1 = Constants.getOutputFilePath(inputFilePath + "_tab1", "xlsm");
+        String outputPath1 = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)) + "_tab1", "xlsm");
 
         OutputStream outputStream = new ByteArrayOutputStream();
         //FileStream outputStream = File.create(outputPath)
@@ -54,7 +55,7 @@ public class WorkingWithSpreadsheetMultiTab {
 
         //6. Save second tab from EditableDocument #2 to separate document
         SpreadsheetSaveOptions saveOptions2 = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsb);
-        String outputPath2 = Constants.getOutputFilePath(inputFilePath + "_tab2", "xlsb");
+        String outputPath2 = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)) + "_tab2", "xlsb");
 
         OutputStream outputStream1 = new ByteArrayOutputStream();
         //FileStream outputStream1 = File.create(outputPath)

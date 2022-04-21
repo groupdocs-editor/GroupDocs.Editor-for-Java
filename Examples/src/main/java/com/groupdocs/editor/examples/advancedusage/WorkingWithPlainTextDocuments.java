@@ -11,6 +11,7 @@ import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.TextEditOptions;
 import com.groupdocs.editor.options.TextLeadingSpacesOptions;
 import com.groupdocs.editor.options.TextSaveOptions;
@@ -61,8 +62,8 @@ public class WorkingWithPlainTextDocuments {
         txtSaveOptions.setPreserveTableLayout(true);
 
         //9. Prepare paths for saving resultant DOCX and TXT files
-        String outputWordPath = Constants.getOutputFilePath(inputFilePath, "docm");
-        String outputTxtPath = Constants.getOutputFilePath(inputFilePath, "txt");
+        String outputWordPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), "docm");
+        String outputTxtPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), "txt");
 
         //10. Save
         editor.save(afterEdit, outputWordPath, wordSaveOptions);

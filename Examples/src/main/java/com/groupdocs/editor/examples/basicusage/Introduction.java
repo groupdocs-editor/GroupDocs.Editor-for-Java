@@ -12,6 +12,7 @@ import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.htmlcss.resources.fonts.FontResourceBase;
 import com.groupdocs.editor.htmlcss.resources.images.IImageResource;
 import com.groupdocs.editor.htmlcss.resources.textual.CssText;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -48,7 +49,7 @@ public class Introduction {
 
         //6. Save edited document to the output format
         //6.1. In order to do that, prepare stream or path for saving (writing) output document...
-        String outputPath = Constants.getOutputFilePath(inputFilePath, ".rtf");
+        String outputPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), "rtf");
         //6.2. ...and prepare saving options
         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Rtf);
         //6.3. Finally, save to path

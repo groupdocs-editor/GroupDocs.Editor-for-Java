@@ -12,6 +12,7 @@ import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
 import com.groupdocs.editor.htmlcss.serialization.QuoteType;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.TextSaveOptions;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
 import com.groupdocs.editor.options.XmlEditOptions;
@@ -57,9 +58,9 @@ public class WorkingWithXml {
         txtSaveOptions.setEncoding(StandardCharsets.UTF_8);
 
         //9. Prepare paths for saving resultant DOCX and TXT files
-        String outputWordPath = Constants.getOutputFilePath(inputFilePath, "docx");
+        String outputWordPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), "docx");
 
-        String outputTxtPath = Constants.getOutputFilePath(inputFilePath, "txt");
+        String outputTxtPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), "txt");
 
         //10. Save
         editor.save(afterEdit, outputWordPath, wordSaveOptions);

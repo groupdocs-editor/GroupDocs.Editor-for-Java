@@ -11,6 +11,7 @@ import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.FontExtractionOptions;
 import com.groupdocs.editor.options.WordProcessingEditOptions;
 import com.groupdocs.editor.options.WordProcessingLoadOptions;
@@ -89,7 +90,7 @@ public class WorkingWithWordProcessing {
 
         //11. Save it
         //11.1. Prepare saving filename and path
-        String outputPath = Constants.getOutputFilePath(inputFilePath, docmFormat.getExtension());
+        String outputPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), docmFormat.getExtension());
 
         //11.2. Prepare stream for saving
         OutputStream outputStream = new ByteArrayOutputStream();

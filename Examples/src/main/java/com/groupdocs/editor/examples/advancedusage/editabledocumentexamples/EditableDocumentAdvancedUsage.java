@@ -13,6 +13,7 @@ import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
 import com.groupdocs.editor.htmlcss.resources.fonts.FontResourceBase;
 import com.groupdocs.editor.htmlcss.resources.images.IImageResource;
 import com.groupdocs.editor.htmlcss.resources.textual.CssText;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.WordProcessingEditOptions;
 import com.groupdocs.editor.options.WordProcessingLoadOptions;
 
@@ -32,6 +33,7 @@ public class EditableDocumentAdvancedUsage {
 
             //1. Lets create a EditableDocument instance in usual way, by loading and editing input document of some supportable format
             String inputFilePath = Constants.SAMPLE_DOCX;
+            String fileName = Constants.removeExtension(Path.getFileName(inputFilePath));
             Editor editor = new Editor(inputFilePath, new WordProcessingLoadOptions());
             EditableDocument beforeEdit = editor.edit(new WordProcessingEditOptions());
 
@@ -87,7 +89,7 @@ public class EditableDocumentAdvancedUsage {
             //4. It is possible to save the document from EditableDocument as a simple HTML-file with resources to the disk
             // In the example below a separate directory for resources (stylesheets, images, and fonts) will be created automatically.
             // However, by using a 2-parameter overload of a "Save" method you can create it manually.
-            String htmlFilePath = Constants.getOutputFilePath(inputFilePath, ".html");
+            String htmlFilePath = Constants.getOutputFilePath(fileName, "html");
             beforeEdit.save(htmlFilePath);
 
             //5. Along with implementing IDisposable, EditableDocument provides ability to check whether current instance is disposed

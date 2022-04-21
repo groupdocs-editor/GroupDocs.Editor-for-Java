@@ -5,6 +5,8 @@
  */
 package com.groupdocs.editor.examples;
 
+import static org.apache.commons.io.FilenameUtils.indexOfExtension;
+
 /**
  *
  * author AlexT
@@ -14,7 +16,7 @@ public class Constants {
     public static String PROJECT_PATH = System.getProperty("user.dir");
     
     public static final String LicensePath = "C:\\GroupDocs.Total.Java.lic";
-    public static final String SamplesPath = "\\Resources\\SampleFiles\\";
+    public static final String SamplesPath = "\\Resources\\";
     public static final String OutputPath = "\\Resources\\Output\\";
     
     public static String SAMPLE_DOCX = getSampleFilePath("SampleDoc1.docx");
@@ -47,5 +49,14 @@ public class Constants {
 
     public static String getOutputFilePath(String fileName, String fileExtension) {
         return PROJECT_PATH + OutputPath + fileName + "." + fileExtension;
+    }
+    public static String removeExtension(final String filename) {
+
+        final int index = indexOfExtension(filename); //used the String.lastIndexOf() method
+        if (index == 0) {
+            return filename;
+        } else {
+            return filename.substring(0, index);
+        }
     }
 }

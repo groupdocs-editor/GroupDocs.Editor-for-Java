@@ -68,7 +68,7 @@ public class ExtractingDocumentInfo {
 
         //9. Check and display its type
         System.out.println(String.format("It is:\r\nWordProcessing: {0}\r\nSpreadsheet: {1}\r\nTextual: {2}",
-                (WordProcessingDocumentInfo) infoXlsx, (SpreadsheetDocumentInfo) infoXlsx, (TextualDocumentInfo) infoXlsx
+                 infoXlsx instanceof WordProcessingDocumentInfo, infoXlsx instanceof SpreadsheetDocumentInfo, infoXlsx instanceof TextualDocumentInfo
         ));
 
         //10. Print detailed info
@@ -102,7 +102,7 @@ public class ExtractingDocumentInfo {
 
         //15. Check it
         System.out.println(String.format("Password-protected document actually is:\r\nWordProcessing: {0}\r\nSpreadsheet: {1}\r\nTextual: {2}",
-                (WordProcessingDocumentInfo) infoXls, (SpreadsheetDocumentInfo) infoXls, (TextualDocumentInfo) infoXls
+                infoXls instanceof WordProcessingDocumentInfo, infoXls instanceof SpreadsheetDocumentInfo, infoXls instanceof TextualDocumentInfo
         ));
 
         //16. Print detailed info
@@ -117,7 +117,7 @@ public class ExtractingDocumentInfo {
         //18. Grab data and check it
         IDocumentInfo infoXml = editorXml.getDocumentInfo(null);
         System.out.println(String.format("XML document is:\r\nWordProcessing: {0}\r\nSpreadsheet: {1}\r\nTextual: {2}",
-                (WordProcessingDocumentInfo) infoXml, (SpreadsheetDocumentInfo) infoXml, (TextualDocumentInfo) infoXml
+                infoXml instanceof WordProcessingDocumentInfo, infoXml instanceof SpreadsheetDocumentInfo, infoXml instanceof TextualDocumentInfo
         ));
 
         //19. Print detailed info
@@ -132,7 +132,7 @@ public class ExtractingDocumentInfo {
         //21. Grab data and check it
         IDocumentInfo infoTxt = editorTxt.getDocumentInfo(null);
         System.out.println(String.format("Text document is:\r\nWordProcessing: {0}\r\nSpreadsheet: {1}\r\nTextual: {2}",
-                (WordProcessingDocumentInfo) infoTxt, (SpreadsheetDocumentInfo) infoTxt, (TextualDocumentInfo) infoTxt
+                infoTxt instanceof WordProcessingDocumentInfo, infoTxt instanceof SpreadsheetDocumentInfo, infoTxt instanceof TextualDocumentInfo
         ));
 
         //22. Print detailed info

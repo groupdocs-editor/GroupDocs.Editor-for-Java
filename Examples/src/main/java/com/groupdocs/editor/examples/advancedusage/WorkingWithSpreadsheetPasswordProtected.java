@@ -7,9 +7,11 @@ package com.groupdocs.editor.examples.advancedusage;
 
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
+import com.groupdocs.editor.IncorrectPasswordException;
 import com.groupdocs.editor.PasswordRequiredException;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.SpreadsheetFormats;
+import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.SpreadsheetEditOptions;
 import com.groupdocs.editor.options.SpreadsheetLoadOptions;
 import com.groupdocs.editor.options.SpreadsheetSaveOptions;
@@ -44,7 +46,7 @@ public class WorkingWithSpreadsheetPasswordProtected {
         editor = new Editor(inputFilePath, loadOptions);
         try {
             editor.edit();
-        } catch (PasswordRequiredException ex) {
+        } catch (IncorrectPasswordException ex) {
             System.out.println("Cannot edit a document, because it is password-protected, and password was specified, but it is incorrect");
         }
 
@@ -75,7 +77,7 @@ public class WorkingWithSpreadsheetPasswordProtected {
 
         //5. Save document without modification
         //5.1. Prepare output filename and path
-        String outputPath = Constants.getOutputFilePath(inputFilePath, xlsmFormat.getExtension());
+        String outputPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), xlsmFormat.getExtension());
 
         //5.2. Create output stream
         OutputStream outputStream = new ByteArrayOutputStream();

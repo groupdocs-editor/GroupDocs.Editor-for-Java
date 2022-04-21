@@ -5,21 +5,21 @@
 	<artifactId>GroupDocs.Editor-for-Java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>7</maven.compiler.source>
+		<maven.compiler.target>7</maven.compiler.target>
 	</properties>
 
 	<dependencies>
 		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
-    		<version>20.11</version>
+    		<version>22.4</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.7</version>
+			<version>2.5</version>
 		</dependency>
 	</dependencies>
 	   <repositories>
