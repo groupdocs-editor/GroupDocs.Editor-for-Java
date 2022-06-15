@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>GroupDocs.Editor Dropwizard</name>
-    <url>https://groupdocs.com</url>
+    <url>http://groupdocs.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.groupdocs</groupId>
             <artifactId>groupdocs-editor</artifactId>
-            <version>20.11</version>
+            <version>22.6</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -234,12 +234,12 @@
         <repository>
             <id>com.springsource.repository.bundles.external</id>
             <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
-            <url>https://repository.springsource.com/maven/bundles/external</url>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
         </repository>
         <repository>
-            <id>GroupDocs Artifact Repository</id>
-            <name>GroupDocs Artifact Repository</name>
-            <url>https://repository.groupdocs.com/repo/</url>
+            <id>GroupDocsJavaAPI</id>
+            <name>GroupDocs Java API</name>
+            <url>http://artifact.groupdocs.com/repo/</url>
         </repository>
     </repositories>
 

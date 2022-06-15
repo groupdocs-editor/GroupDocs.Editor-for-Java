@@ -3,11 +3,9 @@ package com.groupdocs.ui.editor.service;
 import com.google.common.collect.Sets;
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
-import com.groupdocs.editor.formats.IDocumentFormat;
-import com.groupdocs.editor.formats.SpreadsheetFormats;
-import com.groupdocs.editor.formats.TextualFormats;
-import com.groupdocs.editor.formats.WordProcessingFormats;
+import com.groupdocs.editor.formats.*;
 import com.groupdocs.editor.license.License;
+import com.groupdocs.editor.metadata.IDocumentInfo;
 import com.groupdocs.editor.options.*;
 import com.groupdocs.ui.config.DefaultDirectories;
 import com.groupdocs.ui.config.GlobalConfiguration;
@@ -51,6 +49,8 @@ public class EditorServiceImpl implements EditorService {
     public static final String CELL = "Cell";
     public static final String PDF = "pfd";
     public static final String TXT = "Txt";
+    public static final String PPT = "Presentation";
+
 
     public static final Map<String, Format> formats = new HashMap<>();
 
@@ -70,7 +70,6 @@ public class EditorServiceImpl implements EditorService {
             formats.put("html", new Format(TextualFormats.Html, TXT));
             //formats.put("mhtml", new Format(WordProcessingFormats.Mhtml, WORD));
             formats.put("wordML", new Format(WordProcessingFormats.WordML, WORD));
-
             //formats.put("csv", new Format(SpreadsheetFormats.Csv, CELL));
             formats.put("ods", new Format(SpreadsheetFormats.Ods, CELL));
             formats.put("cellML", new Format(SpreadsheetFormats.SpreadsheetML, CELL));
@@ -81,6 +80,18 @@ public class EditorServiceImpl implements EditorService {
             formats.put("xlsx", new Format(SpreadsheetFormats.Xlsx, CELL));
             formats.put("xltm", new Format(SpreadsheetFormats.Xltm, CELL));
             formats.put("xltx", new Format(SpreadsheetFormats.Xltx, CELL));
+            formats.put("ppt95", new Format(PresentationFormats.Ppt95, PPT));
+            formats.put("ppt", new Format(PresentationFormats.Ppt, PPT));
+            formats.put("pptx", new Format(PresentationFormats.Pptx, PPT));
+            formats.put("pptm", new Format(PresentationFormats.Pptm, PPT));
+            formats.put("pps", new Format(PresentationFormats.Pps, PPT));
+            formats.put("ppsx", new Format(PresentationFormats.Ppsx, PPT));
+            formats.put("ppsm", new Format(PresentationFormats.Ppsm, PPT));
+            formats.put("pot", new Format(PresentationFormats.Pot, PPT));
+            formats.put("potx", new Format(PresentationFormats.Potx, PPT));
+            formats.put("potm", new Format(PresentationFormats.Potm, PPT));
+            formats.put("odp", new Format(PresentationFormats.Odp, PPT));
+            formats.put("otp", new Format(PresentationFormats.Otp, PPT));
         }
     }
 
@@ -101,7 +112,8 @@ public class EditorServiceImpl implements EditorService {
         try {
             // set GroupDocs license
             License license = new License();
-            license.setLicense(globalConfiguration.getApplication().getLicensePath());
+            String path = globalConfiguration.getApplication().getLicensePath();
+            license.setLicense(path);
         } catch (Throwable throwable) {
             logger.error("Can not verify Editor license!");
         }
@@ -156,7 +168,8 @@ public class EditorServiceImpl implements EditorService {
         try {
             ILoadOptions options = getLoadOptions(guid, password);
             Editor editor = new Editor(new FileInputStream(guid), options);
-            EditableDocument editableDocument = editor.edit();
+            IEditOptions editOptions = getEditOptions(guid);
+            EditableDocument editableDocument = editor.edit(editOptions);
             PageDescriptionEntity page = new PageDescriptionEntity();
             page.setData(editableDocument.getEmbeddedHtml());
             page.setNumber(0);
@@ -206,6 +219,9 @@ public class EditorServiceImpl implements EditorService {
             case WORD:
                 options = new WordProcessingSaveOptions((WordProcessingFormats)format.format);
                 break;
+            case PPT:
+                options = new PresentationSaveOptions((PresentationFormats) format.format);
+                break;
             case CELL:
                 options = new SpreadsheetSaveOptions((SpreadsheetFormats)format.format);
                 break;
@@ -235,11 +251,39 @@ public class EditorServiceImpl implements EditorService {
             case CELL:
                 options = new SpreadsheetLoadOptions();
                 break;
+            case TXT:
+                options = null;
+                break;
+            case PPT:
+                options = new PresentationLoadOptions();
+                break;
             default:
                 logger.error("Not supported doc format");
                 throw new IllegalArgumentException("Not supported doc format");
         }
-        options.setPassword(password);
+        if (options != null){
+            options.setPassword(password);
+        }
         return options;
+    }
+
+    private IEditOptions getEditOptions(String fileName) {
+        String extension = FilenameUtils.getExtension(fileName);
+
+        Format format = formats.get(extension.toLowerCase());
+        switch (format.type) {
+            case WORD:
+                return new WordProcessingEditOptions();
+            case CELL:
+                return new SpreadsheetEditOptions();
+            case TXT:
+                return null;
+            case PPT:
+                return new PresentationEditOptions();
+            default:
+                logger.error("Not supported doc format");
+                throw new IllegalArgumentException("Not supported doc format");
+        }
+
     }
 }

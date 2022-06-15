@@ -57,8 +57,8 @@ public class ExtractingDocumentInfo {
         //7. If yes - get detailed info about it
         if ("yes".equals(isWordProcessing)) {
             WordProcessingDocumentInfo casted = (WordProcessingDocumentInfo) infoDocx;
-            System.out.println(String.format("Format is: {0}; extension is: {1}; Page count: {2}; Size: {3} bytes; Is encrypted: {4}",
-                    casted.getFormat().getName(), casted.getFormat().getExtension(), casted.getPageCount(), casted.getSize(), casted.isEncrypted()));
+            System.out.println(String.format("Format is: "+casted.getFormat().getName()+"; extension is: "+casted.getFormat().getExtension()+"; Page count: "+casted.getPageCount()
+                            +"; Size: "+casted.getSize()+" bytes; Is encrypted: "+casted.isEncrypted()));
         }
 
         //8. Now let's check 2-tab Spreadsheet
@@ -74,8 +74,8 @@ public class ExtractingDocumentInfo {
         //10. Print detailed info
         {
             SpreadsheetDocumentInfo casted = (SpreadsheetDocumentInfo) infoXlsx;
-            System.out.println(String.format("Format is: {0}; extension is: {1}; Tabs count: {2}; Size: {3} bytes; Is encrypted: {4}",
-                    casted.getFormat().getName(), casted.getFormat().getExtension(), casted.getPageCount(), casted.getSize(), casted.isEncrypted()));
+            System.out.println(String.format("Format is: "+casted.getFormat().getName()+"; extension is: "+casted.getFormat().getExtension()+"; Tabs count: "
+                            +casted.getPageCount()+"; Size: "+casted.getSize()+" bytes; Is encrypted: "+casted.isEncrypted()));
         }
 
         //11. Now let's try to open a password-protected document
@@ -107,8 +107,8 @@ public class ExtractingDocumentInfo {
 
         //16. Print detailed info
         SpreadsheetDocumentInfo casted = (SpreadsheetDocumentInfo) infoXls;
-        System.out.println(String.format("Format is: {0}; extension is: {1}; Tabs count: {2}; Size: {3} bytes; Is encrypted: {4}",
-                casted.getFormat().getName(), casted.getFormat().getExtension(), casted.getPageCount(), casted.getSize(), casted.isEncrypted()));
+        System.out.println(String.format("Format is: "+casted.getFormat().getName()+"; extension is: "+casted.getFormat().getExtension()
+                        +"; Tabs count: "+casted.getPageCount()+"; Size: "+casted.getSize()+" bytes; Is encrypted: "+casted.isEncrypted()));
 
         //17. Now let's try to play with text-based documents
         String xmlInputFilePath = Constants.SAMPLE_XML;
@@ -122,8 +122,8 @@ public class ExtractingDocumentInfo {
 
         //19. Print detailed info
         TextualDocumentInfo casted1 = (TextualDocumentInfo) infoXml;
-        System.out.println(String.format("Format is: {0}; extension is: {1}; Encoding: {2}; Size: {3} bytes",
-                casted1.getFormat().getName(), casted1.getFormat().getExtension(), casted1.getEncoding(), casted1.getSize()));
+        System.out.println(String.format("Format is: "+casted1.getFormat().getName()+"; extension is: "+casted1.getFormat().getExtension()+
+                        "; Encoding: "+casted1.getEncoding()+"; Size: "+casted1.getSize()+" bytes"));
 
         //20. Plain text at this time
         String txtInputFilePath = Constants.SAMPLE_TXT;
@@ -137,8 +137,8 @@ public class ExtractingDocumentInfo {
 
         //22. Print detailed info
         TextualDocumentInfo casted2 = (TextualDocumentInfo) infoTxt;
-        System.out.println(String.format("Format is: {0}; extension is: {1}; Encoding: {2}; Size: {3} bytes",
-                casted2.getFormat().getName(), casted2.getFormat().getExtension(), casted2.getEncoding(), casted2.getSize()));
+        System.out.println(String.format("Format is: "+casted2.getFormat().getName()+"; extension is: "+casted2.getFormat().getExtension()+
+                        "; Encoding: "+casted2.getEncoding()+"; Size: "+casted2.getSize()+" bytes"));
 
         //23. Don't forget to dispose all resources
         editorDocx.dispose();

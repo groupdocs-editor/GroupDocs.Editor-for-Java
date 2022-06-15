@@ -10,7 +10,7 @@
     <packaging>${packaging.type}</packaging>
 
     <name>GroupDocs.Editor for Java Spring Sample</name>
-    <url>https://groupdocs.com</url>
+    <url>http://groupdocs.com</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -132,7 +132,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.7</version>
+            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -143,7 +143,7 @@
         <dependency>
             <groupId>com.groupdocs</groupId>
             <artifactId>groupdocs-editor</artifactId>
-            <version>20.11</version>
+            <version>22.6</version>
             <type>jar</type>
         </dependency>
 
@@ -151,9 +151,9 @@
 
     <repositories>
         <repository>
-             <id>GroupDocs Artifact Repository</id>
-             <name>GroupDocs Artifact Repository</name>
-             <url>https://repository.groupdocs.com/repo/</url>
+            <id>GroupDocsJavaAPI</id>
+            <name>GroupDocs Java API</name>
+            <url>http://artifact.groupdocs.com/repo/</url>
         </repository>
     </repositories>
 
