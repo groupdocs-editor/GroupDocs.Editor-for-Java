@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.groupdocs</groupId>
             <artifactId>groupdocs-editor</artifactId>
-            <version>22.6</version>
+            <version>22.9</version>
             <type>jar</type>
         </dependency>
         <dependency>
