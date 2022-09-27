@@ -39,6 +39,8 @@ public class Constants {
 
     public static String SAMPLE_PPTX = getSampleFilePath("ComplexTest.pptx");
 
+    public static String SAMPLE_MSG = getSampleFilePath("ComplexExample.msg");
+
     private static String getSampleFilePath(String fileName) {
         return PROJECT_PATH + SamplesPath + fileName;
     }

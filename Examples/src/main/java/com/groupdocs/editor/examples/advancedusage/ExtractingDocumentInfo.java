@@ -67,9 +67,8 @@ public class ExtractingDocumentInfo {
         IDocumentInfo infoXlsx = editorXlsx.getDocumentInfo(null);
 
         //9. Check and display its type
-        System.out.println(String.format("It is:\r\nWordProcessing: {0}\r\nSpreadsheet: {1}\r\nTextual: {2}",
-                 infoXlsx instanceof WordProcessingDocumentInfo, infoXlsx instanceof SpreadsheetDocumentInfo, infoXlsx instanceof TextualDocumentInfo
-        ));
+        System.out.println(String.format("It is:\r\nWordProcessing: "+(infoXlsx instanceof WordProcessingDocumentInfo)+"\r\nSpreadsheet: "+(infoXlsx instanceof SpreadsheetDocumentInfo)+"\r\nTextual: " +
+                (infoXlsx instanceof TextualDocumentInfo)));
 
         //10. Print detailed info
         {

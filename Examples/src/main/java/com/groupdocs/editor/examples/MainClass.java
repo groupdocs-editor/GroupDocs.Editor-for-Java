@@ -19,6 +19,7 @@ public class MainClass {
 
         //HelloWorld.run();
         SetLicenseFromFile.run();
+        WorkingWithEmail.run();
         //SetLicenseFromStream.run();
         //SetMeteredLicense.run();
 
@@ -33,6 +34,7 @@ public class MainClass {
         WorkingWithSpreadsheetPasswordProtected.run();
         WorkingWithSpreadsheetMultiTab.run();
         WorkingWithDsv.run();
+        WorkingWithEmail.run();
         WorkingWithPresentations.run();
         WorkingWithPlainTextDocuments.run();
         WorkingWithXml.run();

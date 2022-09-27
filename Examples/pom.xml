@@ -5,15 +5,15 @@
 	<artifactId>GroupDocs.Editor-for-Java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>7</maven.compiler.source>
+		<maven.compiler.target>7</maven.compiler.target>
 	</properties>
 
 	<dependencies>
 		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
-    		<version>22.6</version>
+    		<version>22.9</version>
 		</dependency>
 		
 		<dependency>
@@ -26,7 +26,7 @@
 		<repository>
 			<id>GroupDocsJavaAPI</id>
 			<name>GroupDocs Java API</name>
-			<url>https://repository.groupdocs.com/repo/</url>
+			<url>http://repository.groupdocs.com/repo/</url>
 		</repository>
 	</repositories>
 	<build>

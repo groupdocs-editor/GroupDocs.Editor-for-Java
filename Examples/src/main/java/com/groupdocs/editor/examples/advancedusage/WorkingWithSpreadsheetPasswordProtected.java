@@ -90,7 +90,7 @@ public class WorkingWithSpreadsheetPasswordProtected {
         editor.dispose();
 
         System.out.println(String.format(
-                "WorkingWithSpreadsheetPasswordProtected routine has successfully finished. Editor instance was manually {0}",
-                editor.isDisposed() ? "disposed" : "NOT disposed"));
+                "WorkingWithSpreadsheetPasswordProtected routine has successfully finished. Editor instance was manually " +
+                        (editor.isDisposed() ? "disposed" : "NOT disposed")));
     }
 }
