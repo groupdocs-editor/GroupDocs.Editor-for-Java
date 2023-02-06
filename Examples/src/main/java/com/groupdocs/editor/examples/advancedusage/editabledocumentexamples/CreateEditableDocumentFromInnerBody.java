@@ -9,6 +9,7 @@ import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
+import com.groupdocs.editor.options.PageRange;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
 import java.io.File;
 import org.apache.commons.io.FileUtils;

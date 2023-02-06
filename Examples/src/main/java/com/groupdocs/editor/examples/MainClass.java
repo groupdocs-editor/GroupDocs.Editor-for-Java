@@ -16,45 +16,48 @@ public class MainClass {
     public static void main(String[] args) throws Throwable {
 
         //QuickStart usage
-
         //HelloWorld.run();
         SetLicenseFromFile.run();
-        WorkingWithEmail.run();
+
         //SetLicenseFromStream.run();
         //SetMeteredLicense.run();
 
         //Basic usage
-        EditDocument.run();
-        Introduction.run();
-        LoadDocument.run();
-        SaveDocument.run();
+        //EditDocument.run();
+        //Introduction.run();
+        //LoadDocument.run();
+        //SaveDocument.run();
 
         //Advanced usage
-        WorkingWithWordProcessing.run();
-        WorkingWithSpreadsheetPasswordProtected.run();
-        WorkingWithSpreadsheetMultiTab.run();
-        WorkingWithDsv.run();
-        WorkingWithEmail.run();
-        WorkingWithPresentations.run();
-        WorkingWithPlainTextDocuments.run();
-        WorkingWithXml.run();
-        ExtractingDocumentInfo.run();
-        SavingEditedDocumentToAllFormats.run();
-        WorkingWithFormats.run();
+        //WorkingWithWordProcessing.run();
+        //WorkingWithSpreadsheetPasswordProtected.run();
+        //WorkingWithSpreadsheetMultiTab.run();
+        //WorkingWithDsv.run();
+        //WorkingWithEmail.run();
+        //WorkingWithMarkdown.run();
+        //EditingMarkdown.run();
+        //MarkdownRoundtrip.run();
+        //WorkingWithPresentations.run();
+        //WorkingWithPresentationPreview.run();
+        //WorkingWithPlainTextDocuments.run();
+        //WorkingWithXml.run();
+        //ExtractingDocumentInfo.run();
+        //SavingEditedDocumentToAllFormats.run();
+        //WorkingWithFormats.run();
 
         // Working with EditableDocument
-        CreateEditableDocumentFromHtmlFile.run();
-        CreateEditableDocumentFromInnerBody.run();
-        GetHtmlContent.run();
-        GetHtmlContentWithPrefix.run();
-        GetHtmlBodyContent.run();
-        GetHtmlBodyContentWithPrefix.run();
-        GetAllEmbeddedHtmlContent.run();
-        GetExternalCssContent.run();
-        GetExternalCssContentWithPrefix.run();
-        SaveHtmlToFolder.run();
-        SaveHtmlResourcesToFolder.run();
-        WorkingWithResources.run();
-        EditableDocumentAdvancedUsage.run();
+        //CreateEditableDocumentFromHtmlFile.run();
+        //CreateEditableDocumentFromInnerBody.run();
+        //GetHtmlContent.run();
+        //GetHtmlContentWithPrefix.run();
+        //GetHtmlBodyContent.run();
+        //GetHtmlBodyContentWithPrefix.run();
+        //GetAllEmbeddedHtmlContent.run();
+        //GetExternalCssContent.run();
+        //GetExternalCssContentWithPrefix.run();
+        //SaveHtmlToFolder.run();
+        //SaveHtmlResourcesToFolder.run();
+        //WorkingWithResources.run();
+        //EditableDocumentAdvancedUsage.run();
     }
 }

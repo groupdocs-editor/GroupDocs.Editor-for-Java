@@ -13,20 +13,34 @@
 		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
-    		<version>22.9</version>
+    		<version>23.2</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.14.3</version>
 		</dependency>
 	</dependencies>
 	   <repositories>
 		<repository>
 			<id>GroupDocsJavaAPI</id>
 			<name>GroupDocs Java API</name>
-			<url>https://repository.groupdocs.com/repo/</url>
+			<url>https://releases.groupdocs.com/java/repo/</url>
+		</repository>
+		<repository>
+		   <id>maven-apache-central</id>
+		   <name>maven-central</name>
+		   <url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+		<repository>
+		   <id>maven-central</id>
+		   <name>maven-central</name>
+		   <url>https://repo1.maven.org/maven2</url>
 		</repository>
 	</repositories>
 	<build>

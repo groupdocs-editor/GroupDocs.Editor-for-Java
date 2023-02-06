@@ -15,9 +15,9 @@ public class Constants {
 
     public static String PROJECT_PATH = System.getProperty("user.dir");
     
-    public static final String LicensePath = "C:\\GroupDocs.Total.Java.lic";
+    public static final String LicensePath = "C:\\GroupDocs.Editor.Java.lic";
     public static final String SamplesPath = "\\Resources\\";
-    public static final String OutputPath = "\\Resources\\Output\\";
+    public static final String OutputPath = "\\Output\\";
     
     public static String SAMPLE_DOCX = getSampleFilePath("SampleDoc1.docx");
 
@@ -41,7 +41,13 @@ public class Constants {
 
     public static String SAMPLE_MSG = getSampleFilePath("ComplexExample.msg");
 
-    private static String getSampleFilePath(String fileName) {
+    public static String SAMPLE_MD = getSampleFilePath("Markdown\\ComplexImage.md");
+
+    public static String SAMPLE_MD_EDIT = getSampleFilePath("Markdown\\input.md");
+
+    public static String SAMPLE_MD_FOLDER = getSampleFilePath("Markdown\\images");
+
+    public static String getSampleFilePath(String fileName) {
         return PROJECT_PATH + SamplesPath + fileName;
     }
 

@@ -6,7 +6,6 @@ import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.options.EmailEditOptions;
 import com.groupdocs.editor.options.EmailSaveOptions;
 import com.groupdocs.editor.options.MailMessageOutput;
-import com.groupdocs.editor.options.WordProcessingLoadOptions;
 
 import java.io.ByteArrayOutputStream;
 
@@ -48,5 +47,6 @@ public class WorkingWithEmail {
         editedDoc.dispose();
         originalDoc.dispose();
         msgEditor.dispose();
+        System.out.println("WorkingWithEmail routine has successfully finished");
     }
 }

@@ -22,9 +22,6 @@ public class CreateEditableDocumentFromHtmlFile {
     public static void run() throws Exception {
         String htmlFilePath = Constants.SAMPLE_HTML;
 
-        Editor editor1 = new Editor("E:\\java_examples\\test-editor\\Examples\\Resources\\HIPAA Manual_Template_1-18-2022.docx", new WordProcessingLoadOptions());
-        EditableDocument editableDocument = editor1.edit();
-
         String fileName = Constants.removeExtension(Path.getFileName(htmlFilePath));
         EditableDocument document = EditableDocument.fromFile(htmlFilePath, null);
 
@@ -32,5 +29,6 @@ public class CreateEditableDocumentFromHtmlFile {
         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
         String savePath = Constants.getOutputFilePath(fileName, "docx");
         editor.save(document, savePath, saveOptions);
+        System.out.println("CreateEditableDocumentFromHtmlFile routine has successfully finished");
     }
 }
