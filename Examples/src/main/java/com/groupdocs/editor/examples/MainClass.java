@@ -41,6 +41,12 @@ public class MainClass {
         //WorkingWithPresentationPreview.run();
         //WorkingWithPlainTextDocuments.run();
         //WorkingWithXml.run();
+        //WorkingWithXml.loadXml();
+        //WorkingWithXml.editXmlShort();
+        //WorkingWithXml.highlightOptionsDemo();
+        //WorkingWithXml.formatOptionsDemo();
+        //WorkingWithXml.complexEditDemo();
+        //WorkingWithXml.getXmlMetainfo();
         //ExtractingDocumentInfo.run();
         //SavingEditedDocumentToAllFormats.run();
         //WorkingWithFormats.run();
