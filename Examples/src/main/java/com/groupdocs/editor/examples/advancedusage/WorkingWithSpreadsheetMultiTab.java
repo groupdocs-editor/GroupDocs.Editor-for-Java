@@ -13,10 +13,8 @@ import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
 import com.groupdocs.editor.options.SpreadsheetEditOptions;
 import com.groupdocs.editor.options.SpreadsheetLoadOptions;
 import com.groupdocs.editor.options.SpreadsheetSaveOptions;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import java.io.*;
 
 /**
  *
@@ -57,10 +55,14 @@ public class WorkingWithSpreadsheetMultiTab {
         SpreadsheetSaveOptions saveOptions2 = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsb);
         String outputPath2 = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)) + "_tab2", "xlsb");
 
-        OutputStream outputStream1 = new ByteArrayOutputStream();
+        ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
         //FileStream outputStream1 = File.create(outputPath)
 
         editor.save(secondTabBeforeEdit, outputPath2, saveOptions2);
+
+        try(OutputStream outputFile = new FileOutputStream(outputPath2)) {
+            outputStream1.writeTo(outputFile);
+        }
 
         //7. Dispose both EditableDocument instances
         firstTabBeforeEdit.dispose();

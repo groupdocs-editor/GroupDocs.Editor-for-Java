@@ -17,6 +17,7 @@ import com.groupdocs.editor.htmlcss.css.datatypes.Length;
 import com.groupdocs.editor.htmlcss.css.properties.FontSize;
 import com.groupdocs.editor.htmlcss.css.properties.FontStyle;
 import com.groupdocs.editor.htmlcss.css.properties.FontWeight;
+import com.groupdocs.editor.htmlcss.css.properties.TextDecorationLineType;
 import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
 import com.groupdocs.editor.htmlcss.serialization.QuoteType;
 import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
@@ -136,15 +137,15 @@ public class WorkingWithXml {
 
         //Setting attribute names font settings
         highlightOptions.getAttributeNamesFontSettings().setName("Arial");
-        highlightOptions.getAttributeNamesFontSettings().setLine(WebFont.TextDecorationLine.Underline);
+        highlightOptions.getAttributeNamesFontSettings().setLine(TextDecorationLineType.Underline);
         highlightOptions.getAttributeNamesFontSettings().setWeight(FontWeight.Lighter);
 
         //Setting attribute values font settings
-        highlightOptions.getAttributeValuesFontSettings().setLine((byte) (WebFont.TextDecorationLine.Underline + WebFont.TextDecorationLine.Overline));
+        highlightOptions.getAttributeValuesFontSettings().setLine(TextDecorationLineType.op_Addition(TextDecorationLineType.Underline,TextDecorationLineType.Overline));
         highlightOptions.getAttributeValuesFontSettings().setStyle(FontStyle.Italic);
 
         //Setting CDATA sections font settings
-        highlightOptions.getCDataFontSettings().setLine(WebFont.TextDecorationLine.LineThrough);
+        highlightOptions.getCDataFontSettings().setLine(TextDecorationLineType.LineThrough);
         highlightOptions.getCDataFontSettings().setSize(FontSize.Smaller);
 
         //Setting HTML comments font settings
@@ -202,7 +203,7 @@ public class WorkingWithXml {
         editOptions1.setFixIncorrectStructure(true);
         editOptions1.setAttributeValuesQuoteType(QuoteType.SingleQuote);
         editOptions1.getFormatOptions().setLeftIndent(Length.parse("20px"));
-        editOptions1.getHighlightOptions().getXmlTagsFontSettings().setLine((byte) (WebFont.TextDecorationLine.Underline + WebFont.TextDecorationLine.Overline));
+        editOptions1.getHighlightOptions().getXmlTagsFontSettings().setLine(TextDecorationLineType.op_Addition(TextDecorationLineType.Underline,TextDecorationLineType.Overline));
         editOptions1.getHighlightOptions().getXmlTagsFontSettings().setWeight(FontWeight.Bold);
 
         XmlEditOptions editOptions2 = new XmlEditOptions();
@@ -210,7 +211,7 @@ public class WorkingWithXml {
         editOptions2.setAttributeValuesQuoteType(QuoteType.DoubleQuote);
         editOptions2.getFormatOptions().setLeafTextNodesOnNewline(true);
         editOptions2.getHighlightOptions().getXmlTagsFontSettings().setSize(FontSize.XLarge);
-        editOptions2.getHighlightOptions().getHtmlCommentsFontSettings().setLine(WebFont.TextDecorationLine.LineThrough);
+        editOptions2.getHighlightOptions().getHtmlCommentsFontSettings().setLine(TextDecorationLineType.LineThrough);
 
         Editor editor = new Editor(xmlInputPath);
         try /*JAVA: was using*/

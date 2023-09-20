@@ -69,7 +69,7 @@ public class EditableDocumentAdvancedUsage {
 
             //3.2. Generating prefixed HTML markup to a String.
             // Now, for example, <img src="car.jpg" /> is turned into <img src="http://example.com/ImagesHandler/id=car.jpg" />
-            String prefixedHtmlMarkup = beforeEdit.getContent(customImagesRequesthandlerUri, customCssRequesthandlerUri);
+            String prefixedHtmlMarkup = beforeEdit.getContentString(customImagesRequesthandlerUri, customCssRequesthandlerUri);
 
             //3.3. Some WYSIWYG-editors can handle only pure TML markup, without header (in other words, only internals of HTML->BODY element).
             // EditableDocument can provide such part of a document.

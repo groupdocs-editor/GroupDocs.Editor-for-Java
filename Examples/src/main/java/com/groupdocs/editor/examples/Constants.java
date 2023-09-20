@@ -19,7 +19,9 @@ public class Constants {
     public static final String SamplesPath = "\\Resources\\";
     public static final String OutputPath = "\\Output\\";
     
-    public static String SAMPLE_DOCX = getSampleFilePath("SampleDoc1.docx");
+    public static String SAMPLE_DOCX = getSampleFilePath("sample.docx");
+
+    public static String SAMPLE_DOCX2 = getSampleFilePath("SampleDoc1.docx");
 
     public static String SAMPLE_HTML = getSampleFilePath("SampleDoc1.html");
 
@@ -31,13 +33,13 @@ public class Constants {
 
     public static String SAMPLE_XLSX = getSampleFilePath("Sample_2SpreadSheet.xlsx");
 
-    public static String SAMPLE_XLS_PROTECTED = getSampleFilePath("Timesheet - excel_password.xls");
+    public static String SAMPLE_XLS_PROTECTED = getSampleFilePath("sample.xlsx");
 
     public static String SAMPLE_XML = getSampleFilePath("SampleXmlCorrect.xml");
 
     public static String SAMPLE_TXT = getSampleFilePath("SamplePlainText1.txt");
 
-    public static String SAMPLE_PPTX = getSampleFilePath("ComplexTest.pptx");
+    public static String SAMPLE_PPTX = getSampleFilePath("sample.pptx");
 
     public static String SAMPLE_MSG = getSampleFilePath("ComplexExample.msg");
 

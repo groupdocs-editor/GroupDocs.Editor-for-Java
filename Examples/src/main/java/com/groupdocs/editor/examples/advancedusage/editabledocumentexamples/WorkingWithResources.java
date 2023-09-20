@@ -34,7 +34,7 @@ public class WorkingWithResources {
         System.out.println("Investigating resources of DOCX document");
 
         //1. Lets create a EditableDocument instance in usual way, by loading and editing input document of some supportable format
-        String inputFilePath = Constants.SAMPLE_DOCX;
+        String inputFilePath = Constants.SAMPLE_DOCX2;
         Editor editor = new Editor(inputFilePath, new WordProcessingLoadOptions());
 
         WordProcessingEditOptions editOptions = new WordProcessingEditOptions();

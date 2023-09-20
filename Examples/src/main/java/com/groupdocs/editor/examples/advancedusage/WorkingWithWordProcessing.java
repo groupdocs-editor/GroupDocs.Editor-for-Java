@@ -5,6 +5,7 @@
  */
 package com.groupdocs.editor.examples.advancedusage;
 
+import java.io.*;
 import java.util.List;
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
@@ -18,10 +19,7 @@ import com.groupdocs.editor.options.WordProcessingLoadOptions;
 import com.groupdocs.editor.options.WordProcessingProtection;
 import com.groupdocs.editor.options.WordProcessingProtectionType;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.util.Locale;
 
 /**
@@ -93,11 +91,15 @@ public class WorkingWithWordProcessing {
         String outputPath = Constants.getOutputFilePath(Constants.removeExtension(Path.getFileName(inputFilePath)), docmFormat.getExtension());
 
         //11.2. Prepare stream for saving
-        OutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         //FileStream outputStream1 = File.create(outputPath)
 
         //11.3. Save
         editor.save(afterEdit, outputStream, saveOptions);
+
+        try(OutputStream outputFile = new FileOutputStream(outputPath)) {
+            outputStream.writeTo(outputFile);
+        }
         System.out.println("WorkingWithWordProcessing routine has successfully finished");
     }
 }

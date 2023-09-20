@@ -22,7 +22,7 @@ public class GetHtmlContentWithPrefix {
         EditableDocument document = editor.edit(new WordProcessingEditOptions());
         String externalImagesPrefix = "http://www.mywebsite.com/images/id=";
         String externalCssPrefix = "http://www.mywebsite.com/css/id=";
-        String prefixedHtmlContent = document.getContent(externalImagesPrefix, externalCssPrefix);
+        String prefixedHtmlContent = document.getContentString(externalImagesPrefix, externalCssPrefix);
         System.out.println("HTML content of the input document with custom image and stylesheet prefixes: " + prefixedHtmlContent);
     }
 }

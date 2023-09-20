@@ -5,6 +5,7 @@
  */
 package com.groupdocs.editor.examples.advancedusage;
 
+import java.io.*;
 import java.util.List;
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
@@ -14,10 +15,6 @@ import com.groupdocs.editor.htmlcss.resources.IHtmlResource;
 import com.groupdocs.editor.options.PresentationEditOptions;
 import com.groupdocs.editor.options.PresentationLoadOptions;
 import com.groupdocs.editor.options.PresentationSaveOptions;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  *
@@ -73,14 +70,18 @@ public class WorkingWithPresentations {
 
         //11. Save it
         //11.1. Prepare saving filename and path
-        String outputPath = Constants.getOutputFilePath(inputFilePath, saveOptions.getOutputFormat().getExtension());
+        String outputPath = Constants.getOutputFilePath("sample_out", saveOptions.getOutputFormat().getExtension());
 
         //11.2. Prepare stream for saving
-        OutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         //FileStream outputStream = File.create(outputPath)
 
         //11.3. Save
         editor.save(afterEdit, outputStream, saveOptions);
+
+        try(OutputStream outputFile = new FileOutputStream(outputPath)) {
+            outputStream.writeTo(outputFile);
+        }
 
         System.out.println("WorkingWithPresentations routine has successfully finished");
     }
