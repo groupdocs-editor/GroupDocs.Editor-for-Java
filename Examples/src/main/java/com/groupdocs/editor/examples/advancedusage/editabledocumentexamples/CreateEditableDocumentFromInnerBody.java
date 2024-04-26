@@ -31,7 +31,7 @@ public class CreateEditableDocumentFromInnerBody {
         String pathToResourceFolder = Constants.SAMPLE_HTML_BODY_RESOURCES;
 
         //4. Initialize EditableDocument
-        EditableDocument inputDoc = EditableDocument.fromBodyMarkupAndResourceFolder(content, pathToResourceFolder);
+        EditableDocument inputDoc = EditableDocument.fromMarkupAndResourceFolder(content, pathToResourceFolder);
 
         //5. Check obtained document
         System.out.println("There should be 2 stylesheets, and actually is " + inputDoc.getCss().size());

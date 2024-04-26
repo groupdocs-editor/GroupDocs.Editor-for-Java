@@ -2,10 +2,7 @@ package com.groupdocs.editor.examples;
 
 import com.groupdocs.editor.examples.advancedusage.*;
 import com.groupdocs.editor.examples.advancedusage.editabledocumentexamples.*;
-import com.groupdocs.editor.examples.basicusage.EditDocument;
-import com.groupdocs.editor.examples.basicusage.Introduction;
-import com.groupdocs.editor.examples.basicusage.LoadDocument;
-import com.groupdocs.editor.examples.basicusage.SaveDocument;
+import com.groupdocs.editor.examples.basicusage.*;
 import com.groupdocs.editor.examples.quickstart.HelloWorld;
 import com.groupdocs.editor.examples.quickstart.SetLicenseFromFile;
 import com.groupdocs.editor.examples.quickstart.SetLicenseFromStream;
@@ -15,55 +12,90 @@ public class MainClass {
 
     public static void main(String[] args) throws Throwable {
 
-        //QuickStart usage
-        //HelloWorld.run();
+        System.out.print("Using GroupDocs.Editor for Java version " + com.groupdocs.editor.Editor.class.getPackage().getSpecificationVersion() );
+        System.out.print("Open Program.cs. \nIn main() method uncomment the example that you want to run.");
+        System.out.print("Output folder is '"+Constants.OutputPath+"'" );
+        System.out.print("=====================================================");
+            //region Quick Start
+
         SetLicenseFromFile.run();
+        //QuickStart.SetLicenseFromStream.run();
+        //QuickStart.SetMeteredLicense.run();
+        //HelloWorld.run();
 
-        //SetLicenseFromStream.run();
-        //SetMeteredLicense.run();
+            //endregion
 
-        //Basic usage
-        //EditDocument.run();
+        ////// *** Documents Editor Examples (Un-Comment to run each example demo methods) ***
+
+            //region Here are basic examples
+
         //Introduction.run();
+
         //LoadDocument.run();
+
+        //EditDocument.run();
+
         //SaveDocument.run();
 
-        //Advanced usage
+        //CreateDocument.run();
+
+            //endregion
+
+            //region Advanced usage
+
         //WorkingWithWordProcessing.run();
+
         //WorkingWithSpreadsheetPasswordProtected.run();
+
         //WorkingWithSpreadsheetMultiTab.run();
+
         //WorkingWithDsv.run();
-        //WorkingWithEmail.run();
-        //WorkingWithMarkdown.run();
-        //EditingMarkdown.run();
-        //MarkdownRoundtrip.run();
+
         //WorkingWithPresentations.run();
-        //WorkingWithPresentationPreview.run();
+
         //WorkingWithPlainTextDocuments.run();
+
         //WorkingWithXml.run();
-        //WorkingWithXml.loadXml();
-        //WorkingWithXml.editXmlShort();
-        //WorkingWithXml.highlightOptionsDemo();
-        //WorkingWithXml.formatOptionsDemo();
-        //WorkingWithXml.complexEditDemo();
-        //WorkingWithXml.getXmlMetainfo();
+
         //ExtractingDocumentInfo.run();
+
         //SavingEditedDocumentToAllFormats.run();
+
         //WorkingWithFormats.run();
 
-        // Working with EditableDocument
+            //endregion
+
+            //region Working with EditableDocument
+
         //CreateEditableDocumentFromHtmlFile.run();
+
         //CreateEditableDocumentFromInnerBody.run();
+
         //GetHtmlContent.run();
+
         //GetHtmlContentWithPrefix.run();
+
         //GetHtmlBodyContent.run();
+
         //GetHtmlBodyContentWithPrefix.run();
+
         //GetAllEmbeddedHtmlContent.run();
+
         //GetExternalCssContent.run();
+
         //GetExternalCssContentWithPrefix.run();
+
         //SaveHtmlToFolder.run();
+
         //SaveHtmlResourcesToFolder.run();
+
         //WorkingWithResources.run();
+
         //EditableDocumentAdvancedUsage.run();
+
+            //endregion
+
+        System.out.print("\r\n\r\n__________________________\r\nAll done. Press any key to exit.");
+
     }
 }
