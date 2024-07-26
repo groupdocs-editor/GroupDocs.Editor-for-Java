@@ -13,6 +13,9 @@ import com.groupdocs.editor.options.WordProcessingEditOptions;
 import com.groupdocs.editor.options.WordProcessingLoadOptions;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
 
+import java.util.Iterator;
+
+
 /**
  *
  * @author AlexT
@@ -42,7 +45,8 @@ public class SavingEditedDocumentToAllFormats {
         EditableDocument afterEdit = EditableDocument.fromMarkup(allEmbeddedInsideStringEdited, null);
 
         //8. Iterate over all supportable WordProcessing formats and save a document in some of this format at one step
-        for (WordProcessingFormats oneFormat : WordProcessingFormats.All) {
+        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.All.iterator(); it.hasNext(); ) {
+            WordProcessingFormats oneFormat = it.next();
             //8.1. Prepare option class
             WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(oneFormat);
 

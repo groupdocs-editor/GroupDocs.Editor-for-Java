@@ -10,6 +10,8 @@ import com.groupdocs.editor.formats.SpreadsheetFormats;
 import com.groupdocs.editor.formats.TextualFormats;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 
+import java.util.Iterator;
+
 /**
  *
  * @author AlexT
@@ -18,12 +20,14 @@ public class WorkingWithFormats {
 
     public static void run() throws Exception {
         //WordProcessing
-        for (WordProcessingFormats oneFormat : WordProcessingFormats.All) {
+        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.All.iterator(); it.hasNext(); ) {
+            WordProcessingFormats oneFormat = it.next();
             System.out.println("Name is "+oneFormat.getName()+", extension is "+ oneFormat.getExtension());
         }
 
         //Presentation
-        for (PresentationFormats oneFormat : PresentationFormats.All) {
+        for (Iterator<PresentationFormats> it = PresentationFormats.All.iterator(); it.hasNext(); ) {
+            PresentationFormats oneFormat = it.next();
             System.out.println("Name is "+oneFormat.getName()+", extension is " + oneFormat.getExtension());
         }
 
