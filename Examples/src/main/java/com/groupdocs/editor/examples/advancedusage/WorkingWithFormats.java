@@ -20,13 +20,13 @@ public class WorkingWithFormats {
 
     public static void run() throws Exception {
         //WordProcessing
-        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.All.iterator(); it.hasNext(); ) {
+        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.getAll().iterator(); it.hasNext(); ) {
             WordProcessingFormats oneFormat = it.next();
             System.out.println("Name is "+oneFormat.getName()+", extension is "+ oneFormat.getExtension());
         }
 
         //Presentation
-        for (Iterator<PresentationFormats> it = PresentationFormats.All.iterator(); it.hasNext(); ) {
+        for (Iterator<PresentationFormats> it = PresentationFormats.getAll().iterator(); it.hasNext(); ) {
             PresentationFormats oneFormat = it.next();
             System.out.println("Name is "+oneFormat.getName()+", extension is " + oneFormat.getExtension());
         }

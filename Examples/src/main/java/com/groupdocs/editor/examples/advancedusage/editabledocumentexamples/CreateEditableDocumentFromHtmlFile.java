@@ -10,7 +10,6 @@ import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.internal.c.a.ms.System.IO.Path;
-import com.groupdocs.editor.options.WordProcessingLoadOptions;
 import com.groupdocs.editor.options.WordProcessingSaveOptions;
 
 /**

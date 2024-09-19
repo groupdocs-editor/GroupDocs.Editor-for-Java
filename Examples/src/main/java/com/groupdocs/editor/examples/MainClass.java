@@ -2,6 +2,10 @@ package com.groupdocs.editor.examples;
 
 import com.groupdocs.editor.examples.advancedusage.*;
 import com.groupdocs.editor.examples.advancedusage.editabledocumentexamples.*;
+import com.groupdocs.editor.examples.advancedusage.formfieldmanagerexamples.EditFormFieldCollection;
+import com.groupdocs.editor.examples.advancedusage.formfieldmanagerexamples.FixInvalidFormFieldCollectionAndSave;
+import com.groupdocs.editor.examples.advancedusage.formfieldmanagerexamples.LegacyFormFieldCollection;
+import com.groupdocs.editor.examples.advancedusage.formfieldmanagerexamples.RemoveFormFieldCollection;
 import com.groupdocs.editor.examples.basicusage.*;
 import com.groupdocs.editor.examples.quickstart.HelloWorld;
 import com.groupdocs.editor.examples.quickstart.SetLicenseFromFile;
@@ -92,6 +96,15 @@ public class MainClass {
         //WorkingWithResources.run();
 
         //EditableDocumentAdvancedUsage.run();
+
+            //endregion
+
+        //region Working with FormFieldManager
+
+        //LegacyFormFieldCollection.run();
+        //FixInvalidFormFieldCollectionAndSave.run();
+        //EditFormFieldCollection.run();
+        //RemoveFormFieldCollection.run();
 
             //endregion
 

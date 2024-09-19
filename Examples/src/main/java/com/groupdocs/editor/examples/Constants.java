@@ -49,6 +49,8 @@ public class Constants {
 
     public static String SAMPLE_MD_FOLDER = getSampleFilePath("Markdown\\images");
 
+    public static String SampleLegacyFormFields_docx = getSampleFilePath("SampleLegacyFormFields.docx");
+
     public static String getSampleFilePath(String fileName) {
         return PROJECT_PATH + SamplesPath + fileName;
     }

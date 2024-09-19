@@ -15,7 +15,7 @@ public class CreateDocument {
     {
 
         // Create a new WordProcessing document and save it using a callback .
-        Editor editorWord = new Editor(document -> saveNewDocument(document), WordProcessingFormats.Docx);
+        Editor editorWord = new Editor(WordProcessingFormats.Docx);
         {
             // Edit the WordProcessing document with default options.
             EditableDocument defaultWordProcessingDoc = editorWord.edit();
@@ -30,7 +30,7 @@ public class CreateDocument {
         }
 
         // Create a new Spreadsheet document and save it via callback .
-        Editor editorSpreadsheet = new Editor(document -> saveNewDocument(document), SpreadsheetFormats.Xlsx);
+        Editor editorSpreadsheet = new Editor(SpreadsheetFormats.Xlsx);
         {
             // Edit the Spreadsheet document with default options.
             EditableDocument defaultEditableSpreadsheetDocument = editorSpreadsheet.edit();
@@ -44,7 +44,7 @@ public class CreateDocument {
         }
 
         // Create a new Presentation document and save it via callback Action<Stream>.
-        Editor editorPresentation = new Editor(document -> saveNewDocument(document), PresentationFormats.Pptx);
+        Editor editorPresentation = new Editor(PresentationFormats.Pptx);
         {
             // Edit the Presentation document with default options.
             EditableDocument defaultEditablePresentationDocument = editorPresentation.edit();
@@ -58,7 +58,7 @@ public class CreateDocument {
         }
 
         // Create a new Email document and save it via callback .
-        Editor editorEmail = new Editor(document -> saveNewDocument(document), EmailFormats.Eml);
+        Editor editorEmail = new Editor(EmailFormats.Eml);
         {
             // Edit the Email document with default options.
             EditableDocument defaultEditableEmailDocument = editorEmail.edit();
@@ -73,22 +73,4 @@ public class CreateDocument {
         System.out.println("CreateDocument routine has successfully finished");
     }
 
-    // Callback function to save the new document stream
-    static void saveNewDocument(InputStream document)
-    {
-        try /*JAVA: was using*/
-        {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = document.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            document.close();
-            out.close();
-        } catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 }

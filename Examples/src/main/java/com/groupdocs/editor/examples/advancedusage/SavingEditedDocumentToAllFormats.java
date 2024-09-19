@@ -23,6 +23,7 @@ import java.util.Iterator;
 public class SavingEditedDocumentToAllFormats {
 
     public static void run() throws Exception {
+
         //1. Get a path to the input WordProcessing file (or stream with file content)
         String inputFilePath = Constants.SAMPLE_DOCX;
 
@@ -36,6 +37,7 @@ public class SavingEditedDocumentToAllFormats {
 
         //5. Open document for editing by creating intermediate EditableDocument instance
         EditableDocument beforeEdit = editor.edit(editOptions);
+
         //6.1. Get document as a single base64-encoded String, where all resources (images, fonts, etc) are embedded inside this String along with main textual content
         String allEmbeddedInsideString = beforeEdit.getEmbeddedHtml();
         //6.2. For example, edit its content somehow
@@ -45,7 +47,7 @@ public class SavingEditedDocumentToAllFormats {
         EditableDocument afterEdit = EditableDocument.fromMarkup(allEmbeddedInsideStringEdited, null);
 
         //8. Iterate over all supportable WordProcessing formats and save a document in some of this format at one step
-        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.All.iterator(); it.hasNext(); ) {
+        for (Iterator<WordProcessingFormats> it = WordProcessingFormats.getAll().iterator(); it.hasNext(); ) {
             WordProcessingFormats oneFormat = it.next();
             //8.1. Prepare option class
             WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(oneFormat);

@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.formats.*;
+import com.groupdocs.editor.formats.abstraction.IDocumentFormat;
 import com.groupdocs.editor.license.License;
 
 import com.groupdocs.editor.options.*;

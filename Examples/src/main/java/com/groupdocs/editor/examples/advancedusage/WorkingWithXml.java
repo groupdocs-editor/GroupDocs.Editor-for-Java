@@ -13,7 +13,9 @@ import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.TextualFormats;
 import com.groupdocs.editor.formats.WordProcessingFormats;
 import com.groupdocs.editor.htmlcss.css.datatypes.ArgbColor;
+import com.groupdocs.editor.htmlcss.css.datatypes.ArgbColors;
 import com.groupdocs.editor.htmlcss.css.datatypes.Length;
+import com.groupdocs.editor.htmlcss.css.datatypes.LengthUnit;
 import com.groupdocs.editor.htmlcss.css.properties.FontSize;
 import com.groupdocs.editor.htmlcss.css.properties.FontStyle;
 import com.groupdocs.editor.htmlcss.css.properties.FontWeight;
@@ -133,7 +135,7 @@ public class WorkingWithXml {
 
         //Setting XML tags font settings
         highlightOptions.getXmlTagsFontSettings().setSize(FontSize.Large);
-        highlightOptions.getXmlTagsFontSettings().setColor(ArgbColor.KnownColors.CssLevel1.Olive);
+        highlightOptions.getXmlTagsFontSettings().setColor(ArgbColors.Olive);
 
         //Setting attribute names font settings
         highlightOptions.getAttributeNamesFontSettings().setName("Arial");
@@ -149,7 +151,7 @@ public class WorkingWithXml {
         highlightOptions.getCDataFontSettings().setSize(FontSize.Smaller);
 
         //Setting HTML comments font settings
-        highlightOptions.getHtmlCommentsFontSettings().setColor(ArgbColor.KnownColors.CssLevel3.Lightgreen);
+        highlightOptions.getHtmlCommentsFontSettings().setColor(ArgbColors.Lightgreen);
         highlightOptions.getHtmlCommentsFontSettings().setName("Courier New");
 
         //Setting text node font settings
@@ -181,7 +183,7 @@ public class WorkingWithXml {
         formatOptions.setLeafTextNodesOnNewline(true);
 
         //Setting a custom text indent using 'Length' data type, which is composed from value with unit
-        formatOptions.setLeftIndent(Length.fromValueWithUnit(20, Length.Unit.Px));
+        formatOptions.setLeftIndent(Length.fromValueWithUnit(20, LengthUnit.Px));
 
         //Checking that options are not default now
         Assert.assertFalse(editOptions.getFormatOptions().isDefault());
