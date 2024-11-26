@@ -78,7 +78,7 @@ public class WorkingWithXml {
                         editor.save(afterEdit, outputDocxPath.toString(), wordSaveOptions);
                         editor.save(afterEdit, outputTxtPath.toString(), txtSaveOptions);
 
-                        System.out.println("\nDocuments saved successfully.");
+                        System.out.println("..sample finished successfully.");
                         return Arrays.asList(outputDocxPath, outputTxtPath);
                     } finally {
                         afterEdit.dispose();
@@ -216,8 +216,8 @@ public class WorkingWithXml {
     }
 
     public static List<Path> complexEditDemo(Path inputFile) {
-        final java.nio.file.Path output1Path = makeOutputPath("WorkingWithXml-complexEditDemo-1.html");
-        final java.nio.file.Path output2Path = makeOutputPath("WorkingWithXml-complexEditDemo-2.html");
+        final java.nio.file.Path outputPath1 = makeOutputPath("WorkingWithXml-complexEditDemo-1.html");
+        final java.nio.file.Path outputPath2 = makeOutputPath("WorkingWithXml-complexEditDemo-2.html");
         try {
             // The first set of options
             XmlEditOptions editOptions1 = new XmlEditOptions();
@@ -243,7 +243,7 @@ public class WorkingWithXml {
                 final EditableDocument editableDocument1 = editor.edit(editOptions1);
                 try {
                     // Save the edited document
-                    editableDocument1.save(output1Path.toString());
+                    editableDocument1.save(outputPath1.toString());
                 } finally {
                     editableDocument1.dispose();
                 }
@@ -252,12 +252,12 @@ public class WorkingWithXml {
                 final EditableDocument editableDocument2 = editor.edit(editOptions2);
                 try {
                     // Save the edited document
-                    editableDocument2.save(output2Path.toString());
+                    editableDocument2.save(outputPath2.toString());
                 } finally {
                     editableDocument2.dispose();
                 }
 
-                return Arrays.asList(output1Path, output2Path);
+                return Arrays.asList(outputPath1, outputPath2);
             } finally {
                 editor.dispose();
             }

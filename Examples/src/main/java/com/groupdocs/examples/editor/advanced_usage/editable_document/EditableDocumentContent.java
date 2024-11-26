@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EditableDocumentContent {
 
-    public static void getAllEmbeddedHtmlContent(Path inputFile) {
+    public static String getAllEmbeddedHtmlContent(Path inputFile) {
         try {
             // Initialize an Editor object with the input file path and WordProcessingLoadOptions.
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -24,19 +24,22 @@ public class EditableDocumentContent {
 
                     System.out.println("HTML content of the input document, where all resources are embedded in base64 encoding: \n\t"
                             + embeddedHtmlContent.replace('\n', ' '));
+
+                    System.out.println("..sample finished successfully.");
+                    return embeddedHtmlContent;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getExternalCssContent(Path inputFile) {
+    public static List<String> getExternalCssContent(Path inputFile) {
         try {
             // Create an Editor instance with the input file's path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -51,19 +54,22 @@ public class EditableDocumentContent {
                     for (String css : stylesheets) {
                         System.out.println('\t' + css.replace('\n', ' '));
                     }
+
+                    System.out.println("..sample finished successfully.");
+                    return stylesheets;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getExternalCssContentWithPrefix(Path inputFile) {
+    public static List<String> getExternalCssContentWithPrefix(Path inputFile) {
         try {
             // Initialize an Editor with the input file's path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -82,19 +88,22 @@ public class EditableDocumentContent {
                     for (String css : stylesheets) {
                         System.out.println('\t' + css.replace('\n', ' '));
                     }
+
+                    System.out.println("..sample finished successfully.");
+                    return stylesheets;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getHtmlBodyContent(Path inputFile) {
+    public static String getHtmlBodyContent(Path inputFile) {
         try {
             // Initialize the editor with the given file path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -107,19 +116,22 @@ public class EditableDocumentContent {
 
                     System.out.println("Inner content of the HTML->BODY element: \n\t"
                             + bodyContent.replace('\n', ' '));
+
+                    System.out.println("..sample finished successfully.");
+                    return bodyContent;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getHtmlBodyContentWithPrefix(Path inputFile) {
+    public static String getHtmlBodyContentWithPrefix(Path inputFile) {
         try {
             // Initialize the editor with the given file path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -135,19 +147,22 @@ public class EditableDocumentContent {
 
                     System.out.println("Content of HTML->BODY element with external images prefix: \n\t" +
                             prefixedBodyContent.replace('\n', ' '));
+
+                    System.out.println("Document edited and processed successfully.");
+                    return prefixedBodyContent;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("Document edited and processed successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getHtmlContent(Path inputFile) {
+    public static String getHtmlContent(Path inputFile) {
         try {
             // Create new Editor with input file path and load options
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -160,19 +175,22 @@ public class EditableDocumentContent {
 
                     System.out.println("HTML content of the input document (first 200 chars): \n\t"
                             + htmlContent.substring(0, Math.min(200, htmlContent.length())).replace('\n', ' '));
+
+                    System.out.println("..sample finished successfully.");
+                    return htmlContent;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 
-    public static void getHtmlContentWithPrefix(Path inputFile) {
+    public static String getHtmlContentWithPrefix(Path inputFile) {
         try {
             // Create new Editor with input file path and load options
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
@@ -188,15 +206,18 @@ public class EditableDocumentContent {
                     String prefixedHtmlContent = document.getContentString(externalImagesPrefix, externalCssPrefix);
 
                     System.out.println("HTML content of the input document: \n\t" + prefixedHtmlContent.replace('\n', ' '));
+
+                    System.out.println("..sample finished successfully.");
+                    return prefixedHtmlContent;
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return null;
     }
 }

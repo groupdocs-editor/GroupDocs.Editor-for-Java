@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
 public class WorkingWithMarkdown {
-    public static void run(Path inputFile, Path inputFolder) {
+    public static Path run(Path inputFile, Path inputFolder) {
         final Path outputPath = makeOutputPath("WorkingWithMarkdown.docx");
 
         try {
@@ -56,10 +56,11 @@ public class WorkingWithMarkdown {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 
     static class MdImageLoader implements IMarkdownImageLoadCallback {

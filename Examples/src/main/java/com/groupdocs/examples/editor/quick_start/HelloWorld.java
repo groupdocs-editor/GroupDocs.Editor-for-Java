@@ -65,7 +65,7 @@ public class HelloWorld {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }

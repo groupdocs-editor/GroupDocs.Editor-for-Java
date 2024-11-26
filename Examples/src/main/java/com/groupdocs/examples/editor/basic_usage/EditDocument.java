@@ -9,13 +9,14 @@ import com.groupdocs.editor.options.*;
 import com.groupdocs.examples.editor.utils.FailureRegister;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
 public class EditDocument {
 
-    public static void edit(Path inputFile) {
+    public static Path edit(Path inputFile) {
         final Path outputPath = makeOutputPath("EditableDocument-edit.docx");
         try {
             // Create Editor instance and load WordProcessing document
@@ -56,13 +57,14 @@ public class EditDocument {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 
-    public static void editWithSpecificOptions(Path inputFile) {
+    public static Path editWithSpecificOptions(Path inputFile) {
         final Path outputPath = makeOutputPath("EditableDocument-editWithSpecificOptions.docx");
         try {
             // Initialize the Editor with WordProcessingLoadOptions
@@ -105,14 +107,14 @@ public class EditDocument {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
-
+        return outputPath;
     }
 
-    public static void editWithDifferentSpecificOptions(Path inputFile) {
+    public static List<Path> editWithDifferentSpecificOptions(Path inputFile) {
         final Path outputPath1 = makeOutputPath("EditableDocument-editWithDifferentSpecificOptions1.docx");
         final Path outputPath2 = makeOutputPath("EditableDocument-editWithDifferentSpecificOptions2.docx");
         try {
@@ -191,10 +193,11 @@ public class EditDocument {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath1.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return Arrays.asList(outputPath1, outputPath2);
     }
 
     public static void editSpreadsheetTabs(Path inputFile) {
@@ -275,7 +278,7 @@ public class EditDocument {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }

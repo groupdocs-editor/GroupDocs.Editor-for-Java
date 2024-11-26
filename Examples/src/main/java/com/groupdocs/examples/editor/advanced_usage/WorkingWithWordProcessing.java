@@ -82,7 +82,7 @@ public class WorkingWithWordProcessing {
                         // Save the edited document
                         editor.save(afterEdit, outputPath.toString(), saveOptions);
 
-                        System.out.println("\nDocuments saved successfully.");
+                        System.out.println("..sample finished successfully.");
                         return outputPath;
                     } finally {
                         afterEdit.dispose();

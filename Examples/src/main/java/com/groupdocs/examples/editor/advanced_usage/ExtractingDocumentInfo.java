@@ -16,9 +16,6 @@ import com.groupdocs.examples.editor.utils.FailureRegister;
 
 import java.nio.file.Path;
 
-/**
- * @author AlexT
- */
 public class ExtractingDocumentInfo {
 
     public static IDocumentInfo fromDocx(Path inputFile) {
@@ -56,7 +53,7 @@ public class ExtractingDocumentInfo {
                     System.out.printf("Format is: " + casted.getFormat().getName() + "; extension is: " + casted.getFormat().getExtension() + "; Page count: " + casted.getPageCount() + "; Size: " + casted.getSize() + " bytes; Is encrypted: " + casted.isEncrypted() + "%n");
                 }
 
-                System.out.println("\nDocument info extracted successfully.");
+                System.out.println("..sample finished successfully.");
                 return documentInfo;
             } finally {
                 editor.dispose();
@@ -87,7 +84,7 @@ public class ExtractingDocumentInfo {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument info extracted successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -129,7 +126,7 @@ public class ExtractingDocumentInfo {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument info extracted successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -156,7 +153,7 @@ public class ExtractingDocumentInfo {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument info extracted successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -184,7 +181,7 @@ public class ExtractingDocumentInfo {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument info extracted successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }

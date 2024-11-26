@@ -74,7 +74,7 @@ public class WorkingWithText {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocuments saved successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }

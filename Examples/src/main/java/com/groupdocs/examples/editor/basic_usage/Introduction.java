@@ -11,6 +11,7 @@ import com.groupdocs.examples.editor.utils.FailureRegister;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.nio.file.Path;
 import java.util.List;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
@@ -26,7 +27,7 @@ public class Introduction {
      *
      * @param inputFile The path to the input file which will be processed.
      */
-    public static void run(java.nio.file.Path inputFile) {
+    public static Path run(Path inputFile) {
         final java.nio.file.Path outputPath = makeOutputPath("Introduction.rtf");
 
         try {
@@ -83,9 +84,10 @@ public class Introduction {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 }

@@ -69,7 +69,7 @@ public class WorkingWithPresentations {
                         try (OutputStream outputStream = Files.newOutputStream(outputPath)) {
                             editor.save(afterEdit, outputStream, saveOptions);
                         }
-                        System.out.println("\nDocuments saved successfully.");
+                        System.out.println("..sample finished successfully.");
                         return outputPath;
                     } finally {
                         afterEdit.dispose();

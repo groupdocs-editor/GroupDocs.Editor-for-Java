@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
 public class MarkdownRoundTrip {
-    public static void run(Path inputFile, Path inputFolder) {
+    public static List<Path> run(Path inputFile, Path inputFolder) {
         final Path outputPath = makeOutputPath("MarkdownRoundTrip.md");
         final Path outputFolderPath = makeOutputPath("MarkdownRoundTrip");
 
@@ -46,10 +48,11 @@ public class MarkdownRoundTrip {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return Arrays.asList(outputPath, outputFolderPath);
     }
 
     static class MdImageLoader implements IMarkdownImageLoadCallback {

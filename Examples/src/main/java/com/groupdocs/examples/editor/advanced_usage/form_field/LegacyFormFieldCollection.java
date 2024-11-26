@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
-
 /**
  * This example demonstrates loading a FormFieldCollection and reading form fields.
  */
@@ -19,8 +17,7 @@ public class LegacyFormFieldCollection {
     /**
      * Runs the example to demonstrate loading, editing, and reading form fields from a document.
      */
-    public static Path run(Path inputFile) {
-        final Path outputPath = makeOutputPath("LegacyFormFieldCollection.docx");
+    public static FormFieldCollection run(Path inputFile) {
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
 
             // Create load options for the document, including password handling
@@ -60,13 +57,14 @@ public class LegacyFormFieldCollection {
                             break;
                     }
                 }
+                System.out.println("..sample finished successfully.");
+                return collection;
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
-        return outputPath;
+        return null;
     }
 }

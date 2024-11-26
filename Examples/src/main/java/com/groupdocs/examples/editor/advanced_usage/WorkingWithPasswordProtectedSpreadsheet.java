@@ -69,7 +69,7 @@ public class WorkingWithPasswordProtectedSpreadsheet {
                     editableDocument.dispose();
                 }
 
-                System.out.println("\nDocuments saved successfully.");
+                System.out.println("..sample finished successfully.");
                 return outputPath;
             } finally {
                 editor.dispose();

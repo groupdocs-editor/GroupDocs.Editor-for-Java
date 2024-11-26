@@ -20,8 +20,8 @@ import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
 public class EditableDocumentOperations {
 
-    public static void saveHtmlResourcesToFolder(Path inputFile) {
-        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-getHtmlContentWithPrefix");
+    public static Path saveHtmlResourcesToFolder(Path inputFile) {
+        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-getHtmlContentWithPrefix-");
         try {
             Files.createDirectories(outputPath);
 
@@ -64,13 +64,14 @@ public class EditableDocumentOperations {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 
-    public static void saveHtmlToFolder(Path inputFile) {
+    public static Path saveHtmlToFolder(Path inputFile) {
         final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-saveHtmlToFolder.html");
         try {
             Files.createDirectories(outputPath);
@@ -89,10 +90,11 @@ public class EditableDocumentOperations {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 
     /*
@@ -226,7 +228,7 @@ public class EditableDocumentOperations {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -241,8 +243,8 @@ public class EditableDocumentOperations {
      * all style-related data may be represented as stylesheets (CSS).
      * All of these are grouped in the GroupDocs.Editor.HtmlCss.Resources namespace, where every resource has its own class and methods.
      */
-    public static void workingWithResources(Path inputFile) {
-        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-workingWithResources.html");
+    public static Path workingWithResources(Path inputFile) {
+        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-workingWithResources");
         try {
             Files.createDirectories(outputPath);
             // Initializing an Editor object and opening the document from input file path
@@ -314,9 +316,10 @@ public class EditableDocumentOperations {
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
+        return outputPath;
     }
 }

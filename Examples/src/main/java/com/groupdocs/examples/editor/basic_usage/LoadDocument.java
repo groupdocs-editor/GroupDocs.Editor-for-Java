@@ -20,7 +20,7 @@ public class LoadDocument {
 
             editor.dispose();
 
-            System.out.println("\nDocument loaded successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -38,7 +38,7 @@ public class LoadDocument {
 
             editor.dispose();
 
-            System.out.println("\nDocument loaded successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -53,7 +53,7 @@ public class LoadDocument {
 
             editor.dispose();
 
-            System.out.println("\nDocument loaded successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -72,7 +72,7 @@ public class LoadDocument {
 
             editor.dispose();
 
-            System.out.println("\nDocument loaded successfully.");
+            System.out.println("..sample finished successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
