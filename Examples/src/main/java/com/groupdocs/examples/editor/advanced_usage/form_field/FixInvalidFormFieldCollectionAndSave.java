@@ -29,57 +29,51 @@ public class FixInvalidFormFieldCollectionAndSave {
      */
     public static Path run(Path inputFile) {
         final Path outputPath = makeOutputPath("FixInvalidFormFieldCollectionAndSave.docx");
-        // 2. Create a stream from this path
+
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
-
-            // 3. Create load options for this document
+            // Loading options for the document
             WordProcessingLoadOptions loadOptions = new WordProcessingLoadOptions();
-            // 3.1. If the input document is password-protected, specify the password for its opening...
             loadOptions.setPassword("some_password_to_open_a_document");
-            // 3.2. ...but, because the document is unprotected, this password will be ignored
+            /* Since the document is unprotected, this password will be ignored */
 
-            // 4. Load the document with options into the Editor instance
             Editor editor = new Editor(inputStream, loadOptions);
             try {
-                // 4.1. Read the FormFieldManager instance
                 FormFieldManager fieldManager = editor.getFormFieldManager();
-                // 4.2. Read the FormFieldCollection in the document
+                /* Read original collection of form fields */
                 FormFieldCollection originalFormFieldCollection = fieldManager.getFormFieldCollection();
 
-                // 4.3. Try to auto-fix invalid form fields
+                // Automatically attempt to fix invalid form fields and manually handle remaining ones
                 fieldManager.fixInvalidFormFieldNames(new ArrayList<>());
+                /* Read updated collection of form fields */
                 FormFieldCollection autoFixedFormFieldCollection = fieldManager.getFormFieldCollection();
 
                 boolean hasInvalidFormFields = fieldManager.hasInvalidFormFields();
                 System.out.println("FormFieldCollection contains invalid items: " + hasInvalidFormFields);
 
-                // 4.4. Try to fix invalid form fields
-                // 4.4.1. Get all invalid form field names
-                Collection<InvalidFormField> invalidFormFields = fieldManager.getInvalidFormFieldNames();
+                /* If there are still some invalid form fields, generate unique names for them and fix the items */
+                if (hasInvalidFormFields) {
+                    // Get all invalid form field names
+                    Collection<InvalidFormField> invalidFormFields = fieldManager.getInvalidFormFieldNames();
 
-                // 4.4.2. Create unique names for invalid fields
-                for (InvalidFormField invalidItem : invalidFormFields) {
-                    invalidItem.setFixedName(String.format("%s_%s", invalidItem.getName(), java.util.UUID.randomUUID()));
+                    // Create unique names for invalid fields
+                    for (InvalidFormField invalidItem : invalidFormFields) {
+                        invalidItem.setFixedName(String.format("%s_%s", invalidItem.getName(), java.util.UUID.randomUUID()));
+                    }
+
+                    // Fix invalid form fields using the generated unique names
+                    fieldManager.fixInvalidFormFieldNames(new ArrayList<>(invalidFormFields));
+                    FormFieldCollection manualFixedFormFieldCollection = fieldManager.getFormFieldCollection();
                 }
 
-                // 4.4.3. Fix invalid fields
-                fieldManager.fixInvalidFormFieldNames(new ArrayList<>(invalidFormFields));
-                FormFieldCollection manualFixedFormFieldCollection = fieldManager.getFormFieldCollection();
+                /* Configure save options for the document */
+                WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
 
-                // 5. Create document save options
-                WordProcessingFormats docFormat = WordProcessingFormats.Docx;
-                WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(docFormat);
-
-                // 5.1. If the document is large and causes OutOfMemoryException, set the memory optimization option
+                // Optimize memory usage and protect the document from writing with a password
                 saveOptions.setOptimizeMemoryUsage(true);
-
-                // 5.2. Protect the document from writing (allow only form fields) with a password
                 saveOptions.setProtection(new WordProcessingProtection(WordProcessingProtectionType.AllowOnlyFormFields, "write_password"));
 
-                // 6. Save the document
-                // 6.1. Prepare a stream for saving
+                // Save the document to the output path
                 try (OutputStream outputStream = Files.newOutputStream(outputPath)) {
-                    // 6.2. Save the document
                     editor.save(outputStream, saveOptions);
                 }
             } finally {

@@ -20,74 +20,66 @@ import java.util.Locale;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
-/**
- * @author AlexT
- */
 public class WorkingWithWordProcessing {
 
     public static java.nio.file.Path run(Path inputFile) {
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
-            //3. Create load options for this document
+            // Create load options for this document
             WordProcessingLoadOptions loadOptions = new WordProcessingLoadOptions();
 
-            //3.1. In case if input document is password-protected, we can specify password for its opening...
+            // In case the input document is password-protected, specify the password; however, since it's unprotected, this will be ignored.
             loadOptions.setPassword("some_password_to_open_a_document");
-            //3.2. ...but, because document is unprotected, this password will be ignored
 
-            //4. Load document with options to the Editor instance
+            // Load document with options to the Editor instance
             Editor editor = new Editor(inputStream, loadOptions);
             try {
-                //5. Create editing options
+                // Create editing options
                 WordProcessingEditOptions editOptions = new WordProcessingEditOptions();
 
-                //5.1. Enable font extraction from original document to intermediate EditableDocument
+                // Enable font extraction from original document to intermediate EditableDocument
                 editOptions.setFontExtraction(FontExtractionOptions.ExtractEmbeddedWithoutSystem);
 
-                //5.2. Enable extracting language information for better subsequent spell-checking on client side
+                // Enable extracting language information for better spell-checking on client side
                 editOptions.setEnableLanguageInformation(true);
 
-                //5.3. Switch to pagination mode instead of default float mode
+                // Switch to pagination mode instead of default float mode
                 editOptions.setEnablePagination(true);
 
-                //6. Create intermediate EditableDocument
+                // Create intermediate EditableDocument
                 EditableDocument beforeEdit = editor.edit(editOptions);
                 try {
-                    //7. Extract textual content as HTML markup with all resources
+                    // Extract textual content as HTML markup with all resources
                     String originalContent = beforeEdit.getContent();
                     List<IHtmlResource> allResources = beforeEdit.getAllResources();
 
-                    //8. Modify content somehow on client side
+                    // Modify content on client side (example: replace "document" with "edited document")
                     String editedContent = originalContent.replace("document", "edited document");
 
-                    //9. Create new EditableDocument instance with edited content
+                    // Create new EditableDocument instance with edited content
                     EditableDocument afterEdit = EditableDocument.fromMarkup(editedContent, allResources);
                     try {
-                        //10. Create document save options
+                        // Create document save options
                         WordProcessingFormats docmFormat = WordProcessingFormats.Docm;
                         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(docmFormat);
 
-                        //10.1 Encrypt output document by setting non-null and non-empty opening password
+                        // Encrypt output document by setting a non-null and non-empty opening password
                         saveOptions.setPassword("password");
 
-                        //10.2. Because pagination was previously enabled in WordProcessingEditOptions (editOptions variable),
-                        //for better output result it is highly recommended to enable it in WordProcessingSaveOptions (saveOptions variable)
+                        // As pagination was enabled in WordProcessingEditOptions, enable it here for better output result
                         saveOptions.setEnablePagination(true);
 
-                        //10.3. You can set locale for output WordProcessing document manually
+                        // Set locale for the output WordProcessing document manually
                         saveOptions.setLocale(Locale.US);
 
-                        //10.4. If document is really huge and causes OutOfMemoryException, you can set memory optimization option
+                        // Enable memory optimization for large documents to prevent OutOfMemoryException
                         saveOptions.setOptimizeMemoryUsage(true);
 
-                        //10.5. You can protect document from writing (make it read-only) with password
+                        // Protect the document from writing (make it read-only) with a password
                         saveOptions.setProtection(new WordProcessingProtection(WordProcessingProtectionType.ReadOnly, "write_password"));
 
-                        //11. Save it
-                        //11.1. Prepare saving filename and path
                         final java.nio.file.Path outputPath = makeOutputPath("WorkingWithWordProcessing" + docmFormat.getExtension());
 
-
-                        //11.3. Save
+                        // Save the edited document
                         editor.save(afterEdit, outputPath.toString(), saveOptions);
 
                         System.out.println("\nDocuments saved successfully.");

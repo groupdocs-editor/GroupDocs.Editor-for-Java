@@ -20,54 +20,51 @@ import java.util.Locale;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
-/**
- * @author AlexT
- */
 public class WorkingWithText {
 
     public static List<Path> run(Path inputFile) {
-        final java.nio.file.Path outputDocmPath = makeOutputPath("WorkingWithText.docm");
-        final java.nio.file.Path outputTxtPath = makeOutputPath("WorkingWithText.txt");
+        final Path outputDocmPath = makeOutputPath("WorkingWithText.docm");
+        final Path outputTxtPath = makeOutputPath("WorkingWithText.txt");
         try {
-            //2. Create Editor instance (not load options required)
+            // Create Editor instance to handle document operations
             Editor editor = new Editor(inputFile.toString());
             try {
 
-                //3. Create TXT editing options
+                // Configure text editing options for UTF-8 encoding and list recognition
                 TextEditOptions editOptions = new TextEditOptions();
                 editOptions.setEncoding(StandardCharsets.UTF_8);
                 editOptions.setRecognizeLists(true);
                 editOptions.setLeadingSpaces(TextLeadingSpacesOptions.ConvertToIndent);
                 editOptions.setTrailingSpaces(TextTrailingSpacesOptions.Trim);
 
-                //4. Create EditableDocument instance
+                // Load the document into an EditableDocument for editing
                 EditableDocument beforeEdit = editor.edit(editOptions);
                 try {
 
-                    //5. Edit is somehow
+                    // Retrieve original text content
                     String originalTextContent = beforeEdit.getContent();
+
+                    // Pass the originalTextContent to a WYSIWYG editor for editing ...
                     String updatedTextContent = originalTextContent.replace("text", "EDITED text");
 
                     List<IHtmlResource> allResources = beforeEdit.getAllResources();
 
-                    //6. Create EditableDocument with updated content
+                    // Create a new EditableDocument with the modified content and resources
                     EditableDocument afterEdit = EditableDocument.fromMarkup(updatedTextContent, allResources);
                     try {
 
-                        //7. Create WordProcessing save options
+                        // Set save options for DOCM format with US locale
                         WordProcessingSaveOptions wordSaveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docm);
                         wordSaveOptions.setLocale(Locale.US);
 
-                        //8. Create TXT saving options
+                        // Set save options for TXT format with UTF-8 encoding and table layout preservation
                         TextSaveOptions txtSaveOptions = new TextSaveOptions();
                         txtSaveOptions.setEncoding(StandardCharsets.UTF_8);
                         txtSaveOptions.setPreserveTableLayout(true);
 
-
-                        //10. Save
+                        // Save the document in both DOCM and TXT formats
                         editor.save(afterEdit, outputDocmPath.toString(), wordSaveOptions);
                         editor.save(afterEdit, outputTxtPath.toString(), txtSaveOptions);
-                        //10. Dispose all resources
                     } finally {
                         afterEdit.dispose();
                     }

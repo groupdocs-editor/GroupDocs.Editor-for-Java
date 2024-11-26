@@ -31,44 +31,39 @@ public class WorkingWithCsv {
         final Path outputTsvPath = makeOutputPath("WorkingWithDsv.tsv");
         final Path outputXlsmPath = makeOutputPath("WorkingWithDsv.xlsm");
         try {
-            //2. Create Editor instance (not load options required)
+            // Create Editor instance
             Editor editor = new Editor(inputFile.toString());
             try {
-
-                //3. Create DSV edit options and specify mandatory parameter - separator (delimiter)
+                // Create DSV edit options and specify separator
                 DelimitedTextEditOptions editOptions = new DelimitedTextEditOptions(",");
                 editOptions.setConvertDateTimeData(false);
                 editOptions.setConvertNumericData(true);
                 editOptions.setTreatConsecutiveDelimitersAsOne(true);
 
-                //4. Create EditableDocument instance
+                // Create EditableDocument instance for editing
                 EditableDocument beforeEdit = editor.edit(editOptions);
                 try {
-
-                    //5. Edit is somehow (just for example)
+                    // Update document content: replace strings "SsangYong" with "Chevrolet", "Kyron" with "Camaro"
                     String originalTextContent = beforeEdit.getContent();
                     String updatedTextContent = originalTextContent.replace("SsangYong", "Chevrolet").replace("Kyron", "Camaro");
                     List<IHtmlResource> allResources = beforeEdit.getAllResources();
 
-                    //6. Create EditableDocument with updated content
+                    // Create new EditableDocument with updated content
                     EditableDocument afterEdit = EditableDocument.fromMarkup(updatedTextContent, allResources);
                     try {
-
-                        //7. Create CSV save options and specify mandatory separator (delimiter) - comma
+                        // Configure save options for CSV and TSV formats, including encoding setup
                         DelimitedTextSaveOptions csvSaveOptions = new DelimitedTextSaveOptions(",");
-                        //csvSaveOptions.TrimLeadingBlankRowAndColumn = true;
+                        // csvSaveOptions.TrimLeadingBlankRowAndColumn = true;
                         csvSaveOptions.setEncoding(StandardCharsets.UTF_8);
 
-                        //8. Create TSV save options and specify mandatory separator (delimiter) - tab character
                         DelimitedTextSaveOptions tsvSaveOptions = new DelimitedTextSaveOptions("\t");
                         tsvSaveOptions.setTrimLeadingBlankRowAndColumn(false);
                         tsvSaveOptions.setEncoding(StandardCharsets.UTF_8);
 
-                        //9. Create Spreadsheet save options
+                        // Create save options for Spreadsheet format
                         SpreadsheetSaveOptions cellsSaveOptions = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsm);
 
-
-                        //11. Save edited document to 3 files of different formats
+                        // Save edited document to 3 files with different formats
                         editor.save(afterEdit, outputCsvPath.toString(), csvSaveOptions);
                         editor.save(afterEdit, outputTsvPath.toString(), tsvSaveOptions);
                         editor.save(afterEdit, outputXlsmPath.toString(), cellsSaveOptions);

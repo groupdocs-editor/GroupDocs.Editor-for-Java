@@ -26,36 +26,27 @@ public class WorkingWithSpreadsheet {
     public static List<java.nio.file.Path> run(Path inputFile) {
         final java.nio.file.Path outputXlsmPath = makeOutputPath("WorkingWithText.xlsm");
         final java.nio.file.Path outputXlsbPath = makeOutputPath("WorkingWithText.xlsb");
-        //1. Get a path to the input file (or stream with file content).
-        //In this case it is sample XLSX (OOXML) with two tabs.
-        try (InputStream inputStream = Files.newInputStream(inputFile)) {
 
+        try (InputStream inputStream = Files.newInputStream(inputFile)) {
             Editor editor = new Editor(inputStream, new SpreadsheetLoadOptions());
             try {
-
-                //3. Let's create an intermediate EditableDocument from 1st tab
+                // Create an EditableDocument from the first worksheet
                 SpreadsheetEditOptions firstTabEditOptions = new SpreadsheetEditOptions();
-                firstTabEditOptions.setWorksheetIndex(0);//index is 0-based
+                firstTabEditOptions.setWorksheetIndex(0);  // Index is 0-based
                 EditableDocument firstTabDocument = editor.edit(firstTabEditOptions);
                 try {
-
-                    //4. Let's create an intermediate EditableDocument from 2nd tab
+                    // Create an EditableDocument from the second worksheet
                     SpreadsheetEditOptions secondTabEditOptions = new SpreadsheetEditOptions();
-                    secondTabEditOptions.setWorksheetIndex(1);//index is 0-based
+                    secondTabEditOptions.setWorksheetIndex(1);  // Index is 0-based
                     EditableDocument secondTabDocument = editor.edit(secondTabEditOptions);
                     try {
-
-                        //5. Save first tab from EditableDocument #1 to separate document
+                        // Save first worksheet from the EditableDocument to separate document
                         SpreadsheetSaveOptions firstTabSaveOptions = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsm);
-
                         editor.save(firstTabDocument, outputXlsmPath.toString(), firstTabSaveOptions);
 
-                        //6. Save second tab from EditableDocument #2 to separate document
+                        // Save second worksheet from the EditableDocument to separate document
                         SpreadsheetSaveOptions saveOptions2 = new SpreadsheetSaveOptions(SpreadsheetFormats.Xlsb);
-
                         editor.save(secondTabDocument, outputXlsbPath.toString(), saveOptions2);
-
-                        //7. Dispose both EditableDocument instances
                     } finally {
                         secondTabDocument.dispose();
                     }

@@ -16,12 +16,16 @@ public class CreateEditableDocument {
         final java.nio.file.Path outputPath = makeOutputPath("CreateEditableDocument-fromHtmlFile.docx");
 
         try {
+            // Create an EditableDocument from the input HTML file
             EditableDocument document = EditableDocument.fromFile(inputFile.toString(), null);
             try {
+                // Initialize the editor for the input HTML file
                 final Editor editor = new Editor(inputFile.toString());
                 try {
 
+                    // Define save options for Word processing in DOCX format
                     WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
+                    // Save the edited document to the output path
                     editor.save(document, outputPath.toString(), saveOptions);
                 } finally {
                     editor.dispose();
@@ -42,24 +46,23 @@ public class CreateEditableDocument {
         final java.nio.file.Path outputPath1 = makeOutputPath("CreateEditableDocument-fromHtmlFile.html");
         final java.nio.file.Path outputPath2 = makeOutputPath("CreateEditableDocument-fromHtmlFile.docm");
         try {
-            //2. Read this markup to String
+            // Read the HTML content from the input file into a String
             String htmlContent = FileUtils.readFileToString(inputFile.toFile(), "utf-8");
 
-            //4. Initialize EditableDocument
+            // Create an EditableDocument from the HTML content and resource folder
             EditableDocument document = EditableDocument.fromMarkupAndResourceFolder(htmlContent, resourcesPath.toString());
             try {
-                //5. Check obtained document
-                System.out.println("There should be 2 stylesheets, and actually is " + document.getCss().size());
-                System.out.println("There should be 2 images, and actually is " + document.getImages().size());
+                System.out.println("Expected 2 stylesheets, found: " + document.getCss().size());
+                System.out.println("Expected 2 images, found: " + document.getImages().size());
 
-                //6. Save it to the file
+                // Save the document in HTML format
                 document.save(outputPath1.toString());
-                //7. Save it to the document
-                //7.1. Get saving format
+
+                // Prepare to save the document in DOCM format
                 WordProcessingFormats saveFormat = WordProcessingFormats.fromExtension("docm");
-                //7.2. Get saving options
                 WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(saveFormat);
-                //7.3. Create instance of Editor class, initialize it with anything
+
+                // Create an Editor instance to handle DOCM saving
                 Editor editor = new Editor(outputPath1.toString());
                 try {
                     editor.save(document, outputPath2.toString(), saveOptions);

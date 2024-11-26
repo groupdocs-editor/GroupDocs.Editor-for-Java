@@ -18,25 +18,25 @@ public class GeneratingPreview {
         try {
             Files.createDirectories(outputFolderPath);
 
-            // Load file to the Editor constructor
+            // Load the input file into the Editor
             Editor editor = new Editor(inputFile.toString());
             try {
 
-                // Get document info for this file
+                // Retrieve document information from the editor
                 IDocumentInfo documentInfo = editor.getDocumentInfo(null);
 
-                // Cast this document info to the PresentationDocumentInfo type
+                // Cast to PresentationDocumentInfo to access slide-related methods
                 PresentationDocumentInfo infoSlides = (PresentationDocumentInfo) documentInfo;
 
-                // Get the number of all slides
+                // Get the total number of slides in the presentation
                 int slidesCount = infoSlides.getPageCount();
 
-                //Iterate through all slides and generate the preview on every iteration
+                // Iterate through all slides to generate SVG previews
                 for (int i = 0; i < slidesCount; i++) {
-                    // Generate one preview as SVG image by slide index
+                    // Generate an SVG preview for each slide index
                     SvgImage oneSvgPreview = infoSlides.generatePreview(i);
 
-                    // Save it to the file
+                    // Save the generated SVG image to the output folder
                     oneSvgPreview.save(outputFolderPath.resolve(oneSvgPreview.getFilenameWithExtension()).toString());
                 }
             } finally {

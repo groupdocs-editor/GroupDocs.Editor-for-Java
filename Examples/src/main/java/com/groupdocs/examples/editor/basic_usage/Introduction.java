@@ -15,19 +15,27 @@ import java.util.List;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
+/**
+ * This class provides functionality to process documents by editing their content
+ * and saving them in a specified format. It utilizes various resources such as
+ * images, fonts, and stylesheets to generate the final output document.
+ */
 public class Introduction {
-
+    /**
+     * This method processes the specified input file and performs some operations and saves it in a specified format.
+     *
+     * @param inputFile The path to the input file which will be processed.
+     */
     public static void run(java.nio.file.Path inputFile) {
         final java.nio.file.Path outputPath = makeOutputPath("Introduction.rtf");
 
         try {
-            //2. Instantiate Editor object by loading the input file
             Editor editor = new Editor(inputFile.toString());
             try {
-                //3. Open input document for edit � obtain an intermediate document, that can be edited
+                // Edit WordProcessing document with default options
                 EditableDocument beforeEditDocument = editor.edit();
                 try {
-                    //4. Grab document content and associated resources from editable document
+                    // Get HTML content from the original document
                     String htmlContent = beforeEditDocument.getContent();
                     List<IImageResource> images = beforeEditDocument.getImages();
                     List<FontResourceBase> fonts = beforeEditDocument.getFonts();
@@ -50,34 +58,29 @@ public class Introduction {
                         System.out.println("\t" + cssText.getType().getFormalName() + ": " + cssText.getName());
                     }
 
-                    //4.1. Get document as a single base64-encoded String, where all resources (images, fonts, etc) are embedded inside this String along with main textual content
+                    // Get document as a single base64-encoded String, where all resources (images, fonts, etc) are embedded inside this String along with main textual content
                     String htmlWithEmbeddedResources = beforeEditDocument.getEmbeddedHtml();
-                    //4.2. For example, edit its content somehow
+                    // Edit its content
                     String htmlWithEmbeddedResourcesChanged = htmlWithEmbeddedResources.replace("Subtitle", "Edited subtitle");
 
-                    //5. Create new EditableDocument instance from edited content and resources
+                    // Create new EditableDocument instance from edited content and resources
                     EditableDocument afterEditDocument = EditableDocument.fromMarkup(htmlWithEmbeddedResourcesChanged, null);
                     try {
-                        //6. Save edited document to the output format
-                        //6.2. Prepare saving options
                         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Rtf);
-                        //6.3. Finally, save to path
+                        // Save to path
                         editor.save(afterEditDocument, outputPath.toString(), saveOptions);
-                        //6.4. Alternatively, output document can be saved into any stream, that support writing
+                        // Alternatively, output document can be saved into any stream that supports writing
                         try (OutputStream outputStream = new ByteArrayOutputStream()) {
                             editor.save(afterEditDocument, outputStream, saveOptions);
                         }
 
                     } finally {
-                        //7. Dispose both EditableDocument instances and Editor itself
                         afterEditDocument.dispose();
                     }
                 } finally {
-                    //7. Dispose both EditableDocument instances and Editor itself
                     beforeEditDocument.dispose();
                 }
             } finally {
-                //7. Dispose both EditableDocument instances and Editor itself
                 editor.dispose();
             }
             System.out.println("\nDocument edited successfully.\nCheck output: " + outputPath.getParent());

@@ -20,20 +20,23 @@ public class SaveDocument {
     public static Path asRtfThroughFile(Path inputFile) {
         final Path outputPath = makeOutputPath("SaveDocument-asRtfThroughFile.rtf");
         try {
+            // Initialize the Editor with WordProcessingLoadOptions
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Create EditableDocument instance for editing
                 EditableDocument originalDocument = editor.edit();
 
-                //Modify its content somehow. Because there is no attached WYSIWYG-editor, this code simulates document editing
+                // Simulate document editing by modifying HTML content
                 String allEmbeddedInsideString = originalDocument.getEmbeddedHtml();
-                String allEmbeddedInsideStringEdited = allEmbeddedInsideString.replace("Subtitle", "Edited subtitle");//Modified version
+                String allEmbeddedInsideStringEdited = allEmbeddedInsideString.replace("Subtitle", "Edited subtitle");
 
-                //Create new EditableDocument instance from modified HTML content
+                // Create a new EditableDocument instance from modified HTML content
                 EditableDocument editedDocument = EditableDocument.fromMarkup(allEmbeddedInsideStringEdited, null);
                 try {
-                    //Save edited document as RTF, specified through file path
+                    // Save the edited document as RTF format to the specified output path
                     WordProcessingSaveOptions rtfSaveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Rtf);
                     try {
+                        // Save the edited document in RTF format
                         editor.save(editedDocument, outputPath.toString(), rtfSaveOptions);
                     } finally {
                         editedDocument.dispose();
@@ -54,21 +57,23 @@ public class SaveDocument {
     public static Path asDocmThroughStream(Path inputFile) {
         final Path outputPath = makeOutputPath("SaveDocument-asDocmThroughStream.docm");
         try {
+            // Initialize the Editor with WordProcessingLoadOptions
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
                 EditableDocument originalDocument = editor.edit();
                 try {
 
-                    //Modify its content somehow. Because there is no attached WYSIWYG-editor, this code simulates document editing
+                    // Simulate document editing by modifying HTML content
                     String allEmbeddedInsideString = originalDocument.getEmbeddedHtml();
-                    String allEmbeddedInsideStringEdited = allEmbeddedInsideString.replace("Subtitle", "Edited subtitle");//Modified version
+                    String allEmbeddedInsideStringEdited = allEmbeddedInsideString.replace("Subtitle", "Edited subtitle");
 
-                    //Create new EditableDocument instance from modified HTML content
+                    // Create a new EditableDocument instance from modified HTML content
                     EditableDocument editedDocument = EditableDocument.fromMarkup(allEmbeddedInsideStringEdited, null);
 
-                    //Save edited document as DOCM, specified through stream
+                    // Save the edited document as DOCM format to the specified output path
                     WordProcessingSaveOptions docmSaveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docm);
 
+                    // Save the edited document as DOCM, specified through stream
                     try (OutputStream outputStream = Files.newOutputStream(outputPath)) {
                         editor.save(editedDocument, outputStream, docmSaveOptions);
                     } finally {
@@ -89,26 +94,28 @@ public class SaveDocument {
 
     public static Path asTxtThroughFile(Path inputFile) {
         final Path outputPath = makeOutputPath("SaveDocument-asTxtThroughFile.txt");
-//Load and edit some document, like it was shown in LoadDocument.cs and EditDocument.cs
         try {
+            // Initialize the Editor with WordProcessingLoadOptions
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
                 EditableDocument originalDocument = editor.edit();
                 try {
 
-                    //Modify its content somehow. Because there is no attached WYSIWYG-editor, this code simulates document editing
+                    // Modify its content somehow. Because there is no attached WYSIWYG-editor, this code simulates document editing
                     String allEmbeddedInsideString = originalDocument.getEmbeddedHtml();
                     String allEmbeddedInsideStringEdited = allEmbeddedInsideString.replace("Subtitle", "Edited subtitle");//Modified version
 
-                    //Create new EditableDocument instance from modified HTML content
+                    // Create new EditableDocument instance from modified HTML content
                     EditableDocument editedDocument = EditableDocument.fromMarkup(allEmbeddedInsideStringEdited, null);
                     try {
 
-                        //Save edited document as plain text, specified through file path.
-                        //Note that all complex content and resources (like images and fonts) will be missed in output TXT
+                        // Save edited document as plain text, specified through file path.
+                        // Note that all complex content and resources (like images and fonts) will be missed in output TXT
                         TextSaveOptions textSaveOptions = new TextSaveOptions();
                         textSaveOptions.setEncoding(StandardCharsets.UTF_8);
                         textSaveOptions.setPreserveTableLayout(true);
+
+                        // Save the edited document in TXT format
                         editor.save(editedDocument, outputPath.toString(), textSaveOptions);
                     } finally {
                         editedDocument.dispose();

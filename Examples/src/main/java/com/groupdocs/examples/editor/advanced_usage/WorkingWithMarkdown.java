@@ -18,36 +18,34 @@ public class WorkingWithMarkdown {
         final Path outputPath = makeOutputPath("WorkingWithMarkdown.docx");
 
         try {
-            //1. Creating the edit options
+            // Creating the edit options and setting image load callback
             MarkdownEditOptions editOptions = new MarkdownEditOptions();
             editOptions.setImageLoadCallback(new MdImageLoader(inputFolder));
 
             final Editor editor = new Editor(inputFile.toString());
             try {
-
-                //3. Generate an editable document
+                // Generate an editable document from the input file
                 EditableDocument beforeEdit = editor.edit(editOptions);
                 try {
-                    //4. Make sure there are 2 images here
                     System.out.println("Images count is 2: " + (beforeEdit.getImages().size() == 2));
                     System.out.println("First image type is png: " + ("png".equals(beforeEdit.getImages().get(0).getType().getFileExtension())));
-                    System.out.println("Second image type is png: " + ("jpeg".equals(beforeEdit.getImages().get(1).getType().getFileExtension())));
+                    System.out.println("Second image type is jpeg: " + ("jpeg".equals(beforeEdit.getImages().get(1).getType().getFileExtension())));
 
                     String originalHtmlContent = beforeEdit.getEmbeddedHtml();
 
-                    //5. Send the 'originalHtmlContent' to the client-side WYSIWYG-editor,
-                    // obtain the edited version and create a new EditableDocument from it
+                    // Pass the htmlContent to a WYSIWYG editor for editing ...
+                    // htmlContent = updatedHtmlContent;
+
+                    // Creating a new editable document from the edited HTML content
                     EditableDocument afterEdit = EditableDocument.fromMarkup(originalHtmlContent, null);
 
                     try {
-                        //6. Make sure 2 images are still here
                         System.out.println("Images count is 2: " + (afterEdit.getImages().size() == 2));
                         System.out.println("First image type is png: " + ("png".equals(afterEdit.getImages().get(0).getType().getFileExtension())));
-                        System.out.println("Second image type is png: " + ("jpeg".equals(afterEdit.getImages().get(1).getType().getFileExtension())));
+                        System.out.println("Second image type is jpeg: " + ("jpeg".equals(afterEdit.getImages().get(1).getType().getFileExtension())));
 
-                        //7. Save to the DOCX, for example
+                        // Saving the editable document to DOCX format at the output path
                         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
-
                         editor.save(afterEdit, outputPath.toString(), saveOptions);
                     } finally {
                         afterEdit.dispose();
@@ -71,6 +69,8 @@ public class WorkingWithMarkdown {
             this._imagesFolder = imagesFolder;
         }
 
+        // Load image from the specified folder and return its data as a byte array
+        @Override
         public final byte processImage(MarkdownImageLoadArgs args) {
             Path filePath = this._imagesFolder.resolve(Paths.get(args.getImageFileName()).getFileName());
             try {

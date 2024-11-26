@@ -16,36 +16,35 @@ public class WorkingWithEmail {
     public static Path run(Path inputFile) {
         final Path outputPath = makeOutputPath("WorkingWithEmail.eml");
         try {
-            //1. Load to the Editor class
+            // Create an instance of Editor class with the input file path
             Editor editor = new Editor(inputFile.toString());
             try {
-
-                //2. Create edit options with all content
+                // Initialize email edit options to include all content
                 EmailEditOptions editOptions = new EmailEditOptions(MailMessageOutput.All);
 
-                //3. Generate an editable document
+                // Generate an editable document from the input file using the defined edit options
                 EditableDocument beforeEdit = editor.edit(editOptions);
                 try {
-                    //4. Emit HTML from EditableDocument, send it to the client-side, edit it there in WYSIWYG-editor (omitted here)
+                    // Extract and save HTML content from the generated editable document
                     String savedHtmlContent = beforeEdit.getEmbeddedHtml();
 
-                    //5. Obtain edited content from the client-side and generate a new EditableDocument from it (omitted here)
+                    // Pass the htmlContent to a WYSIWYG editor for editing ...
+                    // htmlContent = updatedHtmlContent;
+
+                    // Generate a new editable document with edited content obtained from the client-side
                     EditableDocument afterEdit = EditableDocument.fromMarkup(savedHtmlContent, null);
                     try {
-                        //6. Create 1st save options
+                        // Define save options for two types of output MSG format (common and body/attachments)
                         EmailSaveOptions saveOptions1 = new EmailSaveOptions(MailMessageOutput.Common);
-
-                        //7. Create 2nd save options
                         EmailSaveOptions saveOptions2 = new EmailSaveOptions(MailMessageOutput.Body | MailMessageOutput.Attachments);
 
-                        //8. Generate and save 1st output MSG to the file
+                        // Save the first output MSG to a file using defined save options and generated editable document
                         editor.save(afterEdit, outputPath.toString(), saveOptions1);
 
-                        //9. Generate and save 2nd output MSG to a stream
+                        // Save the second output MSG to an output stream using defined save options and generated editable document
                         try (ByteArrayOutputStream outputMsgStream = new ByteArrayOutputStream()) {
                             editor.save(afterEdit, outputMsgStream, saveOptions2);
                         }
-                        //10. Dispose all resources
                     } finally {
                         afterEdit.dispose();
                     }

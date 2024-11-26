@@ -20,20 +20,25 @@ public class MarkdownRoundTrip {
         try {
             Files.createDirectories(outputFolderPath);
 
+            // Set up MarkdownEditOptions with image load callback
             MarkdownEditOptions editOptions = new MarkdownEditOptions();
             editOptions.setImageLoadCallback(new MdImageLoader(inputFolder));
 
+            // Configure save options for the Markdown document
             MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
+            // Center align table content and set output image folder
             saveOptions.setTableContentAlignment(MarkdownTableContentAlignment.Center);
             saveOptions.setImagesFolder(outputFolderPath.toString());
 
+            // Initialize the editor with input file
             Editor editor = new Editor(inputFile.toString());
             try {
                 EditableDocument editableDocument = editor.edit(editOptions);
                 try {
                     System.out.println("Images count is 3: " + (editableDocument.getImages().size() == 3));
-                    // edit "editableDocument" in WYSIWYG-editor and obtain its edited version
+                    // The user can edit "editableDocument" in WYSIWYG-editor and obtain its edited version
 
+                    // Save the edited document to the specified output path
                     editor.save(editableDocument, outputPath.toString(), saveOptions);
                 } finally {
                     editableDocument.dispose();
@@ -57,11 +62,14 @@ public class MarkdownRoundTrip {
         public final byte processImage(MarkdownImageLoadArgs args) {
             Path filePath = this._imagesFolder.resolve(Paths.get(args.getImageFileName()).getFileName());
             try {
+                // Read image data from the file
                 byte[] data = Files.readAllBytes(filePath);
+                // Set the data for the image loading process
                 args.setData(data);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            // Indicate that the image was provided by the user
             return MarkdownImageLoadingAction.UserProvided;
         }
     }

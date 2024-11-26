@@ -37,48 +37,49 @@ public class WorkingWithXml {
 
     public static List<Path> editAndSave(Path inputFile) {
         try {
-            //1. Load to the Editor class
+            // Load the file into the Editor class
             Editor editor = new Editor(inputFile.toString());
             try {
-                //3. Create XML editing options
+
+                // Create XML editing options with specific configurations
                 XmlEditOptions editOptions = new XmlEditOptions();
                 editOptions.setAttributeValuesQuoteType(QuoteType.DoubleQuote);
                 editOptions.setRecognizeEmails(true);
                 editOptions.setRecognizeUris(true);
                 editOptions.setTrimTrailingWhitespaces(true);
 
-                //4. Create EditableDocument instance
+                // Load the document into an EditableDocument instance for editing
                 EditableDocument beforeEdit = editor.edit(editOptions);
-                try {
 
-                    //5. Edit is somehow
+                try {
+                    // Retrieve the original text content and replace "John" with "Samuel"
                     String originalTextContent = beforeEdit.getContent();
                     String updatedTextContent = originalTextContent.replace("John", "Samuel");
 
+                    // Collect all resources from the document
                     List<IHtmlResource> allResources = beforeEdit.getAllResources();
 
-                    //6. Create EditableDocument with updated content
+                    // Create a new EditableDocument instance with the updated content and resources
                     EditableDocument afterEdit = EditableDocument.fromMarkup(updatedTextContent, allResources);
-                    try {
 
-                        //7. Create WordProcessing save options
+                    try {
+                        // Define save options for DOCX format
                         WordProcessingSaveOptions wordSaveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
 
-                        //8. Create TXT save options
+                        // Define save options for TXT format with UTF-8 encoding
                         TextSaveOptions txtSaveOptions = new TextSaveOptions();
                         txtSaveOptions.setEncoding(StandardCharsets.UTF_8);
 
-                        //9. Prepare paths for saving resultant DOCX and TXT files
-                        final java.nio.file.Path outputDocxPath = makeOutputPath("WorkingWithXml.docx");
-                        final java.nio.file.Path outputTxtPath = makeOutputPath("WorkingWithXml.txt");
+                        // Prepare output paths for DOCX and TXT files
+                        Path outputDocxPath = makeOutputPath("WorkingWithXml.docx");
+                        Path outputTxtPath = makeOutputPath("WorkingWithXml.txt");
 
-                        //10. Save
+                        // Save the edited document in both DOCX and TXT formats
                         editor.save(afterEdit, outputDocxPath.toString(), wordSaveOptions);
                         editor.save(afterEdit, outputTxtPath.toString(), txtSaveOptions);
 
                         System.out.println("\nDocuments saved successfully.");
                         return Arrays.asList(outputDocxPath, outputTxtPath);
-                        //10. Dispose all resources
                     } finally {
                         afterEdit.dispose();
                     }
@@ -119,16 +120,28 @@ public class WorkingWithXml {
     }
 
     public static void editXmlShort(Path inputFile) {
-        final java.nio.file.Path outputPath = makeOutputPath("WorkingWithEmail.html");
+        final Path outputPath = makeOutputPath("WorkingWithEmail.html");
 
+        // Load the file into the Editor class
         Editor editor = new Editor(inputFile.toString());
         try {
-            final EditableDocument editableDocument = editor.edit();
-            try {
-                final String htmlWithEmbeddedResources = editableDocument.getEmbeddedHtml();
-                //Send htmlWithEmbeddedResources to WYSIWYG-editor or somewhere else
+            // Load the document into an EditableDocument instance for editing
+            EditableDocument editableDocument = editor.edit();
 
-                editableDocument.save(outputPath.toString());
+            try {
+                // Retrieve the original text content with embedded resources
+                String htmlWithEmbeddedResources = editableDocument.getEmbeddedHtml();
+
+                // Send htmlWithEmbeddedResources to WYSIWYG-editor or somewhere else
+
+                // Create a new EditableDocument instance with the updated content and resources
+                EditableDocument afterEdit = EditableDocument.fromMarkup(htmlWithEmbeddedResources, editableDocument.getAllResources());
+                try {
+                    // Save the edited document to the specified output path
+                    afterEdit.save(outputPath.toString());
+                } finally {
+                    afterEdit.dispose();
+                }
             } finally {
                 editableDocument.dispose();
             }
@@ -140,63 +153,65 @@ public class WorkingWithXml {
     public static void highlightOptionsDemo() {
         XmlEditOptions editOptions = new XmlEditOptions();
         System.out.println("HighlightOptions isDefault: " + editOptions.getHighlightOptions().isDefault());
+
+        // Retrieve the HighlightOptions instance from the XmlEditOptions
         XmlHighlightOptions highlightOptions = editOptions.getHighlightOptions();
 
-        //Setting XML tags font settings
+        // Set XML tags font settings, e.g. font size, color, name, weight and decoration
         highlightOptions.getXmlTagsFontSettings().setSize(FontSize.Large);
         highlightOptions.getXmlTagsFontSettings().setColor(ArgbColors.Olive);
 
-        //Setting attribute names font settings
+        // Set attribute names font settings, e.g. font name, size, weight, decoration and style
         highlightOptions.getAttributeNamesFontSettings().setName("Arial");
         highlightOptions.getAttributeNamesFontSettings().setLine(TextDecorationLineType.Underline);
         highlightOptions.getAttributeNamesFontSettings().setWeight(FontWeight.Lighter);
 
-        //Setting attribute values font settings
+        // Set attribute values font settings, e.g. font size, weight, decoration, style and color
         highlightOptions.getAttributeValuesFontSettings().setLine(TextDecorationLineType.op_Addition(TextDecorationLineType.Underline, TextDecorationLineType.Overline));
         highlightOptions.getAttributeValuesFontSettings().setStyle(FontStyle.Italic);
 
-        //Setting CDATA sections font settings
+        // Set CDATA sections font settings, e.g. font size, weight, decoration, style and color
         highlightOptions.getCDataFontSettings().setLine(TextDecorationLineType.LineThrough);
         highlightOptions.getCDataFontSettings().setSize(FontSize.Smaller);
 
-        //Setting HTML comments font settings
+        // Set HTML comments font settings, e.g. font name, size, weight, decoration, style and color
         highlightOptions.getHtmlCommentsFontSettings().setColor(ArgbColors.Lightgreen);
         highlightOptions.getHtmlCommentsFontSettings().setName("Courier New");
 
-        //Setting text node font settings
+        // Set text node font settings, e.g. font weight, size, name, decoration, style and color
         highlightOptions.getInnerTextFontSettings().setWeight(FontWeight.fromNumber(300));
         highlightOptions.getInnerTextFontSettings().setSize(FontSize.XSmall);
 
-        //Checking they are not default
+        // Check that the HighlightOptions instance is not default
         System.out.println("HighlightOptions isDefault after editing: " + editOptions.getHighlightOptions().isDefault());
 
-        //Resetting to default
+        // Reset the HighlightOptions instance to its default state
         highlightOptions.resetToDefault();
 
-        //Checking they are default again now
+        // Check that the HighlightOptions instance is default again
         System.out.println("HighlightOptions isDefault after reset: " + editOptions.getHighlightOptions().isDefault());
     }
 
     public static void formatOptionsDemo() {
         XmlEditOptions editOptions = new XmlEditOptions();
 
-        //Checking that options are default for now
-        System.out.println("FormatOptions isDefault: " + editOptions.getFormatOptions().isDefault());
+        //Check that XmlFormatOptions is default for now
+        System.out.println("XmlFormatOptions isDefault: " + editOptions.getFormatOptions().isDefault());
         XmlFormatOptions formatOptions = editOptions.getFormatOptions();
 
-        //Each attribute-value pair must be placed on a new line
+        //Set the flag to place each attribute-value pair on a new line
         formatOptions.setEachAttributeFromNewline(true);
 
-        //Text nodes (textual content between and inside XML elements) must be placed on a new line
+        //Set the flag to place text nodes (textual content between and inside XML elements) on a new line
         formatOptions.setLeafTextNodesOnNewline(true);
 
-        //Setting a custom text indent using 'Length' data type, which is composed of value with unit
+        //Set a custom text indent using 'Length' data type, which is composed of value with unit
         formatOptions.setLeftIndent(Length.fromValueWithUnit(20, LengthUnit.Px));
 
-        //Checking that options are not default now
-        System.out.println("FormatOptions isDefault after editing: " + editOptions.getFormatOptions().isDefault());
+        //Check that XmlFormatOptions is not default now
+        System.out.println("XmlFormatOptions isDefault after editing: " + editOptions.getFormatOptions().isDefault());
 
-        //Disabling a left indent at all
+        //Disable a left indent at all
         formatOptions.setLeftIndent(Length.UnitlessZero);
     }
 
@@ -204,6 +219,7 @@ public class WorkingWithXml {
         final java.nio.file.Path output1Path = makeOutputPath("WorkingWithEmail.html");
         final java.nio.file.Path output2Path = makeOutputPath("WorkingWithEmail.html");
         try {
+            // The first set of options
             XmlEditOptions editOptions1 = new XmlEditOptions();
             editOptions1.setRecognizeEmails(true);
             editOptions1.setRecognizeUris(true);
@@ -213,6 +229,7 @@ public class WorkingWithXml {
             editOptions1.getHighlightOptions().getXmlTagsFontSettings().setLine(TextDecorationLineType.op_Addition(TextDecorationLineType.Underline, TextDecorationLineType.Overline));
             editOptions1.getHighlightOptions().getXmlTagsFontSettings().setWeight(FontWeight.Bold);
 
+            // The second set of options
             XmlEditOptions editOptions2 = new XmlEditOptions();
             editOptions2.setTrimTrailingWhitespaces(true);
             editOptions2.setAttributeValuesQuoteType(QuoteType.DoubleQuote);
@@ -222,19 +239,24 @@ public class WorkingWithXml {
 
             Editor editor = new Editor(inputFile.toString());
             try {
+                // Edit the document with the first set of options
                 final EditableDocument editableDocument1 = editor.edit(editOptions1);
                 try {
+                    // Save the edited document
                     editableDocument1.save(output1Path.toString());
                 } finally {
                     editableDocument1.dispose();
                 }
 
+                // Edit the document with the second set of options
                 final EditableDocument editableDocument2 = editor.edit(editOptions2);
                 try {
+                    // Save the edited document
                     editableDocument2.save(output2Path.toString());
                 } finally {
                     editableDocument2.dispose();
                 }
+
                 return Arrays.asList(output1Path, output2Path);
             } finally {
                 editor.dispose();
@@ -247,14 +269,19 @@ public class WorkingWithXml {
 
     public static TextualDocumentInfo getXmlMetaInfo(Path inputFile) {
         try {
+            // Initialize the Editor with the input file path
             Editor editor = new Editor(inputFile.toString());
             try {
+                // Retrieve document information and cast to TextualDocumentInfo
                 IDocumentInfo info = editor.getDocumentInfo(null);
                 TextualDocumentInfo xmlInfo = (TextualDocumentInfo) info;
+
+                // Print details about the XML document
                 System.out.printf("XML Info charset is '%s', system default is '%s'%n", xmlInfo.getEncoding(), Charset.defaultCharset());
                 System.out.printf("XML is encrypted: %s%n", xmlInfo.isEncrypted());
                 System.out.printf("XML pages count is: %d%n", xmlInfo.getPageCount());
                 System.out.printf("XML format is %s: %s%n", TextualFormats.Xml, xmlInfo.getFormat() == TextualFormats.Xml);
+
                 return xmlInfo;
             } finally {
                 editor.dispose();

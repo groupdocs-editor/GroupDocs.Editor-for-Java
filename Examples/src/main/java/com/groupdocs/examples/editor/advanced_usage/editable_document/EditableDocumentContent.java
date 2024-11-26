@@ -13,11 +13,15 @@ public class EditableDocumentContent {
 
     public static void getAllEmbeddedHtmlContent(Path inputFile) {
         try {
+            // Initialize an Editor object with the input file path and WordProcessingLoadOptions.
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Create an EditableDocument from the initialized Editor object.
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Retrieve the embedded HTML content from the document.
                     String embeddedHtmlContent = document.getEmbeddedHtml();
+
                     System.out.println("HTML content of the input document, where all resources are embedded in base64 encoding: \n\t"
                             + embeddedHtmlContent.replace('\n', ' '));
                 } finally {
@@ -34,11 +38,15 @@ public class EditableDocumentContent {
 
     public static void getExternalCssContent(Path inputFile) {
         try {
+            // Create an Editor instance with the input file's path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Begin editing the document using specific word processing edit options
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Extract the CSS content from the document
                     List<String> stylesheets = document.getCssContent();
+
                     System.out.println("There are " + stylesheets.size() + " stylesheets in the input document");
                     for (String css : stylesheets) {
                         System.out.println('\t' + css.replace('\n', ' '));
@@ -57,13 +65,19 @@ public class EditableDocumentContent {
 
     public static void getExternalCssContentWithPrefix(Path inputFile) {
         try {
+            // Initialize an Editor with the input file's path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // EditableDocument allows modifications to the document and retrieving CSS content
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Define prefixes for external image and font URLs
                     String externalImagesPrefix = "http://www.mywebsite.com/images/id=";
                     String externalFontsPrefix = "http://www.mywebsite.com/fonts/id=";
+
+                    // Retrieve CSS content, using the defined prefixes
                     List<String> stylesheets = document.getCssContent(externalImagesPrefix, externalFontsPrefix);
+
                     System.out.println("There are " + stylesheets.size() + " stylesheets in the input document");
                     for (String css : stylesheets) {
                         System.out.println('\t' + css.replace('\n', ' '));
@@ -82,11 +96,15 @@ public class EditableDocumentContent {
 
     public static void getHtmlBodyContent(Path inputFile) {
         try {
+            // Initialize the editor with the given file path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Edit the document for modifications
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Retrieve the BODY content from the document.
                     String bodyContent = document.getBodyContent();
+
                     System.out.println("Inner content of the HTML->BODY element: \n\t"
                             + bodyContent.replace('\n', ' '));
                 } finally {
@@ -103,21 +121,27 @@ public class EditableDocumentContent {
 
     public static void getHtmlBodyContentWithPrefix(Path inputFile) {
         try {
+            // Initialize the editor with the given file path
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Edit the document for modifications
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Define the prefix for external images
                     String externalImagesPrefix = "http://www.mywebsite.com/images/id=";
+
+                    // Get the content of BODY with the external image prefix
                     String prefixedBodyContent = document.getBodyContent(externalImagesPrefix);
-                    System.out.println("Inner content of the HTML->BODY element with external images prefix: \n\t"
-                            + prefixedBodyContent.replace('\n', ' '));
+
+                    System.out.println("Content of HTML->BODY element with external images prefix: \n\t" +
+                            prefixedBodyContent.replace('\n', ' '));
                 } finally {
                     document.dispose();
                 }
             } finally {
                 editor.dispose();
             }
-            System.out.println("\nDocument edited successfully.");
+            System.out.println("Document edited and processed successfully.");
         } catch (Exception e) {
             FailureRegister.getInstance().registerFailedSample(e);
         }
@@ -125,13 +149,17 @@ public class EditableDocumentContent {
 
     public static void getHtmlContent(Path inputFile) {
         try {
+            // Create new Editor with input file path and load options
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
             try {
+                // Open the document for editing using specified options
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
                 try {
+                    // Get HTML content of the document
                     String htmlContent = document.getContent();
+
                     System.out.println("HTML content of the input document (first 200 chars): \n\t"
-                            + htmlContent.substring(0, 200).replace('\n', ' '));
+                            + htmlContent.substring(0, Math.min(200, htmlContent.length())).replace('\n', ' '));
                 } finally {
                     document.dispose();
                 }
@@ -146,15 +174,20 @@ public class EditableDocumentContent {
 
     public static void getHtmlContentWithPrefix(Path inputFile) {
         try {
+            // Create new Editor with input file path and load options
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
+
             try {
+                // Open the document for editing using specified options
                 EditableDocument document = editor.edit(new WordProcessingEditOptions());
+
                 try {
                     String externalImagesPrefix = "http://www.mywebsite.com/images/id=";
                     String externalCssPrefix = "http://www.mywebsite.com/css/id=";
+                    // Getting the HTML content with custom image and stylesheet prefixes
                     String prefixedHtmlContent = document.getContentString(externalImagesPrefix, externalCssPrefix);
-                    System.out.println("HTML content of the input document with custom image and stylesheet prefixes: \n\t"
-                            + prefixedHtmlContent.replace('\n', ' '));
+
+                    System.out.println("HTML content of the input document: \n\t" + prefixedHtmlContent.replace('\n', ' '));
                 } finally {
                     document.dispose();
                 }

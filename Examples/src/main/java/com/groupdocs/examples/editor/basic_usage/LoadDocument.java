@@ -13,7 +13,7 @@ public class LoadDocument {
 
     public static void fromFile(Path inputFile) {
         try {
-            //Load document as file via path and without load options
+            // Load document as file via path and without load options
             Editor editor = new Editor(inputFile.toString());
 
             // Do stuff with editor
@@ -28,7 +28,7 @@ public class LoadDocument {
 
     public static void fromFileWithOptions(Path inputFile) {
         try {
-            //Load document as file via path and with load options
+            // Load document as file via path and with load options
             WordProcessingLoadOptions wordLoadOptions = new WordProcessingLoadOptions();
             wordLoadOptions.setPassword("some password");
 
@@ -46,7 +46,7 @@ public class LoadDocument {
 
     public static void fromStream(Path inputFile) {
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
-            //Load document as content from byte stream and without load options
+            // Load document as content from byte stream and without load options
             Editor editor = new Editor(inputStream);
 
             // Do stuff with editor
@@ -61,11 +61,11 @@ public class LoadDocument {
 
     public static void fromStreamWithOptions(Path inputFile) {
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
-            //Load document as content from byte stream and with load options
+            // Configure editing options for the Spreadsheet document
             SpreadsheetLoadOptions sheetLoadOptions = new SpreadsheetLoadOptions();
             sheetLoadOptions.setOptimizeMemoryUsage(true);
 
-            //Load document as content from byte stream and without load options
+            // Load document as content from byte stream and without load options
             Editor editor = new Editor(inputStream, sheetLoadOptions);
 
             // Do stuff with editor

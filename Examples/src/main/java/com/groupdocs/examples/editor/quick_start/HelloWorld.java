@@ -13,18 +13,30 @@ import java.util.List;
 
 import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 
+/**
+ * This class demonstrates a basic usage of the GroupDocs.Editor API
+ * to edit a word processing document by modifying its HTML content.
+ */
 public class HelloWorld {
 
+    /**
+     * Runs the editing process for a given input file path and returns the output file path.
+     *
+     * @param inputFile The path to the input document file.
+     * @return The path to the edited document file.
+     */
     public static Path run(Path inputFile) {
         final Path outputPath = makeOutputPath("HelloWorld.docx");
 
         try {
+            // Initialize an Editor instance with the provided input file.
             final Editor editor = new Editor(inputFile.toString());
             try {
                 WordProcessingEditOptions editOptions = new WordProcessingEditOptions();
                 EditableDocument originalDocument = editor.edit(editOptions);
                 try {
-                    String htmlContent = originalDocument.getEmbeddedHtml();
+                    // Extract the HTML content from the original document.
+                    String htmlContent = originalDocument.getContent();
                     final List<IHtmlResource> allResources = originalDocument.getAllResources();
 
                     // Pass the htmlContent to a WYSIWYG editor for editing ...
@@ -37,11 +49,12 @@ public class HelloWorld {
                         System.out.println("\t" + resource.getType().getFormalName() + ": " + resource.getName());
                     }
 
-                    // Save changed document
+                    // Create a new EditableDocument from the updated HTML content and resources.
                     EditableDocument editedDocument = EditableDocument.fromMarkup(htmlContent, allResources);
                     try {
                         WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docx);
 
+                        // Save the edited document to the specified output path using the provided save options.
                         editor.save(editedDocument, outputPath.toString(), saveOptions);
                     } finally {
                         editedDocument.dispose();
@@ -60,4 +73,3 @@ public class HelloWorld {
         return outputPath;
     }
 }
-

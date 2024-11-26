@@ -21,21 +21,20 @@ public class LegacyFormFieldCollection {
      */
     public static Path run(Path inputFile) {
         final Path outputPath = makeOutputPath("LegacyFormFieldCollection.docx");
-        // 2. Create a stream from this path
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
 
-            // 3. Create load options for this document
+            // Create load options for the document, including password handling
             WordProcessingLoadOptions loadOptions = new WordProcessingLoadOptions();
-            // 3.1. In case the input document is password-protected, we can specify a password for its opening...
+            // Specify a password for opening the document if it is password-protected
+            // Because the document is unprotected, this password will be ignored
             loadOptions.setPassword("some_password_to_open_a_document");
-            // 3.2. ...but, because the document is unprotected, this password will be ignored
 
-            // 4. Load the document with options to the Editor instance
+            // Load the document into the Editor instance with specified options
             Editor editor = new Editor(inputStream, loadOptions);
             try {
-                // 4.1. Read the FormFieldManager instance
+                // Retrieve the FormFieldManager to manage form fields in the document
                 FormFieldManager fieldManager = editor.getFormFieldManager();
-                // 4.2. Read the FormFieldCollection in the document
+                // Get the collection of form fields present in the document
                 FormFieldCollection collection = fieldManager.getFormFieldCollection();
                 for (IFormField formField : collection) {
                     switch (formField.getType()) {

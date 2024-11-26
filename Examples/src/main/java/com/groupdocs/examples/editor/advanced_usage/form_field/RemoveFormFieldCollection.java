@@ -25,50 +25,47 @@ import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
  */
 public class RemoveFormFieldCollection {
     public static Path run(Path inputFile) {
-
         final Path outputPath = makeOutputPath("RemoveFormFieldCollection.docx");
-        // 2. Create a stream from this path
+
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
 
-            //3. Create load options for this document
+            // Create load options for this document, including password if protected
             WordProcessingLoadOptions loadOptions = new WordProcessingLoadOptions();
-            //3.1. In case if input document is password-protected, we can specify password for its opening...
+            // Password set for opening if needed
+            // Because document is unprotected, this password will be ignored
             loadOptions.setPassword("some_password_to_open_a_document");
-            //3.2. ...but, because document is unprotected, this password will be ignored
 
-            //4. Load document with options to the Editor instance
+            // Load document with options to the Editor instance
             Editor editor = new Editor(inputStream, loadOptions);
             try {
-                //4.1. read FormFieldManager instance
+                // Retrieve the FormFieldManager instance
                 FormFieldManager fieldManager = editor.getFormFieldManager();
-                //4.1. read FormFieldCollection in the document.
+                // Get the collection of form fields in the document
                 FormFieldCollection collection = fieldManager.getFormFieldCollection();
 
-                //4.2. Remove a specific text form field
+                // Remove a specific text form field identified by its name
                 TextFormField textField = collection.getFormField("Text1", TextFormField.class);
                 fieldManager.removeFormField(textField);
                 collection = fieldManager.getFormFieldCollection();
 
-                //4.3. Remove multiple form fields
+                // Remove multiple form fields by specifying their names
                 textField = collection.getFormField("Text7", TextFormField.class);
                 CheckBoxForm checkBoxForm = collection.getFormField("Check2", CheckBoxForm.class);
                 fieldManager.removeFormFields(Arrays.asList(textField, checkBoxForm));
                 collection = fieldManager.getFormFieldCollection();
 
-                //5. Create document save options
+                // Create document save options specifying the desired format
                 WordProcessingFormats docFormat = WordProcessingFormats.Docx;
                 WordProcessingSaveOptions saveOptions = new WordProcessingSaveOptions(docFormat);
 
-                //5.1. If document is really huge and causes OutOfMemoryException, you can set memory optimization option
+                // Optimize memory usage for large documents to avoid OutOfMemoryException
                 saveOptions.setOptimizeMemoryUsage(true);
 
-                //5.2. You can protect document from writing (make it Allow Only FormFields) with password
+                // Protect document from writing, allowing only form fields to be edited
                 saveOptions.setProtection(new WordProcessingProtection(WordProcessingProtectionType.AllowOnlyFormFields, "write_password"));
 
-                //6. Save it
-                //6.2. Prepare stream for saving
                 try (OutputStream outputStream = Files.newOutputStream(outputPath)) {
-                    // 6.2. Save the document
+                    // Save the document using the editor
                     editor.save(outputStream, saveOptions);
                 }
             } finally {
