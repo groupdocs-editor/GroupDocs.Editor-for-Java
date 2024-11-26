@@ -71,8 +71,8 @@ public class WorkingWithXml {
                         txtSaveOptions.setEncoding(StandardCharsets.UTF_8);
 
                         // Prepare output paths for DOCX and TXT files
-                        Path outputDocxPath = makeOutputPath("WorkingWithXml.docx");
-                        Path outputTxtPath = makeOutputPath("WorkingWithXml.txt");
+                        Path outputDocxPath = makeOutputPath("WorkingWithXml-editAndSave.docx");
+                        Path outputTxtPath = makeOutputPath("WorkingWithXml-editAndSave.txt");
 
                         // Save the edited document in both DOCX and TXT formats
                         editor.save(afterEdit, outputDocxPath.toString(), wordSaveOptions);
@@ -120,7 +120,7 @@ public class WorkingWithXml {
     }
 
     public static void editXmlShort(Path inputFile) {
-        final Path outputPath = makeOutputPath("WorkingWithEmail.html");
+        final Path outputPath = makeOutputPath("WorkingWithXml-editXmlShort.html");
 
         // Load the file into the Editor class
         Editor editor = new Editor(inputFile.toString());
@@ -216,8 +216,8 @@ public class WorkingWithXml {
     }
 
     public static List<Path> complexEditDemo(Path inputFile) {
-        final java.nio.file.Path output1Path = makeOutputPath("WorkingWithEmail.html");
-        final java.nio.file.Path output2Path = makeOutputPath("WorkingWithEmail.html");
+        final java.nio.file.Path output1Path = makeOutputPath("WorkingWithXml-complexEditDemo-1.html");
+        final java.nio.file.Path output2Path = makeOutputPath("WorkingWithXml-complexEditDemo-2.html");
         try {
             // The first set of options
             XmlEditOptions editOptions1 = new XmlEditOptions();

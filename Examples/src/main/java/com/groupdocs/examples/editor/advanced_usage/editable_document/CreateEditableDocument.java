@@ -43,8 +43,8 @@ public class CreateEditableDocument {
 
 
     public static java.nio.file.Path fromInnerBody(java.nio.file.Path inputFile, java.nio.file.Path resourcesPath) {
-        final java.nio.file.Path outputPath1 = makeOutputPath("CreateEditableDocument-fromHtmlFile.html");
-        final java.nio.file.Path outputPath2 = makeOutputPath("CreateEditableDocument-fromHtmlFile.docm");
+        final java.nio.file.Path outputPath1 = makeOutputPath("CreateEditableDocument-fromInnerBody.html");
+        final java.nio.file.Path outputPath2 = makeOutputPath("CreateEditableDocument-fromInnerBody.docm");
         try {
             // Read the HTML content from the input file into a String
             String htmlContent = FileUtils.readFileToString(inputFile.toFile(), "utf-8");

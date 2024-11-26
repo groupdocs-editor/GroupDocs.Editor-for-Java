@@ -24,8 +24,8 @@ import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 public class WorkingWithSpreadsheet {
 
     public static List<java.nio.file.Path> run(Path inputFile) {
-        final java.nio.file.Path outputXlsmPath = makeOutputPath("WorkingWithText.xlsm");
-        final java.nio.file.Path outputXlsbPath = makeOutputPath("WorkingWithText.xlsb");
+        final java.nio.file.Path outputXlsmPath = makeOutputPath("WorkingWithSpreadsheet.xlsm");
+        final java.nio.file.Path outputXlsbPath = makeOutputPath("WorkingWithSpreadsheet.xlsb");
 
         try (InputStream inputStream = Files.newInputStream(inputFile)) {
             Editor editor = new Editor(inputStream, new SpreadsheetLoadOptions());

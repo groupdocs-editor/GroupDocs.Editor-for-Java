@@ -27,14 +27,14 @@ import static com.groupdocs.examples.editor.utils.FilesUtils.makeOutputPath;
 public class WorkingWithCsv {
 
     public static List<Path> run(Path inputFile) {
-        final Path outputCsvPath = makeOutputPath("WorkingWithDsv.csv");
-        final Path outputTsvPath = makeOutputPath("WorkingWithDsv.tsv");
-        final Path outputXlsmPath = makeOutputPath("WorkingWithDsv.xlsm");
+        final Path outputCsvPath = makeOutputPath("WorkingWithCsv.csv");
+        final Path outputTsvPath = makeOutputPath("WorkingWithCsv.tsv");
+        final Path outputXlsmPath = makeOutputPath("WorkingWithCsv.xlsm");
         try {
             // Create Editor instance
             Editor editor = new Editor(inputFile.toString());
             try {
-                // Create DSV edit options and specify separator
+                // Create CSV edit options and specify separator
                 DelimitedTextEditOptions editOptions = new DelimitedTextEditOptions(",");
                 editOptions.setConvertDateTimeData(false);
                 editOptions.setConvertNumericData(true);

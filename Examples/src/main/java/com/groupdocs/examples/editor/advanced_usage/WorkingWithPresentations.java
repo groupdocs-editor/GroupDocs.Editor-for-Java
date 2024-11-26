@@ -65,7 +65,7 @@ public class WorkingWithPresentations {
                         saveOptions.setPassword("password");
 
                         // Prepare saving filename and path, then save the document
-                        final Path outputPath = makeOutputPath("WorkingWithEmail" + saveOptions.getOutputFormat().getExtension());
+                        final Path outputPath = makeOutputPath("WorkingWithPresentations" + saveOptions.getOutputFormat().getExtension());
                         try (OutputStream outputStream = Files.newOutputStream(outputPath)) {
                             editor.save(afterEdit, outputStream, saveOptions);
                         }

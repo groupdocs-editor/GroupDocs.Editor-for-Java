@@ -71,7 +71,7 @@ public class EditableDocumentOperations {
     }
 
     public static void saveHtmlToFolder(Path inputFile) {
-        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-saveHtmlResourcesToFolder.html");
+        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-saveHtmlToFolder.html");
         try {
             Files.createDirectories(outputPath);
 
@@ -102,7 +102,7 @@ public class EditableDocumentOperations {
      * In order to make document editable in any WYSIWYG client-side editor (like CKEditor or TinyMCE), EditableDocument provides methods for generating HTML markup and producing resources, that can be accepted by the user.
      */
     public static Path complexOperations(Path inputFile) {
-        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations.html");
+        final java.nio.file.Path outputPath = makeOutputPath("EditableDocumentOperations-complexOperations.html");
 
         try {
             Editor editor = new Editor(inputFile.toString(), new WordProcessingLoadOptions());
