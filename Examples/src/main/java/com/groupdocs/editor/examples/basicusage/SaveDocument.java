@@ -9,9 +9,8 @@ import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.formats.WordProcessingFormats;
-import com.groupdocs.editor.options.TextSaveOptions;
-import com.groupdocs.editor.options.WordProcessingLoadOptions;
-import com.groupdocs.editor.options.WordProcessingSaveOptions;
+import com.groupdocs.editor.options.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -24,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 public class SaveDocument {
 
     public static void run() throws Exception {
-//Load and edit some document, like it was shown in LoadDocument.cs and EditDocument.cs
+		//Load and edit some document, like it was shown in LoadDocument.cs and EditDocument.cs
         String inputFilePath = Constants.SAMPLE_DOCX;
         Editor editor = new Editor(inputFilePath, new WordProcessingLoadOptions());
         EditableDocument defaultWordProcessingDoc = editor.edit();
@@ -44,7 +43,7 @@ public class SaveDocument {
         //Save edited document as DOCM, specified through stream
         String outputDocmPath = Constants.getOutputDirectoryPath("editedDoc.docm");
         WordProcessingSaveOptions docmSaveOptions = new WordProcessingSaveOptions(WordProcessingFormats.Docm);
-        
+
         try (OutputStream outputStream = new ByteArrayOutputStream()) {
             editor.save(editedDoc, outputStream, docmSaveOptions);
         }

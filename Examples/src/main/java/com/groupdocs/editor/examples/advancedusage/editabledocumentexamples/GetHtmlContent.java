@@ -10,8 +10,13 @@ import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.examples.Constants;
 import com.groupdocs.editor.options.WordProcessingEditOptions;
 import com.groupdocs.editor.options.WordProcessingLoadOptions;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import com.groupdocs.editor.options.WordProcessingSaveOptions;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *

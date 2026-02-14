@@ -13,7 +13,7 @@
 		<dependency>
     		<groupId>com.groupdocs</groupId>
    			<artifactId>groupdocs-editor</artifactId>
-    		<version>24.9</version>
+    		<version>26.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -30,7 +30,7 @@
 		<repository>
 			<id>GroupDocsJavaAPI</id>
 			<name>GroupDocs Java API</name>
-			<url>https://releases.groupdocs.com/java/repo/</url>
+			<url>https://releases-qa.groupdocs.com/java/repo/</url>
 		</repository>
 		<repository>
 		   <id>maven-apache-central</id>

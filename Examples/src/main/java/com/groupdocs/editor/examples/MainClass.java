@@ -16,10 +16,10 @@ public class MainClass {
 
     public static void main(String[] args) throws Throwable {
 
-        System.out.print("Using GroupDocs.Editor for Java version " + com.groupdocs.editor.Editor.class.getPackage().getSpecificationVersion() );
-        System.out.print("Open Program.cs. \nIn main() method uncomment the example that you want to run.");
-        System.out.print("Output folder is '"+Constants.OutputPath+"'" );
-        System.out.print("=====================================================");
+        System.out.println("Using GroupDocs.Editor for Java version " + com.groupdocs.editor.Editor.class.getPackage().getSpecificationVersion() );
+        //System.out.print("Open Program.cs. \nIn main() method uncomment the example that you want to run.");
+        System.out.println("Output folder is '"+Constants.OutputPath+"'" );
+        System.out.println("=====================================================");
             //region Quick Start
 
         SetLicenseFromFile.run();
@@ -67,6 +67,10 @@ public class MainClass {
 
         //WorkingWithFormats.run();
 
+        //DeleteSlides.run();
+
+        //DeleteWorksheets.run();
+
             //endregion
 
             //region Working with EditableDocument
@@ -75,7 +79,7 @@ public class MainClass {
 
         //CreateEditableDocumentFromInnerBody.run();
 
-        //GetHtmlContent.run();
+        GetHtmlContent.run();
 
         //GetHtmlContentWithPrefix.run();
 
@@ -109,6 +113,5 @@ public class MainClass {
             //endregion
 
         System.out.print("\r\n\r\n__________________________\r\nAll done. Press any key to exit.");
-
     }
 }

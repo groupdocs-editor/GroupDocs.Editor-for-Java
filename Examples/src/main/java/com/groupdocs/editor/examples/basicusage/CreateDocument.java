@@ -1,5 +1,6 @@
 package com.groupdocs.editor.examples.basicusage;
 
+
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.formats.*;
@@ -13,7 +14,6 @@ import java.io.InputStream;
 public class CreateDocument {
     public static void run() throws Exception
     {
-
         // Create a new WordProcessing document and save it using a callback .
         Editor editorWord = new Editor(WordProcessingFormats.Docx);
         {
