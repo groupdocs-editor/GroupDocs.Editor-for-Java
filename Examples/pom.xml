@@ -30,7 +30,7 @@
 		<repository>
 			<id>GroupDocsJavaAPI</id>
 			<name>GroupDocs Java API</name>
-			<url>https://releases-qa.groupdocs.com/java/repo/</url>
+			<url>https://releases.groupdocs.com/java/repo/</url>
 		</repository>
 		<repository>
 		   <id>maven-apache-central</id>
