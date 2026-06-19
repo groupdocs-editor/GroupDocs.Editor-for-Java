@@ -1,0 +1,7 @@
+<div class="gd-error-backdrop" *ngIf="dialog.visible" (click)="dialog.close()">
+  <div class="gd-error-modal" (click)="$event.stopPropagation()">
+    <h3 class="gd-error-title">Error</h3>
+    <p class="gd-error-message">{{ dialog.message }}</p>
+    <button type="button" class="gd-error-button" (click)="dialog.close()">OK</button>
+  </div>
+</div>

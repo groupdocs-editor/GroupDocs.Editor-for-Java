@@ -1,6 +1,22 @@
-# Edit Documents as HTML via Java API
+# GroupDocs.Editor for Java - Examples and Demo Projects
 
-GroupDocs.Editor is a one-stop solution for [Document Editing as HTML](https://products.groupdocs.com/editor/java). The edited documents can be saved in original format as well as other formats including Microsoft Word documents (DOC, DOCX), Excel spreadsheets (XLS, XLSX), PDF & TXT.
+[GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java) is a document editing API that lets you load documents, edit them as HTML, and save back to the original or other supported formats including Microsoft Word, Excel, PowerPoint, PDF, and plain text.
+
+## Important: Demo Applications Only
+
+The projects in the [Demos](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Demos) folder and the Docker images published as [`groupdocs/editor`](https://hub.docker.com/r/groupdocs/editor) are **sample applications** intended to demonstrate [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java) features.
+
+They are **not** production-ready services and must **not** be exposed to the public internet without additional hardening.
+
+Before using a demo in any shared or production-like environment:
+
+- Run it on `localhost` or a trusted private network only
+- Do not publish Docker containers directly to the internet without authentication, a reverse proxy, and network restrictions
+- Treat file upload, browse, and download features as untrusted input — validate and sandbox file paths in your own integration
+- Add authentication, authorization, rate limiting, and logging appropriate for your security requirements
+- Keep GroupDocs.Editor and all dependencies up to date
+
+For production integrations, use the library ([Examples](Examples), [documentation](https://docs.groupdocs.com/editor/java/)) and implement your own secure document storage and API layer instead of deploying these demos as-is.
 
 <p align="center">
   <a title="Download complete GroupDocs.Editor for Java source code" href="https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/archive/master.zip"> 
@@ -8,40 +24,91 @@ GroupDocs.Editor is a one-stop solution for [Document Editing as HTML](https://p
   </a>
 </p>
 
+## Repository Structure
+
 Directory | Description
 --------- | -----------
-[Docs](https://github.com/groupdocs-editor/GroupDocs.Editor-Docs)  | Product documentation containing the Developer's Guide, Release Notes and more.
-[Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples)  | Java examples and sample documents for you to get started quickly. 
-[Demos](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Demos)  | Frontend examples to help you learn how to Implement product features in a Web-UI based application.
+[Demos](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Demos) | Demo projects for Spring and Dropwizard with WYSIWYG web UI.
+[Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples) | Java API usage examples with sample documents.
 
+## Demos
+
+Both web demos run on `http://localhost:8080/editor/` and provide document editing with download, upload, and print support.
+
+| Demo | Framework | Build | GroupDocs.Editor |
+|------|-----------|-------|------------------|
+| [Spring](Demos/Spring) | Spring Boot 2.0 | `mvn clean spring-boot:run` | 26.1 |
+| [Dropwizard](Demos/Dropwizard) | Dropwizard 1.3 | `mvn clean compile exec:java` | 26.1 |
+
+## Docker
+
+Pre-built Docker images are available on [Docker Hub](https://hub.docker.com/r/groupdocs/editor).
+
+```bash
+docker pull groupdocs/editor:latest
+docker run -p 8080:8080 groupdocs/editor:latest
+```
+
+**Security notice:** Docker images ship with demo defaults (e.g. upload and browse enabled, no authentication). Use them for local evaluation only. Do not expose port `8080` to untrusted networks without adding authentication, path validation, and other security controls required by your organization.
+
+Available image tags follow the pattern `{version}-java-{jdk}-bullseye-{framework}`:
+
+| Tag | JDK | Framework |
+|-----|-----|-----------|
+| `{ver}-java-openjdk8-bullseye-spring` | Eclipse Temurin 8 | Spring |
+| `{ver}-java-openjdk11-bullseye-spring` | Eclipse Temurin 11 | Spring |
+| `{ver}-java-openjdk18-bullseye-spring` | Eclipse Temurin 21 | Spring |
+| `{ver}-java-openjdk8-bullseye-dropwizard` | Eclipse Temurin 8 | Dropwizard |
+| `{ver}-java-openjdk11-bullseye-dropwizard` | Eclipse Temurin 11 | Dropwizard |
+| `{ver}-java-openjdk18-bullseye-dropwizard` | Eclipse Temurin 21 | Dropwizard |
+
+The `latest` tag points to the `openjdk18-bullseye-spring` variant.
+
+The [Docker Hub repository overview](https://hub.docker.com/r/groupdocs/editor) is generated from [`docs/docker-hub-overview.md`](docs/docker-hub-overview.md) when the [Publish Docker Images](.github/workflows/docker-publish.yml) workflow runs with **Push** enabled.
 
 ## Document Editing as HTML
 
 - Convert documents to HTML DOM.
 - Convert HTML DOM to [Office & OpenOffice formats](https://docs.groupdocs.com/editor/java/supported-document-formats/).
-- Protect resultant documents. 
-- Reply comments and statuses.
-- Optimize memory usage.
-- Paginal mode for the Words document.
-- Ability to open, view and edit XML document.
+- Protect resultant documents.
+- Paginal mode for Word documents.
+- Open, view and edit XML documents.
 
-## Get Started with GroupDocs.Editor for Java
+## Getting Started
 
-GroupDocs.Editor for Java requires J2SE J2SE 6.0 (1.6), 7.0 (1.7), J2SE 8.0 (1.8) or above. Please install Java first if you do not have it already. 
+GroupDocs.Editor for Java requires J2SE 8.0 (1.8) or above.
 
-GroupDocs hosts all Java APIs on [GroupDocs Artifact Repository](https://artifact.groupdocs.com/webapp/#/artifacts/browse/tree/General/repo/com/groupdocs/groupdocs-editor), so simply [configure](https://docs.groupdocs.com/editor/java/installation/) your Maven project to fetch the dependencies automatically.
+Add the [GroupDocs repository](https://releases.groupdocs.com/java/repo/) to your Maven project:
 
-## Convert Document to HTML DOM
+```xml
+<repository>
+    <id>GroupDocs Artifact Repository</id>
+    <url>https://releases.groupdocs.com/java/repo/</url>
+</repository>
+```
+
+Then add the dependency:
+
+```xml
+<dependency>
+    <groupId>com.groupdocs</groupId>
+    <artifactId>groupdocs-editor</artifactId>
+    <version>26.1</version>
+</dependency>
+```
+
+See the [installation guide](https://docs.groupdocs.com/editor/java/installation/) for details.
+
+## Code Example
 
 ```java
-InputStream inputStream = new FileInputStream(CommonUtilities.getStoragePath(fileName));
-try {
-    InputHtmlDocument htmlDoc = EditorHandler.toHtml(inputStream);
-    String bodyContent = htmlDoc.getContent();
-    System.out.println(bodyContent);
-} catch (Exception ex){
-     ex.getMessage();
+try (Editor editor = new Editor("sample.docx")) {
+    EditableDocument doc = editor.edit();
+    String html = doc.getEmbeddedHtml();
+    // modify html...
+    EditableDocument edited = EditableDocument.fromMarkup(html, null);
+    editor.save(edited, "output.docx");
 }
 ```
 
-[Home](https://www.groupdocs.com/) | [Product Page](https://products.groupdocs.com/editor/java) | [Documentation](https://docs.groupdocs.com/editor/java/) | [Demos](https://products.groupdocs.app/editor/family) | [API Reference](https://apireference.groupdocs.com/java/editor) | [Examples](https://github.com/groupdocs-editor/GroupDocs.editor-for-Java/tree/master/Examples) | [Blog](https://blog.groupdocs.com/category/editor/) | [Search](https://search.groupdocs.com/) | [Free Support](https://forum.groupdocs.com/c/editor) | [Temporary License](https://purchase.groupdocs.com/temporary-license)
+[Home](https://www.groupdocs.com/) | [Product Page](https://products.groupdocs.com/editor/java) | [Documentation](https://docs.groupdocs.com/editor/java/) | [Demos](https://products.groupdocs.app/editor/family) | [API Reference](https://apireference.groupdocs.com/editor/java) | [Examples](https://github.com/groupdocs-editor/GroupDocs.Editor-for-Java/tree/master/Examples) | [Blog](https://blog.groupdocs.com/category/editor/) | [Free Support](https://forum.groupdocs.com/c/editor) | [Temporary License](https://purchase.groupdocs.com/temporary-license)

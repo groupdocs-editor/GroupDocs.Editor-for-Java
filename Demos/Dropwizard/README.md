@@ -11,6 +11,14 @@
 - Java 8 (JDK 1.8)
 - Maven 3
 
+## Security Notice
+
+This is a **sample application** intended to demonstrate GroupDocs.Editor features. It is **not** production-ready.
+
+- Run on `localhost` or a trusted private network only
+- Demo defaults enable upload, browse, and download without authentication
+- File paths are validated with `PathSecurityUtils` to stay within the configured `DocumentSamples` directory
+- Do not expose port `8080` to untrusted networks without additional hardening
 
 ## Document Editor API for Java Dropwizard
 

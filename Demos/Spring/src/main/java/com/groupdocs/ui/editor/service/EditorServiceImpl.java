@@ -1,14 +1,14 @@
 package com.groupdocs.ui.editor.service;
 
-import com.google.common.collect.Sets;
 import com.groupdocs.editor.EditableDocument;
 import com.groupdocs.editor.Editor;
 import com.groupdocs.editor.formats.*;
 import com.groupdocs.editor.formats.abstraction.IDocumentFormat;
 import com.groupdocs.editor.license.License;
 import com.groupdocs.editor.options.*;
-import com.groupdocs.ui.config.DefaultDirectories;
 import com.groupdocs.ui.config.GlobalConfiguration;
+import com.groupdocs.ui.util.PathSecurityUtils;
+import com.groupdocs.ui.util.Utils;
 import com.groupdocs.ui.editor.model.EditDocumentRequest;
 import com.groupdocs.ui.editor.model.EditorConfiguration;
 import com.groupdocs.ui.exception.TotalGroupDocsException;
@@ -24,16 +24,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 @Service
 public class EditorServiceImpl implements EditorService {
     private static final Logger logger = LoggerFactory.getLogger(EditorServiceImpl.class);
-    public static final Set<String> SUPPORTED_FORMATS = Sets.newHashSet("DOCX", "DOC", "DOCM", "DOTX", "ODT", "OTT", "RTF", "TXT", "HTML", "MHTML", "XML");
 
     public static class Format {
         IDocumentFormat format;
@@ -47,52 +45,93 @@ public class EditorServiceImpl implements EditorService {
 
     public static final String WORD = "Word";
     public static final String CELL = "Cell";
-    public static final String PDF = "pfd";
     public static final String TXT = "Txt";
     public static final String PPT = "Presentation";
 
+    /*
+     * PDF support is disabled until groupdocs-editor for Java ships PdfLoadOptions / PdfEditOptions
+     * (available in .NET as com.groupdocs.editor.options.PdfLoadOptions, PdfEditOptions, PdfSaveOptions).
+     *
+     * .NET reference (GroupDocs.Editor-for-.NET WorkingWithPdf.cs):
+     *   PdfLoadOptions loadOptions = new PdfLoadOptions();
+     *   loadOptions.setPassword(password);
+     *   Editor editor = new Editor(inputStream, loadOptions);
+     *   PdfEditOptions editOptions = new PdfEditOptions();
+     *   editOptions.setEnablePagination(true);
+     *   EditableDocument document = editor.edit(editOptions);
+     *   PdfSaveOptions saveOptions = new PdfSaveOptions();
+     *   editor.save(document, outputStream, saveOptions);
+     *
+     * When PdfEditOptions is available, uncomment:
+     *   public static final String PDF = "Pdf";
+     *   formats.put("pdf", new Format(FixedLayoutFormats.Pdf, PDF));
+     */
+    // public static final String PDF = "Pdf";
 
     public static final Map<String, Format> formats = new HashMap<>();
 
-    {
-        {
-            formats.put("doc", new Format(WordProcessingFormats.Doc, WORD));
-            formats.put("dot", new Format(WordProcessingFormats.Dot, WORD));
-            formats.put("docx", new Format(WordProcessingFormats.Docx, WORD));
-            formats.put("docm", new Format(WordProcessingFormats.Docm, WORD));
-            formats.put("dotx", new Format(WordProcessingFormats.Dotx, WORD));
-            formats.put("dotm", new Format(WordProcessingFormats.Dotm, WORD));
-            formats.put("flatOpc", new Format(WordProcessingFormats.FlatOpc, WORD));
-            formats.put("rtf", new Format(WordProcessingFormats.Rtf, WORD));
-            formats.put("odt", new Format(WordProcessingFormats.Odt, WORD));
-            formats.put("0tt", new Format(WordProcessingFormats.Ott, WORD));
-            formats.put("txt", new Format(TextualFormats.Txt, TXT));
-            formats.put("html", new Format(TextualFormats.Html, TXT));
-            //formats.put("mhtml", new Format(WordProcessingFormats.Mhtml, WORD));
-            formats.put("wordML", new Format(WordProcessingFormats.WordML, WORD));
-            //formats.put("csv", new Format(SpreadsheetFormats.Csv, CELL));
-            formats.put("ods", new Format(SpreadsheetFormats.Ods, CELL));
-            formats.put("cellML", new Format(SpreadsheetFormats.SpreadsheetML, CELL));
-            //formats.put("tabDelimited", new Format(SpreadsheetFormats.TabDelimited, CELL));
-            formats.put("xls", new Format(SpreadsheetFormats.Xls, CELL));
-            formats.put("xlsb", new Format(SpreadsheetFormats.Xlsb, CELL));
-            formats.put("xlsm", new Format(SpreadsheetFormats.Xlsm, CELL));
-            formats.put("xlsx", new Format(SpreadsheetFormats.Xlsx, CELL));
-            formats.put("xltm", new Format(SpreadsheetFormats.Xltm, CELL));
-            formats.put("xltx", new Format(SpreadsheetFormats.Xltx, CELL));
-            formats.put("ppt95", new Format(PresentationFormats.Ppt95, PPT));
-            formats.put("ppt", new Format(PresentationFormats.Ppt, PPT));
-            formats.put("pptx", new Format(PresentationFormats.Pptx, PPT));
-            formats.put("pptm", new Format(PresentationFormats.Pptm, PPT));
-            formats.put("pps", new Format(PresentationFormats.Pps, PPT));
-            formats.put("ppsx", new Format(PresentationFormats.Ppsx, PPT));
-            formats.put("ppsm", new Format(PresentationFormats.Ppsm, PPT));
-            formats.put("pot", new Format(PresentationFormats.Pot, PPT));
-            formats.put("potx", new Format(PresentationFormats.Potx, PPT));
-            formats.put("potm", new Format(PresentationFormats.Potm, PPT));
-            formats.put("odp", new Format(PresentationFormats.Odp, PPT));
-            formats.put("otp", new Format(PresentationFormats.Otp, PPT));
+    static {
+        formats.put("doc", new Format(WordProcessingFormats.Doc, WORD));
+        formats.put("dot", new Format(WordProcessingFormats.Dot, WORD));
+        formats.put("docx", new Format(WordProcessingFormats.Docx, WORD));
+        formats.put("docm", new Format(WordProcessingFormats.Docm, WORD));
+        formats.put("dotx", new Format(WordProcessingFormats.Dotx, WORD));
+        formats.put("dotm", new Format(WordProcessingFormats.Dotm, WORD));
+        formats.put("flatOpc", new Format(WordProcessingFormats.FlatOpc, WORD));
+        formats.put("rtf", new Format(WordProcessingFormats.Rtf, WORD));
+        formats.put("odt", new Format(WordProcessingFormats.Odt, WORD));
+        formats.put("ott", new Format(WordProcessingFormats.Ott, WORD));
+        formats.put("txt", new Format(TextualFormats.Txt, TXT));
+        formats.put("html", new Format(TextualFormats.Html, TXT));
+        formats.put("xml", new Format(TextualFormats.Xml, TXT));
+        formats.put("mhtml", new Format(TextualFormats.Mhtml, TXT));
+        formats.put("wordML", new Format(WordProcessingFormats.WordML, WORD));
+        formats.put("csv", new Format(SpreadsheetFormats.Csv, CELL));
+        formats.put("ods", new Format(SpreadsheetFormats.Ods, CELL));
+        formats.put("cellML", new Format(SpreadsheetFormats.SpreadsheetML, CELL));
+        formats.put("xls", new Format(SpreadsheetFormats.Xls, CELL));
+        formats.put("xlsb", new Format(SpreadsheetFormats.Xlsb, CELL));
+        formats.put("xlsm", new Format(SpreadsheetFormats.Xlsm, CELL));
+        formats.put("xlsx", new Format(SpreadsheetFormats.Xlsx, CELL));
+        formats.put("xltm", new Format(SpreadsheetFormats.Xltm, CELL));
+        formats.put("xltx", new Format(SpreadsheetFormats.Xltx, CELL));
+        formats.put("ppt95", new Format(PresentationFormats.Ppt95, PPT));
+        formats.put("ppt", new Format(PresentationFormats.Ppt, PPT));
+        formats.put("pptx", new Format(PresentationFormats.Pptx, PPT));
+        formats.put("pptm", new Format(PresentationFormats.Pptm, PPT));
+        formats.put("pps", new Format(PresentationFormats.Pps, PPT));
+        formats.put("ppsx", new Format(PresentationFormats.Ppsx, PPT));
+        formats.put("ppsm", new Format(PresentationFormats.Ppsm, PPT));
+        formats.put("pot", new Format(PresentationFormats.Pot, PPT));
+        formats.put("potx", new Format(PresentationFormats.Potx, PPT));
+        formats.put("potm", new Format(PresentationFormats.Potm, PPT));
+        formats.put("odp", new Format(PresentationFormats.Odp, PPT));
+        formats.put("otp", new Format(PresentationFormats.Otp, PPT));
+        // formats.put("pdf", new Format(FixedLayoutFormats.Pdf, PDF)); // disabled: no PdfEditOptions in Java API yet
+    }
+
+    static String unsupportedFormatMessage(String extension) {
+        String ext = StringUtils.isEmpty(extension) ? "(none)" : extension.toLowerCase();
+        return String.format("File format '%s' is not supported", ext);
+    }
+
+    private static boolean isSupportedExtension(String extension) {
+        return !StringUtils.isEmpty(extension) && formats.containsKey(extension.toLowerCase());
+    }
+
+    private void requireSupportedFormat(String fileName) {
+        String extension = FilenameUtils.getExtension(fileName);
+        if (!isSupportedExtension(extension)) {
+            throw new TotalGroupDocsException(unsupportedFormatMessage(extension));
         }
+    }
+
+    @Override
+    public void validateSupportedFormat(String fileName) {
+        if (StringUtils.isEmpty(fileName)) {
+            throw new TotalGroupDocsException("File name is required");
+        }
+        requireSupportedFormat(fileName);
     }
 
     @Autowired
@@ -121,34 +160,50 @@ public class EditorServiceImpl implements EditorService {
 
     @Override
     public List<FileDescriptionEntity> getFileList(String path) {
-        if (StringUtils.isEmpty(path)) {
-            path = editorConfiguration.getFilesDirectory();
-        }
-        try {
-            File directory = new File(path);
-            List<File> filesList = Arrays.asList(directory.listFiles());
+        final String filesDirectory = editorConfiguration.getFilesDirectory();
+        final Path filesSubDirectoryPath = PathSecurityUtils.resolveInsideBaseDirectoryOrRoot(filesDirectory, path);
+        final File filesSubDirectory = filesSubDirectoryPath.toFile();
 
-            List<FileDescriptionEntity> fileList = getFileDescriptionEntities(filesList);
-            return fileList;
-        } catch (Exception ex) {
+        List<FileDescriptionEntity> fileList = new ArrayList<>();
+        try {
+            if (!filesSubDirectory.isDirectory()) {
+                throw new TotalGroupDocsException(PathSecurityUtils.ACCESS_DENIED);
+            }
+            final File[] files = filesSubDirectory.listFiles();
+            if (files == null) {
+                throw new TotalGroupDocsException("Can't list files");
+            }
+
+            for (File file : files) {
+                if (!file.getName().startsWith(".") && !file.isHidden()) {
+                    String guid = file.getCanonicalFile().getAbsolutePath();
+                    String extension = FilenameUtils.getExtension(guid);
+                    if (file.isDirectory() || isSupportedExtension(extension)) {
+                        FileDescriptionEntity fileDescription = new FileDescriptionEntity();
+                        fileDescription.setGuid(Utils.normalizePathToGuid(filesDirectory, guid));
+                        fileDescription.setName(file.getName());
+                        fileDescription.setDirectory(file.isDirectory());
+                        fileDescription.setSize(file.length());
+                        fileList.add(fileDescription);
+                    }
+                }
+            }
+
+            Collections.sort(fileList, new Comparator<FileDescriptionEntity>() {
+                @Override
+                public int compare(FileDescriptionEntity o1, FileDescriptionEntity o2) {
+                    if (o1.isDirectory() && !o2.isDirectory()) {
+                        return -1;
+                    }
+                    if (!o1.isDirectory() && o2.isDirectory()) {
+                        return 1;
+                    }
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+        } catch (IOException ex) {
             logger.error("Exception in getting file list", ex);
             throw new TotalGroupDocsException(ex.getMessage(), ex);
-        }
-    }
-
-    public List<FileDescriptionEntity> getFileDescriptionEntities(List<File> filesList) {
-        List<FileDescriptionEntity> fileList = new ArrayList<>();
-        for (File file : filesList) {
-            String guid = file.getAbsolutePath();
-            String extension = FilenameUtils.getExtension(guid);
-            if (file.isDirectory() || (!StringUtils.isEmpty(extension) && SUPPORTED_FORMATS.contains(extension.toUpperCase()))) {
-                FileDescriptionEntity fileDescription = new FileDescriptionEntity();
-                fileDescription.setGuid(guid);
-                fileDescription.setName(file.getName());
-                fileDescription.setDirectory(file.isDirectory());
-                fileDescription.setSize(file.length());
-                fileList.add(fileDescription);
-            }
         }
         return fileList;
     }
@@ -165,10 +220,14 @@ public class EditorServiceImpl implements EditorService {
 
     private LoadDocumentEntity loadDocumentEntity(String guid, String password) {
         LoadDocumentEntity doc = new LoadDocumentEntity();
+        String filesDirectory = editorConfiguration.getFilesDirectory();
+        String documentPath = PathSecurityUtils.resolveInsideBaseDirectoryAsString(filesDirectory, guid);
         try {
-            ILoadOptions options = getLoadOptions(guid, password);
-            Editor editor = new Editor(new FileInputStream(guid), options);
-            IEditOptions editOptions = getEditOptions(guid);
+            ILoadOptions options = getLoadOptions(documentPath, password);
+            Editor editor = options != null
+                    ? new Editor(new FileInputStream(documentPath), options)
+                    : new Editor(documentPath);
+            IEditOptions editOptions = getEditOptions(documentPath);
             EditableDocument editableDocument = editor.edit(editOptions);
             PageDescriptionEntity page = new PageDescriptionEntity();
             page.setData(editableDocument.getEmbeddedHtml());
@@ -176,7 +235,7 @@ public class EditorServiceImpl implements EditorService {
             List<PageDescriptionEntity> pages = new ArrayList<>();
             pages.add(page);
             doc.setPages(pages);
-            doc.setGuid(guid);
+            doc.setGuid(Utils.normalizePathToGuid(filesDirectory, documentPath));
         } catch (Exception ex) {
             logger.error("Exception in loading document");
             throw new TotalGroupDocsException(ex.getMessage(), ex);
@@ -186,14 +245,17 @@ public class EditorServiceImpl implements EditorService {
 
     @Override
     public Set<String> getSupportedFormats() {
-        return SUPPORTED_FORMATS;
+        Set<String> supported = new HashSet<>();
+        for (String extension : formats.keySet()) {
+            supported.add(extension.toUpperCase());
+        }
+        return supported;
     }
 
     @Override
     public LoadDocumentEntity saveDoc(EditDocumentRequest editDocumentRequest) {
-        String guid = editDocumentRequest.getGuid();
-        String filePath = !DefaultDirectories.isAbsolutePath(guid) ?
-                editorConfiguration.getFilesDirectory() + File.separator + guid : guid;
+        String filePath = PathSecurityUtils.resolveInsideBaseDirectoryAsString(
+                editorConfiguration.getFilesDirectory(), editDocumentRequest.getGuid());
 
         try (OutputStream outputStream = new FileOutputStream(filePath)) {
             Editor editor = new Editor(filePath);
@@ -204,16 +266,44 @@ public class EditorServiceImpl implements EditorService {
             logger.error("Exception occurred while creating the file");
             throw new TotalGroupDocsException(ex.getMessage(), ex);
         }
-        return loadDocumentEntity(filePath, editDocumentRequest.getPassword());
+        return loadDocumentEntity(
+                Utils.normalizePathToGuid(editorConfiguration.getFilesDirectory(), filePath),
+                editDocumentRequest.getPassword());
+    }
+
+    @Override
+    public InputStream downloadDocument(String documentGuid) {
+        try {
+            return new BufferedInputStream(Files.newInputStream(resolveDownloadDocumentPath(documentGuid)));
+        } catch (IOException e) {
+            logger.error("Exception in downloading document", e);
+            throw new TotalGroupDocsException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public long getDownloadDocumentSize(String documentGuid) {
+        try {
+            return Files.size(resolveDownloadDocumentPath(documentGuid));
+        } catch (IOException e) {
+            logger.error("Exception in downloading document", e);
+            throw new TotalGroupDocsException(e.getMessage(), e);
+        }
+    }
+
+    private Path resolveDownloadDocumentPath(String documentGuid) throws IOException {
+        Path documentPath = PathSecurityUtils.resolveInsideBaseDirectory(
+                editorConfiguration.getFilesDirectory(), documentGuid);
+        if (!Files.isRegularFile(documentPath)) {
+            throw new TotalGroupDocsException(PathSecurityUtils.ACCESS_DENIED);
+        }
+        return documentPath;
     }
 
     private ISaveOptions getSaveOptions(String fileName) {
         ISaveOptions options;
+        requireSupportedFormat(fileName);
         String extension = FilenameUtils.getExtension(fileName);
-        if (StringUtils.isEmpty(extension)) {
-            logger.error("Not supported doc format");
-            throw new IllegalArgumentException("Not supported doc format");
-        }
         Format format = formats.get(extension.toLowerCase());
         switch (format.type) {
             case WORD:
@@ -225,12 +315,11 @@ public class EditorServiceImpl implements EditorService {
             case CELL:
                 options = new SpreadsheetSaveOptions((SpreadsheetFormats)format.format);
                 break;
-            case PDF:
-                options = new PdfSaveOptions();
-                break;
+            // case PDF:
+            //     options = new PdfSaveOptions();
+            //     break;
             default:
-                logger.error("Not supported doc format");
-                throw new IllegalArgumentException("Not supported doc format");
+                throw new TotalGroupDocsException(unsupportedFormatMessage(extension));
         }
 
         return options;
@@ -238,11 +327,8 @@ public class EditorServiceImpl implements EditorService {
 
     private ILoadOptions getLoadOptions(String fileName, String password) {
         ILoadOptions options;
+        requireSupportedFormat(fileName);
         String extension = FilenameUtils.getExtension(fileName);
-        if (StringUtils.isEmpty(extension)) {
-            logger.error("Not supported doc format");
-            throw new IllegalArgumentException("Not supported doc format");
-        }
         Format format = formats.get(extension.toLowerCase());
         switch (format.type) {
             case WORD:
@@ -254,12 +340,14 @@ public class EditorServiceImpl implements EditorService {
             case TXT:
                 options = null;
                 break;
+            // case PDF:
+            //     options = null; // or: new PdfLoadOptions(); loadOptions.setPassword(password);
+            //     break;
             case PPT:
                 options = new PresentationLoadOptions();
                 break;
             default:
-                logger.error("Not supported doc format");
-                throw new IllegalArgumentException("Not supported doc format");
+                throw new TotalGroupDocsException(unsupportedFormatMessage(extension));
         }
         if (options != null){
             options.setPassword(password);
@@ -268,6 +356,7 @@ public class EditorServiceImpl implements EditorService {
     }
 
     private IEditOptions getEditOptions(String fileName) {
+        requireSupportedFormat(fileName);
         String extension = FilenameUtils.getExtension(fileName);
 
         Format format = formats.get(extension.toLowerCase());
@@ -278,11 +367,14 @@ public class EditorServiceImpl implements EditorService {
                 return new SpreadsheetEditOptions();
             case TXT:
                 return null;
+            // case PDF:
+            //     PdfEditOptions editOptions = new PdfEditOptions();
+            //     editOptions.setEnablePagination(true);
+            //     return editOptions;
             case PPT:
                 return new PresentationEditOptions();
             default:
-                logger.error("Not supported doc format");
-                throw new IllegalArgumentException("Not supported doc format");
+                throw new TotalGroupDocsException(unsupportedFormatMessage(extension));
         }
 
     }

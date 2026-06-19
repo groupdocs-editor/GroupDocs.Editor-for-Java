@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Implementation-Title: GroupDocs.Editor for Java
+Copyright: Copyright © Aspose Pty Ltd 2001-2019. All Rights Reserved.
+Implementation-Version: 26.1
+Archiver-Version: Plexus Archiver
+Built-By: GroupDocs
+Release-Date: 2026-02-12
+Specification-Vendor: Aspose Pty Ltd
+Specification-Title: GroupDocs.Editor for Java
+Implementation-Vendor: Aspose Pty Ltd
+Created-By: Apache Maven 3.8.4
+Build-Jdk: 1.8.0_331
+Specification-Version: 26.1
+

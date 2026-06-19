@@ -45,6 +45,8 @@ public class Constants {
 
     public static String SAMPLE_PPTX_DELETE_SLIDES = getSampleFilePath("sample.pptx");
 
+    public static String SAMPLE_PDF = getSampleFilePath("SampleDoc1.pdf");
+
     public static String SAMPLE_MSG = getSampleFilePath("ComplexExample.msg");
 
     public static String SAMPLE_MD = getSampleFilePath("Markdown\\ComplexImage.md");

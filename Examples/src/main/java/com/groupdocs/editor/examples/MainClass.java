@@ -43,11 +43,18 @@ public class MainClass {
 
         //CreateDocument.run();
 
+        //EditNewDocument.run();
+
             //endregion
 
             //region Advanced usage
 
         //WorkingWithWordProcessing.run();
+
+        //WorkingWithPdf.run();
+
+        //EditPdf.run(true);
+        //EditPdf.run(false);
 
         //WorkingWithSpreadsheetPasswordProtected.run();
 

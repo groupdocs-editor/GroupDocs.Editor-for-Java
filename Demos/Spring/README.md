@@ -10,6 +10,14 @@
 - Java 8 (JDK 1.8)
 - Maven 3
 
+## Security Notice
+
+This is a **sample application** intended to demonstrate GroupDocs.Editor features. It is **not** production-ready.
+
+- Run on `localhost` or a trusted private network only
+- Demo defaults enable upload, browse, and download without authentication
+- File paths are validated with `PathSecurityUtils` to stay within the configured `DocumentSamples` directory
+- Do not expose port `8080` to untrusted networks without additional hardening
 
 ## Document Editor API for Java Spring
 [GroupDocs.Editor for Java](https://products.groupdocs.com/editor/java) is a library that allows you to **edit DOCX, ODT, XLS and other supported formats in form of HTML** and save it back to the original format. With GroupDocs.Editor you can easily edit documents on the web with your favorite WYSIWYG editor without external dependencies.

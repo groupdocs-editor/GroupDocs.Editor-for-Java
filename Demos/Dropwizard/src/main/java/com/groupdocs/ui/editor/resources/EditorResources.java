@@ -6,12 +6,17 @@ import com.groupdocs.ui.common.entity.web.LoadDocumentEntity;
 import com.groupdocs.ui.common.entity.web.UploadedDocumentEntity;
 import com.groupdocs.ui.common.entity.web.request.FileTreeRequest;
 import com.groupdocs.ui.common.entity.web.request.LoadDocumentRequest;
+import com.groupdocs.ui.common.exception.TotalGroupDocsException;
 import com.groupdocs.ui.common.resources.Resources;
+import com.groupdocs.ui.common.util.Utils;
 import com.groupdocs.ui.editor.model.EditDocumentRequest;
 import com.groupdocs.ui.editor.model.EditorConfigurationModel;
 import com.groupdocs.ui.editor.service.EditorService;
 import com.groupdocs.ui.editor.service.EditorServiceImpl;
 import com.groupdocs.ui.editor.views.Editor;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
@@ -132,10 +137,16 @@ public class EditorResources extends Resources {
                                                  @FormDataParam("file") FormDataContentDisposition fileDetail,
                                                  @FormDataParam("url") String documentUrl,
                                                  @FormDataParam("rewrite") Boolean rewrite) {
+        if (StringUtils.isEmpty(documentUrl)) {
+            editorService.validateSupportedFormat(fileDetail != null ? fileDetail.getFileName() : null);
+        } else {
+            editorService.validateSupportedFormat(FilenameUtils.getName(documentUrl));
+        }
         String pathname = uploadFile(documentUrl, inputStream, fileDetail, rewrite, null);
         // create response
         UploadedDocumentEntity uploadedDocument = new UploadedDocumentEntity();
-        uploadedDocument.setGuid(pathname);
+        uploadedDocument.setGuid(Utils.normalizePathToGuid(
+                editorService.getEditorConfiguration().getFilesDirectory(), pathname));
         return uploadedDocument;
     }
 
@@ -143,6 +154,15 @@ public class EditorResources extends Resources {
     @Path(value = "/downloadDocument")
     @Produces(APPLICATION_OCTET_STREAM)
     public void downloadDocument(@QueryParam("path") String documentGuid, @Context HttpServletResponse response) {
-        downloadFile(response, documentGuid);
+        long fileSize = editorService.getDownloadDocumentSize(documentGuid);
+        String fileName = FilenameUtils.getName(documentGuid);
+        try (InputStream inputStream = editorService.downloadDocument(documentGuid);
+             java.io.OutputStream outputStream = response.getOutputStream()) {
+            addFileDownloadHeaders(response, fileName, fileSize);
+            IOUtils.copyLarge(inputStream, outputStream);
+        } catch (Exception ex) {
+            logger.error("Exception in downloading document", ex);
+            throw new TotalGroupDocsException(ex.getMessage(), ex);
+        }
     }
 }

@@ -6,6 +6,7 @@ import com.groupdocs.ui.model.request.LoadDocumentRequest;
 import com.groupdocs.ui.model.response.FileDescriptionEntity;
 import com.groupdocs.ui.model.response.LoadDocumentEntity;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -16,12 +17,13 @@ public interface EditorService {
 
     LoadDocumentEntity loadDocument(LoadDocumentRequest loadDocumentRequest);
 
-    /**
-     * Get supported formats
-     *
-     * @return
-     */
     Set<String> getSupportedFormats();
 
     LoadDocumentEntity saveDoc(EditDocumentRequest loadDocumentEntity);
+
+    InputStream downloadDocument(String documentGuid);
+
+    long getDownloadDocumentSize(String documentGuid);
+
+    void validateSupportedFormat(String fileName);
 }
